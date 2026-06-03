@@ -1,0 +1,69 @@
+{
+  "name": "italian-tweaks",
+  "productName": "ITALIAN TWEAKS",
+  "version": "1.0.0",
+  "description": "ITALIAN TWEAKS — Performance Suite",
+  "main": "src/main.js",
+  "author": "ITALIAN TWEAKS",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "dev": "electron .",
+    "start": "electron .",
+    "build": "electron-builder --win --x64",
+    "build:dir": "electron-builder --win --x64 --dir",
+    "postinstall": "node scripts/generate-placeholders.js"
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.italiantweaks.performance",
+    "productName": "ITALIAN TWEAKS",
+    "directories": {
+      "output": "build",
+      "buildResources": "build/resources"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "scripts/**/*",
+      "tools/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "assets/icon.png",
+      "artifactName": "ITALIAN-TWEAKS-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "ITALIAN TWEAKS"
+    },
+    "asar": true,
+    "asarUnpack": [
+      "scripts/**/*",
+      "tools/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "scripts",
+        "to": "scripts",
+        "filter": ["**/*"]
+      },
+      {
+        "from": "tools",
+        "to": "tools",
+        "filter": ["**/*"]
+      }
+    ]
+  }
+}

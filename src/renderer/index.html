@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ITALIAN TWEAKS</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <div class="lowpoly-bg" aria-hidden="true">
+      <div class="lowpoly-bg__base"></div>
+      <img class="lowpoly-bg__image" src="../../assets/background.png" alt="" />
+      <canvas class="lowpoly-bg__canvas" id="lowpoly-canvas"></canvas>
+      <div class="lowpoly-bg__vignette"></div>
+    </div>
+
+    <aside class="sidebar" aria-label="Navigation principale">
+      <header class="sidebar__brand">
+        <img class="sidebar__logo" src="../../assets/logo.png" alt="" width="48" height="48" />
+        <div class="sidebar__titles">
+          <span class="sidebar__name">ITALIAN TWEAKS</span>
+          <span class="sidebar__tagline">Performance Suite</span>
+        </div>
+      </header>
+
+      <nav class="sidebar__nav" id="sidebar-nav"></nav>
+
+      <footer class="sidebar__footer">
+        HTA portable • WMI ActiveX • confirmations obligatoires pour actions système.
+      </footer>
+    </aside>
+
+    <main class="main" id="main-content" role="main"></main>
+  </div>
+
+  <script src="ui.js" defer></script>
+  <script src="page-cache.js" defer></script>
+  <script src="page-loader.js" defer></script>
+  <script src="api.js" defer></script>
+  <script src="pages.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>

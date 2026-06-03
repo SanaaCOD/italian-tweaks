@@ -1,0 +1,15 @@
+{
+    "Success":  true,
+    "Verified":  true,
+    "Code":  "APPLIED_8000_CONFIRMED",
+    "Message":  "8000 Hz confirme",
+    "RequestedRate":  8000,
+    "ConfirmedRate":  8000,
+    "DriverVariant":  "4khz-8khz",
+    "DeviceInstanceId":  "HID\\VID_054C\u0026PID_0CE6\u0026MI_03\\7\u0026519DE54\u00260\u00260000",
+    "UsbParentDeviceId":  "USB\\VID_054C\u0026PID_0CE6\\5\u002630741CDD\u00260\u00264",
+    "UsbCompositeParentId":  "USB\\VID_054C\u0026PID_0CE6\\5\u002630741CDD\u00260\u00264",
+    "TargetHidusbfDeviceId":  "USB\\VID_054C\u0026PID_0CE6\\5\u002630741CDD\u00260\u00264",
+    "NeedsReconnect":  false,
+    "PatchUSBXHCI":  3
+}
