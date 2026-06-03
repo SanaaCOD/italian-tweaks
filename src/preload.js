@@ -1,6 +1,9 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('italianTweaks', {
+  app: {
+    getBuildInfo: () => ipcRenderer.invoke('app:getBuildInfo')
+  },
   system: {
     getStats: (opts) => ipcRenderer.invoke('system:getStats', opts),
     restoreDefaults: () => ipcRenderer.invoke('system:restoreDefaults'),

@@ -8,6 +8,7 @@ const audio = require('../services/audio');
 const games = require('../services/games');
 const settings = require('../services/settings');
 const updateService = require('../services/update-service');
+const { getBuildInfo } = require('../services/build-info');
 
 async function confirmDangerous(title, message) {
   if (!settings.load().confirmDangerousActions) return true;
@@ -120,8 +121,13 @@ function registerIpcHandlers() {
     ok: true,
     status: 'success',
     message: '',
-    data: { version: updateService.getAppVersion() }
+    data: {
+      version: updateService.getAppVersion(),
+      updateMode: updateService.getUpdateMode()
+    }
   }));
+
+  ipcMain.handle('app:getBuildInfo', () => getBuildInfo());
 }
 
 module.exports = { registerIpcHandlers };

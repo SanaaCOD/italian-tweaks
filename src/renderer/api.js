@@ -1,4 +1,25 @@
 /** Appels IPC + retour UI standardisé */
+function itUpdatesApi() {
+  const u = window.italianTweaks?.updates;
+  if (!u) {
+    const missing = () => Promise.resolve({
+      ok: false,
+      status: 'error',
+      message: 'API updates indisponible (preload)',
+      data: {}
+    });
+    return {
+      check: missing,
+      download: missing,
+      install: missing,
+      getStatus: () => Promise.resolve({ ok: true, status: 'idle', data: {} }),
+      getVersion: () => Promise.resolve({ ok: true, data: { version: '?' } }),
+      onStatus: () => () => {}
+    };
+  }
+  return u;
+}
+
 window.ItApi = {
   async run(invokeFn, buttonEl) {
     const card = buttonEl?.closest('.action-card');
@@ -26,11 +47,19 @@ window.ItApi = {
   },
 
   updates: {
-    check: () => window.italianTweaks.updates.check(),
-    download: () => window.italianTweaks.updates.download(),
-    install: () => window.italianTweaks.updates.install(),
-    getStatus: () => window.italianTweaks.updates.getStatus(),
-    getVersion: () => window.italianTweaks.updates.getVersion(),
-    onStatus: (callback) => window.italianTweaks.updates.onStatus(callback)
+    check: () => itUpdatesApi().check(),
+    download: () => itUpdatesApi().download(),
+    install: () => itUpdatesApi().install(),
+    getStatus: () => itUpdatesApi().getStatus(),
+    getVersion: () => itUpdatesApi().getVersion(),
+    onStatus: (callback) => itUpdatesApi().onStatus(callback)
+  },
+  app: {
+    getBuildInfo: () => window.italianTweaks?.app?.getBuildInfo?.() ?? Promise.resolve({
+      version: '?',
+      displayLine: 'v? · build ? · local',
+      devMode: true,
+      packaged: false
+    })
   }
 };

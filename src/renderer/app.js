@@ -191,9 +191,57 @@ function initLowPolyCanvas() {
   resize();
 }
 
+async function initSidebarBuildInfo() {
+  const el = document.getElementById('sidebar-build-id');
+  const devHint = document.getElementById('sidebar-dev-hint');
+  const updBtn = document.getElementById('sidebar-check-update');
+  try {
+    const info = await ItApi.app.getBuildInfo();
+    if (el) {
+      el.textContent = info.displayLine || `v${info.version} · build ${info.builtAt} · ${info.commit}`;
+      el.title = `Build ID: ${info.buildId || ''}${info.packaged ? ' (installateur)' : ' (dev)'}`;
+    }
+    if (devHint) {
+      let updateMode = 'dev';
+      if (!info.devMode) {
+        try {
+          const verRes = await ItApi.updates.getVersion();
+          updateMode = verRes?.data?.updateMode || 'installed';
+        } catch {
+          updateMode = 'installed';
+        }
+      }
+      if (info.devMode) {
+        devHint.hidden = false;
+        devHint.textContent = 'Mode dev — update réel indisponible';
+      } else if (updateMode === 'local_build') {
+        devHint.hidden = false;
+        devHint.textContent =
+          'Mode test local — installe la version Setup pour tester les mises à jour réelles';
+      } else {
+        devHint.hidden = true;
+      }
+    }
+    window.__itBuildInfo = info;
+  } catch (e) {
+    if (el) el.textContent = 'Build info indisponible';
+    console.warn('[build-info]', e);
+  }
+
+  if (updBtn && !updBtn._itBound) {
+    updBtn._itBound = true;
+    updBtn.addEventListener('click', () => {
+      if (typeof ItPages.runGlobalUpdateCheck === 'function') {
+        ItPages.runGlobalUpdateCheck(updBtn);
+      }
+    });
+  }
+}
+
 navGeneration = 1;
 mainContent.dataset.navGen = '1';
 renderSidebar();
 renderPage();
 startStatsRefresh();
 initLowPolyCanvas();
+initSidebarBuildInfo();

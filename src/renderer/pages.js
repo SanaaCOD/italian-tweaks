@@ -768,6 +768,7 @@ window.ItPages = {
       not_available: 'À jour',
       downloading: 'Téléchargement',
       downloaded: 'Prêt à installer',
+      local_build: 'Build local',
       error: 'Erreur'
     };
     return map[status] || status || 'Prêt';
@@ -780,8 +781,46 @@ window.ItPages = {
     return 'neutral';
   },
 
+  _formatLastCheck(iso) {
+    if (!iso) return 'Jamais';
+    try {
+      const d = new Date(iso);
+      return d.toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' });
+    } catch {
+      return iso;
+    }
+  },
+
+  async runGlobalUpdateCheck(triggerBtn) {
+    const btn = triggerBtn || document.getElementById('sidebar-check-update');
+    const label = btn?.textContent;
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Vérification…';
+    }
+    try {
+      const result = await ItApi.updates.check();
+      const msg = result?.message || this._updateStatusLabel(result?.status);
+      ItUi.toast(msg, result?.status === 'error');
+      if (mainContent.querySelector('[data-slot="settings-update"]')) {
+        mainContent._itUpdate = mainContent._itUpdate || {};
+        mainContent._itUpdate.lastCheckAt = new Date().toISOString();
+        this._applyUpdatePayload(mainContent, result);
+      }
+      return result;
+    } catch (e) {
+      ItUi.toast(String(e.message || e), true);
+      return { ok: false, status: 'error', message: String(e.message || e) };
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        if (label) btn.textContent = label;
+      }
+    }
+  },
+
   _syncSettingsUpdateUi(main) {
-    const u = main._itUpdate || { status: 'idle', message: 'Prêt', percent: 0, version: '—', remoteVersion: '' };
+    const u = main._itUpdate || { status: 'idle', message: 'Prêt', percent: 0, version: '—', remoteVersion: '', lastCheckAt: null };
     const statusEl = main.querySelector('[data-upd-status-text]');
     const versionEl = main.querySelector('[data-upd-version]');
     const remoteEl = main.querySelector('[data-upd-remote]');
@@ -790,9 +829,25 @@ window.ItPages = {
     const badge = main.querySelector('[data-card-id="settings-update"] .action-card__status');
 
     if (versionEl) versionEl.textContent = u.version || '—';
+    const lastCheckEl = main.querySelector('[data-upd-last-check]');
+    if (lastCheckEl) lastCheckEl.textContent = this._formatLastCheck(u.lastCheckAt);
+    const devBanner = main.querySelector('[data-upd-dev-banner]');
+    if (devBanner) {
+      if (u.devMode) {
+        devBanner.hidden = false;
+        devBanner.textContent = 'Mode dev — update réel indisponible';
+      } else if (u.localBuild) {
+        devBanner.hidden = false;
+        devBanner.textContent =
+          'Mode test local — installe la version Setup pour tester les mises à jour réelles';
+      } else {
+        devBanner.hidden = true;
+      }
+    }
     if (remoteEl) {
-      remoteEl.textContent = u.remoteVersion ? `Dernière release : ${u.remoteVersion}` : '';
-      remoteEl.hidden = !u.remoteVersion;
+      const gh = u.githubRelease || u.remoteVersion;
+      remoteEl.textContent = gh ? `Dernière release GitHub : ${gh}` : '';
+      remoteEl.hidden = !gh;
     }
     if (statusEl) statusEl.textContent = u.message || this._updateStatusLabel(u.status);
     if (badge) {
@@ -810,9 +865,10 @@ window.ItPages = {
     const btnInstall = main.querySelector('[data-action="upd-install"]');
     const busy = u.status === 'checking' || u.status === 'downloading';
 
+    const noRealUpdate = u.devMode || u.localBuild;
     if (btnCheck) btnCheck.disabled = busy;
-    if (btnDl) btnDl.disabled = busy || u.status !== 'available';
-    if (btnInstall) btnInstall.disabled = busy || u.status !== 'downloaded';
+    if (btnDl) btnDl.disabled = busy || noRealUpdate || u.status !== 'available';
+    if (btnInstall) btnInstall.disabled = busy || noRealUpdate || u.status !== 'downloaded';
   },
 
   _applyUpdatePayload(main, payload) {
@@ -823,7 +879,12 @@ window.ItPages = {
       message: p.message || '',
       percent: data.percent ?? (p.status === 'downloaded' ? 100 : 0),
       version: data.currentVersion || main._itUpdate?.version || '—',
-      remoteVersion: data.version || data.remoteVersion || ''
+      remoteVersion: data.version || data.remoteVersion || '',
+      githubRelease: data.githubRelease || data.remoteVersion || '',
+      lastCheckAt: main._itUpdate?.lastCheckAt || null,
+      devMode: data.devMode ?? main._itUpdate?.devMode ?? false,
+      localBuild: data.localBuild ?? main._itUpdate?.localBuild ?? p.status === 'local_build',
+      updateMode: data.updateMode || main._itUpdate?.updateMode
     };
     this._syncSettingsUpdateUi(main);
   },
@@ -842,9 +903,8 @@ window.ItPages = {
       try {
         const result = await fn();
         this._applyUpdatePayload(main, result);
-        if (!result?.ok && result?.message) ItUi.toast(result.message, true);
-        else if (result?.ok && result?.message && result.status !== 'checking') {
-          ItUi.toast(result.message, false);
+        if (result?.message && result.status !== 'checking') {
+          ItUi.toast(result.message, result.status === 'error');
         }
       } catch (e) {
         this._applyUpdatePayload(main, { ok: false, status: 'error', message: String(e.message || e) });
@@ -856,47 +916,80 @@ window.ItPages = {
   },
 
   async _loadReglagesUpdateMeta(main) {
+    const build = window.__itBuildInfo || (await ItApi.app.getBuildInfo().catch(() => ({})));
     try {
-      const verRes = await window.italianTweaks.updates.getVersion();
-      const statusRes = await window.italianTweaks.updates.getStatus();
+      const verRes = await ItApi.updates.getVersion();
+      const statusRes = await ItApi.updates.getStatus();
+      const updateMode = verRes?.data?.updateMode || statusRes?.data?.updateMode || (build.devMode ? 'dev' : 'installed');
       main._itUpdate = {
         status: statusRes?.status || 'idle',
         message: statusRes?.message || 'Prêt',
         percent: statusRes?.data?.percent || 0,
-        version: verRes?.data?.version || statusRes?.data?.currentVersion || '—',
-        remoteVersion: statusRes?.data?.version || ''
+        version: verRes?.data?.version || build.version || statusRes?.data?.currentVersion || '—',
+        remoteVersion: statusRes?.data?.githubRelease || statusRes?.data?.version || '',
+        githubRelease: statusRes?.data?.githubRelease || '',
+        lastCheckAt: main._itUpdate?.lastCheckAt || null,
+        devMode: updateMode === 'dev',
+        localBuild: updateMode === 'local_build',
+        updateMode
       };
     } catch {
-      main._itUpdate = { status: 'idle', message: 'Prêt', percent: 0, version: '—', remoteVersion: '' };
+      main._itUpdate = {
+        status: 'idle',
+        message: 'Prêt',
+        percent: 0,
+        version: build.version || '—',
+        remoteVersion: '',
+        githubRelease: '',
+        lastCheckAt: null,
+        devMode: !!build.devMode,
+        localBuild: false,
+        updateMode: build.devMode ? 'dev' : 'installed'
+      };
     }
     this._syncSettingsUpdateUi(main);
   },
 
-  _applyReglages(main, s) {
-    const grid = main.querySelector('#pg');
-    if (!grid) return;
-    const u = main._itUpdate || { status: 'idle', message: 'Prêt', version: '—' };
-    grid.innerHTML = [
-      `<article class="action-card" data-card-id="settings-update">
+  _htmlReglagesUpdateCard(u) {
+    const state = u || { status: 'idle', message: 'Prêt', version: '—', devMode: true };
+    return `
+      <article class="action-card action-card--updates" data-card-id="settings-update">
         <div class="action-card__head">
           <h3 class="action-card__title">Mises à jour</h3>
-          <span class="action-card__status">${ItUi.escape(this._updateStatusLabel(u.status))}</span>
+          <span class="action-card__status">${ItUi.escape(this._updateStatusLabel(state.status))}</span>
         </div>
-        <p class="action-card__text">Vérifie et installe la dernière version depuis GitHub.</p>
+        <p class="action-card__text">Vérifie et installe la dernière version depuis GitHub (SanaaCOD/italian-tweaks).</p>
+        <p class="settings-update__dev-banner" data-upd-dev-banner${state.devMode ? '' : ' hidden'}>Mode dev — update réel indisponible (build packagé requis).</p>
         <div class="settings-update__meta">
-          <p>Version actuelle : <strong data-upd-version>${ItUi.escape(u.version)}</strong></p>
+          <p>Version actuelle : <strong data-upd-version>${ItUi.escape(state.version)}</strong></p>
+          <p>Dernière vérification : <span data-upd-last-check>${ItUi.escape(this._formatLastCheck(state.lastCheckAt))}</span></p>
           <p class="settings-update__remote" data-upd-remote hidden></p>
-          <p class="settings-update__status-line" data-upd-status-text>${ItUi.escape(u.message || 'Prêt')}</p>
+          <p class="settings-update__status-line" data-upd-status-text>${ItUi.escape(state.message || 'Prêt')}</p>
           <div class="settings-update__progress" data-upd-progress hidden>
             <div class="settings-update__progress-bar" data-upd-progress-bar></div>
           </div>
         </div>
-        <div class="action-card__actions">
+        <div class="action-card__actions settings-update__actions">
           <button type="button" class="btn btn--primary" data-action="upd-check">Check update</button>
-          <button type="button" class="btn btn--ghost" data-action="upd-dl" disabled>Télécharger</button>
-          <button type="button" class="btn btn--ghost" data-action="upd-install" disabled>Installer et redémarrer</button>
+          <button type="button" class="btn btn--ghost" data-action="upd-dl">Télécharger</button>
+          <button type="button" class="btn btn--ghost" data-action="upd-install">Installer et redémarrer</button>
         </div>
-      </article>`,
+        <p class="ctrl-device__feedback" data-ctrl-feedback hidden></p>
+      </article>`;
+  },
+
+  _renderReglagesUpdateSlot(main) {
+    const slot = main.querySelector('[data-slot="settings-update"]');
+    if (!slot) return;
+    const u = main._itUpdate || { status: 'idle', message: 'Prêt', version: '—', devMode: true };
+    slot.innerHTML = this._htmlReglagesUpdateCard(u);
+    this._syncSettingsUpdateUi(main);
+  },
+
+  _applyReglagesOther(main, s) {
+    const slot = main.querySelector('[data-slot="settings-other"]');
+    if (!slot) return;
+    slot.innerHTML = [
       ItUi.actionCard({
         title: 'Confirmations',
         text: 'Avant actions système dangereuses',
@@ -907,12 +1000,26 @@ window.ItPages = {
       }),
       ItUi.actionCard({ title: 'Reset', actions: [{ id: 'rst', label: 'Réinitialiser', primary: true }] })
     ].join('');
+  },
 
-    this._syncSettingsUpdateUi(main);
+  _applyReglages(main, s) {
+    const grid = main.querySelector('#pg');
+    if (!grid) return;
+    if (!main._itUpdate) {
+      main._itUpdate = { status: 'idle', message: 'Prêt', percent: 0, version: '—', remoteVersion: '', devMode: true };
+    }
+    grid.innerHTML = `
+      <div data-slot="settings-update"></div>
+      <div data-slot="settings-other"></div>`;
+    this._renderReglagesUpdateSlot(main);
+    this._applyReglagesOther(main, s);
     this._ensureReglagesUpdateListener(main);
 
     main._itReglagesHandlers = {
-      'upd-check': (btn) => this._runUpdateAction(main, btn, () => ItApi.updates.check()),
+      'upd-check': (btn) => this._runUpdateAction(main, btn, async () => {
+        main._itUpdate.lastCheckAt = new Date().toISOString();
+        return ItApi.updates.check();
+      }),
       'upd-dl': (btn) => this._runUpdateAction(main, btn, () => ItApi.updates.download()),
       'upd-install': (btn) => this._runUpdateAction(main, btn, () => ItApi.updates.install()),
       tog: async () => {
@@ -953,7 +1060,7 @@ window.ItPages = {
       pageId,
       main,
       () => window.italianTweaks.settings.get(),
-      (payload) => this._applyReglages(main, payload),
+      (payload) => this._applyReglagesOther(main, payload),
       () => {
         ItPageLoader.setCardStatus(main, 'settings-confirm', 'Données indisponibles', 'warn');
       }

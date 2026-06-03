@@ -226,12 +226,68 @@ button {
 }
 
 .sidebar__footer {
-  padding: 0.65rem 1.1rem 0;
+  padding: 0.65rem 1.1rem 0.85rem;
   font-size: 0.58rem;
-  line-height: 1.4;
+  line-height: 1.45;
   color: var(--text-muted);
   border-top: 1px solid var(--border-subtle);
   margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.sidebar__build-id {
+  font-family: Consolas, 'Segoe UI', monospace;
+  font-size: 0.58rem;
+  color: var(--accent-cyan);
+  word-break: break-word;
+  user-select: text;
+}
+
+.sidebar__dev-hint {
+  font-size: 0.55rem;
+  color: #e8b032;
+}
+
+.sidebar__update-btn {
+  width: 100%;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.4rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 212, 238, 0.35);
+  background: rgba(0, 212, 238, 0.08);
+  color: var(--accent-cyan);
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.sidebar__update-btn:hover:not(:disabled) {
+  background: rgba(0, 212, 238, 0.16);
+  border-color: rgba(0, 212, 238, 0.55);
+}
+
+.sidebar__update-btn:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.action-card--updates {
+  border-color: rgba(0, 212, 238, 0.28);
+  box-shadow: var(--glow-cyan);
+}
+
+.settings-update__dev-banner {
+  font-size: 0.72rem;
+  color: #e8b032;
+  padding: 0.35rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid rgba(232, 176, 50, 0.35);
+  background: rgba(232, 176, 50, 0.06);
+}
+
+.settings-update__actions .btn {
+  min-width: 7rem;
 }
 
 /* Main content */

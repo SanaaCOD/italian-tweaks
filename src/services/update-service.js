@@ -4,6 +4,9 @@ const path = require('path');
 const { autoUpdater } = require('electron-updater');
 const { getLogsDir } = require('./paths');
 
+const GITHUB_RELEASES_LATEST =
+  'https://api.github.com/repos/SanaaCOD/italian-tweaks/releases/latest';
+
 let getMainWindow = () => null;
 let initialized = false;
 
@@ -11,18 +14,42 @@ let lastPayload = {
   ok: true,
   status: 'idle',
   message: 'Prêt',
-  data: { currentVersion: app.getVersion() }
+  data: { currentVersion: app.getVersion(), updateMode: 'dev' }
 };
 
 let checkWaiter = null;
 let downloadWaiter = null;
 
-function getLogPath() {
-  return path.join(getLogsDir(), 'updates.log');
+function getAppUpdateYmlPath() {
+  return path.join(process.resourcesPath, 'app-update.yml');
+}
+
+function hasAppUpdateYml() {
+  try {
+    return fs.existsSync(getAppUpdateYmlPath());
+  } catch {
+    return false;
+  }
+}
+
+function isWinUnpackedBuild() {
+  try {
+    const exe = (process.execPath || '').replace(/\//g, '\\');
+    return /\\win-unpacked\\/i.test(exe) || /win-unpacked/i.test(exe);
+  } catch {
+    return false;
+  }
+}
+
+/** @returns {'dev'|'local_build'|'installed'} */
+function getUpdateMode() {
+  if (!app.isPackaged) return 'dev';
+  if (!hasAppUpdateYml() || isWinUnpackedBuild()) return 'local_build';
+  return 'installed';
 }
 
 function writeLog(line) {
-  const file = getLogPath();
+  const file = path.join(getLogsDir(), 'updates.log');
   try {
     const dir = path.dirname(file);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
@@ -34,12 +61,17 @@ function writeLog(line) {
 }
 
 function makePayload(partial) {
+  const mode = getUpdateMode();
   return {
     ok: partial.ok !== false,
     status: partial.status || 'idle',
     message: partial.message || '',
     data: {
       currentVersion: app.getVersion(),
+      updateMode: mode,
+      devMode: mode === 'dev',
+      localBuild: mode === 'local_build',
+      packaged: app.isPackaged,
       ...(partial.data || {})
     }
   };
@@ -64,6 +96,127 @@ function clearWaiter(type) {
   if (type === 'download') downloadWaiter = null;
 }
 
+function parseVersionParts(v) {
+  const s = String(v || '')
+    .replace(/^v/i, '')
+    .trim();
+  const m = s.match(/^(\d+)(?:\.(\d+))?(?:\.(\d+))?/);
+  if (!m) return [0, 0, 0];
+  return [Number(m[1]) || 0, Number(m[2]) || 0, Number(m[3]) || 0];
+}
+
+function compareVersions(a, b) {
+  const va = parseVersionParts(a);
+  const vb = parseVersionParts(b);
+  for (let i = 0; i < 3; i += 1) {
+    if (va[i] !== vb[i]) return va[i] - vb[i];
+  }
+  return 0;
+}
+
+async function checkGitHubReleaseReadOnly() {
+  const currentVersion = app.getVersion();
+  try {
+    const res = await fetch(GITHUB_RELEASES_LATEST, {
+      headers: {
+        Accept: 'application/vnd.github+json',
+        'User-Agent': 'ITALIAN-TWEAKS-UpdateCheck'
+      }
+    });
+
+    if (res.status === 404 || res.status === 401 || res.status === 403) {
+      writeLog(`github releases/latest ${res.status} (private or missing)`);
+      return {
+        ok: false,
+        privateRepo: true,
+        message:
+          'Repo privé — update réel nécessitera une release accessible ou un token'
+      };
+    }
+
+    if (!res.ok) {
+      writeLog(`github releases/latest HTTP ${res.status}`);
+      return {
+        ok: false,
+        message: `GitHub API indisponible (${res.status})`
+      };
+    }
+
+    const data = await res.json();
+    const tagName = data?.tag_name || '';
+    const remoteDisplay = tagName || data?.name || '—';
+    const remoteVer = tagName.replace(/^v/i, '');
+    const newer = compareVersions(remoteVer, currentVersion) > 0;
+
+    writeLog(`github latest ${remoteDisplay} (current ${currentVersion}, newer=${newer})`);
+
+    return {
+      ok: true,
+      tagName: remoteDisplay,
+      remoteVersion: remoteDisplay,
+      newer,
+      message: `Dernière release GitHub : ${remoteDisplay}`
+    };
+  } catch (err) {
+    const msg = err?.message || String(err);
+    writeLog(`github fetch error: ${msg}`);
+    return { ok: false, message: msg };
+  }
+}
+
+function localBuildCheckPayload(githubResult) {
+  const missingYml = !hasAppUpdateYml();
+  const base =
+    'Mode test local — installe la version Setup pour tester les mises à jour réelles';
+
+  if (githubResult?.privateRepo) {
+    return makePayload({
+      ok: false,
+      status: 'local_build',
+      message: githubResult.message,
+      data: {
+        missing: missingYml ? 'app-update.yml' : undefined,
+        privateRepo: true,
+        githubChecked: true
+      }
+    });
+  }
+
+  if (githubResult?.ok && githubResult.remoteVersion) {
+    const ghLine = githubResult.message || `Dernière release GitHub : ${githubResult.remoteVersion}`;
+    const newerHint = githubResult.newer
+      ? ' (version plus récente que la vôtre)'
+      : '';
+    return makePayload({
+      ok: githubResult.newer,
+      status: 'local_build',
+      message: `${base}. ${ghLine}${newerHint}`,
+      data: {
+        missing: missingYml ? 'app-update.yml' : undefined,
+        githubRelease: githubResult.remoteVersion,
+        remoteVersion: githubResult.remoteVersion,
+        githubChecked: true,
+        githubNewer: githubResult.newer
+      }
+    });
+  }
+
+  const fallbackMsg = missingYml
+    ? 'Mode test local — update réel disponible seulement avec l’application installée'
+    : base;
+
+  return makePayload({
+    ok: false,
+    status: 'local_build',
+    message: fallbackMsg,
+    data: {
+      missing: missingYml ? 'app-update.yml' : undefined,
+      githubChecked: !!githubResult,
+      githubError: githubResult?.message
+    }
+  });
+}
+
 function initUpdateService(mainWindowGetter) {
   if (initialized) {
     getMainWindow = mainWindowGetter;
@@ -72,13 +225,20 @@ function initUpdateService(mainWindowGetter) {
   initialized = true;
   getMainWindow = mainWindowGetter;
 
+  const mode = getUpdateMode();
+  lastPayload = makePayload({
+    ok: true,
+    status: 'idle',
+    message: 'Prêt',
+    data: { currentVersion: app.getVersion() }
+  });
+
   autoUpdater.autoDownload = false;
   autoUpdater.autoInstallOnAppQuit = false;
   autoUpdater.allowDowngrade = false;
 
-  if (!app.isPackaged) {
-    autoUpdater.forceDevUpdateConfig = false;
-    writeLog('init dev mode — updates disabled until packaged build');
+  if (mode !== 'installed') {
+    writeLog(`init ${mode} — autoUpdater disabled (no app-update.yml or dev)`);
     return;
   }
 
@@ -145,6 +305,16 @@ function initUpdateService(mainWindowGetter) {
 
   autoUpdater.on('error', (err) => {
     const msg = err?.message || String(err);
+    if (/app-update\.yml/i.test(msg) || /ENOENT/i.test(msg)) {
+      writeLog(`autoUpdater error suppressed: ${msg}`);
+      const payload = localBuildCheckPayload(null);
+      broadcast(payload);
+      resolveWaiter(checkWaiter, payload);
+      resolveWaiter(downloadWaiter, payload);
+      clearWaiter('check');
+      clearWaiter('download');
+      return;
+    }
     const payload = makePayload({
       ok: false,
       status: 'error',
@@ -158,7 +328,7 @@ function initUpdateService(mainWindowGetter) {
     clearWaiter('download');
   });
 
-  writeLog('init packaged — autoUpdater ready (github SanaaCOD/italian-tweaks)');
+  writeLog('init installed — autoUpdater ready (github SanaaCOD/italian-tweaks)');
 }
 
 function getStatus() {
@@ -170,13 +340,35 @@ function getAppVersion() {
 }
 
 async function checkForUpdates() {
-  if (!app.isPackaged) {
+  const mode = getUpdateMode();
+  writeLog(`checkForUpdates mode=${mode}`);
+
+  if (mode === 'dev') {
     const payload = makePayload({
       ok: true,
       status: 'not_available',
-      message: 'Mode développement — les mises à jour GitHub sont actives uniquement sur l’installateur.',
-      data: { devMode: true }
+      message: 'Mode dev — update réel indisponible',
+      data: { devMode: true, packaged: false }
     });
+    broadcast(payload);
+    return payload;
+  }
+
+  if (mode === 'local_build') {
+    broadcast({
+      ok: true,
+      status: 'checking',
+      message: 'Vérification GitHub (lecture seule)…'
+    });
+    const github = await checkGitHubReleaseReadOnly();
+    const payload = localBuildCheckPayload(github);
+    broadcast(payload);
+    return payload;
+  }
+
+  if (!hasAppUpdateYml()) {
+    const github = await checkGitHubReleaseReadOnly();
+    const payload = localBuildCheckPayload(github);
     broadcast(payload);
     return payload;
   }
@@ -209,13 +401,24 @@ async function checkForUpdates() {
       }
     };
 
-    writeLog('checkForUpdates start');
+    writeLog('checkForUpdates start (autoUpdater)');
     autoUpdater.checkForUpdates().catch((err) => {
       clearTimeout(timeout);
+      const msg = err?.message || String(err);
+      if (/app-update\.yml/i.test(msg) || /ENOENT/i.test(msg)) {
+        writeLog(`check suppressed ENOENT: ${msg}`);
+        checkGitHubReleaseReadOnly().then((github) => {
+          const payload = localBuildCheckPayload(github);
+          broadcast(payload);
+          checkWaiter = null;
+          resolve(payload);
+        });
+        return;
+      }
       const payload = makePayload({
         ok: false,
         status: 'error',
-        message: err?.message || String(err)
+        message: msg
       });
       broadcast(payload);
       checkWaiter = null;
@@ -225,11 +428,22 @@ async function checkForUpdates() {
 }
 
 async function downloadUpdate() {
-  if (!app.isPackaged) {
+  const mode = getUpdateMode();
+
+  if (mode === 'dev') {
     return makePayload({
       ok: false,
       status: 'error',
-      message: 'Téléchargement indisponible en mode développement'
+      message: 'Mode dev — update réel indisponible'
+    });
+  }
+
+  if (mode === 'local_build') {
+    return makePayload({
+      ok: false,
+      status: 'local_build',
+      message:
+        'Mode test local — téléchargement indisponible (installez via Setup NSIS)'
     });
   }
 
@@ -274,10 +488,11 @@ async function downloadUpdate() {
 
     autoUpdater.downloadUpdate().catch((err) => {
       clearTimeout(timeout);
+      const msg = err?.message || String(err);
       const payload = makePayload({
         ok: false,
         status: 'error',
-        message: err?.message || String(err)
+        message: msg
       });
       broadcast(payload);
       downloadWaiter = null;
@@ -287,11 +502,22 @@ async function downloadUpdate() {
 }
 
 function quitAndInstall() {
-  if (!app.isPackaged) {
+  const mode = getUpdateMode();
+
+  if (mode === 'dev') {
     return makePayload({
       ok: false,
       status: 'error',
-      message: 'Installation indisponible en mode développement'
+      message: 'Mode dev — update réel indisponible'
+    });
+  }
+
+  if (mode === 'local_build') {
+    return makePayload({
+      ok: false,
+      status: 'local_build',
+      message:
+        'Mode test local — installation indisponible (installez via Setup NSIS)'
     });
   }
 
@@ -320,6 +546,7 @@ module.exports = {
   initUpdateService,
   getStatus,
   getAppVersion,
+  getUpdateMode,
   checkForUpdates,
   downloadUpdate,
   quitAndInstall
