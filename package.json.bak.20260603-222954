@@ -1,7 +1,7 @@
-{
+﻿{
     "name":  "italian-tweaks",
     "productName":  "ITALIAN TWEAKS",
-    "version":  "1.0.2",
+    "version":  "1.0.1",
     "description":  "ITALIAN TWEAKS â€” Performance Suite",
     "main":  "src/main.js",
     "author":  "ITALIAN TWEAKS",

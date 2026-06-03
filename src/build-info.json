@@ -1,7 +1,9 @@
 {
-  "version": "1.0.0",
-  "productName": "ITALIAN TWEAKS",
-  "builtAt": "2026-06-03 22:12",
-  "commit": "baaca0a",
-  "buildId": "1.0.0-2026-06-032212-baaca0a"
+  "version": "1.0.1",
+  "buildDate": "2026-06-03 22:29",
+  "buildTime": "2026-06-03 22:29",
+  "commit": "c98188a",
+  "git": "c98188a",
+  "buildId": "v1.0.1 Â· build 2026-06-03 22:29 Â· c98188a",
+  "generatedAt": "2026-06-03T20:29:55.226Z"
 }
