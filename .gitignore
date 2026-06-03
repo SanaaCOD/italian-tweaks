@@ -10,12 +10,10 @@ logs/
 backup*/
 *.bak
 
-# Anciennes apps / imports lourds
 legacy-purpleboost/
 dist-staging-publish/
 dist_build_temp/
 
-# Node portable
 tools/node-*/
 
 .DS_Store
