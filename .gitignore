@@ -1,7 +1,22 @@
-node_modules/
-tools/node-v*/
+﻿node_modules/
 build/
 dist/
+logs/
 *.log
+*.tmp
+.env
+.env.local
+
+backup*/
+*.bak
+
+# Anciennes apps / imports lourds
+legacy-purpleboost/
+dist-staging-publish/
+dist_build_temp/
+
+# Node portable
+tools/node-*/
+
 .DS_Store
 Thumbs.db

@@ -71,5 +71,18 @@ contextBridge.exposeInMainWorld('italianTweaks', {
     get: () => ipcRenderer.invoke('settings:get'),
     save: (d) => ipcRenderer.invoke('settings:save', d),
     reset: () => ipcRenderer.invoke('settings:reset')
+  },
+  updates: {
+    check: () => ipcRenderer.invoke('updates:check'),
+    download: () => ipcRenderer.invoke('updates:download'),
+    install: () => ipcRenderer.invoke('updates:install'),
+    getStatus: () => ipcRenderer.invoke('updates:getStatus'),
+    getVersion: () => ipcRenderer.invoke('updates:getVersion'),
+    onStatus: (callback) => {
+      if (typeof callback !== 'function') return () => {};
+      const handler = (_event, payload) => callback(payload);
+      ipcRenderer.on('updates:status', handler);
+      return () => ipcRenderer.removeListener('updates:status', handler);
+    }
   }
 });

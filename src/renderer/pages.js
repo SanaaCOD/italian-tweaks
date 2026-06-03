@@ -760,10 +760,143 @@ window.ItPages = {
     main.innerHTML = `${this._header('Compte / Abonnement', 'Licence locale — hors TUNEDPC cloud')}<div class="card-grid">${ItUi.actionCard({ title: 'Performance Suite', text: 'Abonnement à brancher (pas de .ps1.enc Auth).', status: 'Local', actions: [{ id: 'x', label: '—', disabled: true }] })}</div>`;
   },
 
+  _updateStatusLabel(status) {
+    const map = {
+      idle: 'Prêt',
+      checking: 'Vérification…',
+      available: 'Mise à jour dispo',
+      not_available: 'À jour',
+      downloading: 'Téléchargement…',
+      downloaded: 'Prête à installer',
+      error: 'Erreur'
+    };
+    return map[status] || status || 'Prêt';
+  },
+
+  _updateStatusType(status) {
+    if (status === 'available' || status === 'downloaded') return 'ok';
+    if (status === 'error') return 'err';
+    if (status === 'checking' || status === 'downloading') return 'pending';
+    return 'neutral';
+  },
+
+  _syncSettingsUpdateUi(main) {
+    const u = main._itUpdate || { status: 'idle', message: 'Prêt', percent: 0, version: '—', remoteVersion: '' };
+    const statusEl = main.querySelector('[data-upd-status-text]');
+    const versionEl = main.querySelector('[data-upd-version]');
+    const remoteEl = main.querySelector('[data-upd-remote]');
+    const progressWrap = main.querySelector('[data-upd-progress]');
+    const progressBar = main.querySelector('[data-upd-progress-bar]');
+    const badge = main.querySelector('[data-card-id="settings-update"] .action-card__status');
+
+    if (versionEl) versionEl.textContent = u.version || '—';
+    if (remoteEl) {
+      remoteEl.textContent = u.remoteVersion ? `Dernière release : ${u.remoteVersion}` : '';
+      remoteEl.hidden = !u.remoteVersion;
+    }
+    if (statusEl) statusEl.textContent = u.message || this._updateStatusLabel(u.status);
+    if (badge) {
+      badge.textContent = this._updateStatusLabel(u.status);
+      badge.className = `action-card__status ${this._updateStatusType(u.status) === 'ok' ? 'status-ok' : this._updateStatusType(u.status) === 'err' ? 'status-err' : this._updateStatusType(u.status) === 'pending' ? 'status-pending' : ''}`;
+    }
+    if (progressWrap && progressBar) {
+      const show = u.status === 'downloading';
+      progressWrap.hidden = !show;
+      progressBar.style.width = `${Math.min(100, Math.max(0, u.percent || 0))}%`;
+    }
+
+    const btnCheck = main.querySelector('[data-action="upd-check"]');
+    const btnDl = main.querySelector('[data-action="upd-dl"]');
+    const btnInstall = main.querySelector('[data-action="upd-install"]');
+    const busy = u.status === 'checking' || u.status === 'downloading';
+
+    if (btnCheck) btnCheck.disabled = busy;
+    if (btnDl) btnDl.disabled = busy || u.status !== 'available';
+    if (btnInstall) btnInstall.disabled = busy || u.status !== 'downloaded';
+  },
+
+  _applyUpdatePayload(main, payload) {
+    const p = payload || {};
+    const data = p.data || {};
+    main._itUpdate = {
+      status: p.status || 'idle',
+      message: p.message || '',
+      percent: data.percent ?? (p.status === 'downloaded' ? 100 : 0),
+      version: data.currentVersion || main._itUpdate?.version || '—',
+      remoteVersion: data.version || data.remoteVersion || ''
+    };
+    this._syncSettingsUpdateUi(main);
+  },
+
+  _ensureReglagesUpdateListener(main) {
+    if (main._itUpdateUnsub) return;
+    main._itUpdateUnsub = window.italianTweaks.updates.onStatus((payload) => {
+      if (!main.querySelector('[data-card-id="settings-update"]')) return;
+      this._applyUpdatePayload(main, payload);
+    });
+  },
+
+  _runUpdateAction(main, btn, fn) {
+    return (async () => {
+      if (btn) btn.disabled = true;
+      try {
+        const result = await fn();
+        this._applyUpdatePayload(main, result);
+        if (!result?.ok && result?.message) ItUi.toast(result.message, true);
+        else if (result?.ok && result?.message && result.status !== 'checking') {
+          ItUi.toast(result.message, false);
+        }
+      } catch (e) {
+        this._applyUpdatePayload(main, { ok: false, status: 'error', message: String(e.message || e) });
+        ItUi.toast(String(e.message || e), true);
+      } finally {
+        this._syncSettingsUpdateUi(main);
+      }
+    })();
+  },
+
+  async _loadReglagesUpdateMeta(main) {
+    try {
+      const verRes = await window.italianTweaks.updates.getVersion();
+      const statusRes = await window.italianTweaks.updates.getStatus();
+      main._itUpdate = {
+        status: statusRes?.status || 'idle',
+        message: statusRes?.message || 'Prêt',
+        percent: statusRes?.data?.percent || 0,
+        version: verRes?.data?.version || statusRes?.data?.currentVersion || '—',
+        remoteVersion: statusRes?.data?.version || ''
+      };
+    } catch {
+      main._itUpdate = { status: 'idle', message: 'Prêt', percent: 0, version: '—', remoteVersion: '' };
+    }
+    this._syncSettingsUpdateUi(main);
+  },
+
   _applyReglages(main, s) {
     const grid = main.querySelector('#pg');
     if (!grid) return;
+    const u = main._itUpdate || { status: 'idle', message: 'Prêt', version: '—' };
     grid.innerHTML = [
+      `<article class="action-card" data-card-id="settings-update">
+        <div class="action-card__head">
+          <h3 class="action-card__title">Mises à jour</h3>
+          <span class="action-card__status">${ItUi.escape(this._updateStatusLabel(u.status))}</span>
+        </div>
+        <p class="action-card__text">Vérifie et installe la dernière version depuis GitHub.</p>
+        <div class="settings-update__meta">
+          <p>Version actuelle : <strong data-upd-version>${ItUi.escape(u.version)}</strong></p>
+          <p class="settings-update__remote" data-upd-remote hidden></p>
+          <p class="settings-update__status-line" data-upd-status-text>${ItUi.escape(u.message || 'Prêt')}</p>
+          <div class="settings-update__progress" data-upd-progress hidden>
+            <div class="settings-update__progress-bar" data-upd-progress-bar></div>
+          </div>
+        </div>
+        <div class="action-card__actions">
+          <button type="button" class="btn btn--primary" data-action="upd-check">Check update</button>
+          <button type="button" class="btn btn--ghost" data-action="upd-dl" disabled>Télécharger update</button>
+          <button type="button" class="btn btn--ghost" data-action="upd-install" disabled>Installer et redémarrer</button>
+        </div>
+      </article>`,
       ItUi.actionCard({
         title: 'Confirmations',
         text: 'Avant actions système dangereuses',
@@ -774,7 +907,14 @@ window.ItPages = {
       }),
       ItUi.actionCard({ title: 'Reset', actions: [{ id: 'rst', label: 'Réinitialiser', primary: true }] })
     ].join('');
-    ItApi.bindPage(grid, {
+
+    this._syncSettingsUpdateUi(main);
+    this._ensureReglagesUpdateListener(main);
+
+    main._itReglagesHandlers = {
+      'upd-check': (btn) => this._runUpdateAction(main, btn, () => ItApi.updates.check()),
+      'upd-dl': (btn) => this._runUpdateAction(main, btn, () => ItApi.updates.download()),
+      'upd-install': (btn) => this._runUpdateAction(main, btn, () => ItApi.updates.install()),
       tog: async () => {
         await window.italianTweaks.settings.save({ confirmDangerousActions: !s.confirmDangerousActions });
         this.renderReglages(main);
@@ -783,6 +923,17 @@ window.ItPages = {
         await window.italianTweaks.settings.reset();
         this.renderReglages(main);
       }
+    };
+  },
+
+  _ensureReglagesClickDelegate(main) {
+    if (main._itReglagesDelegate) return;
+    main._itReglagesDelegate = true;
+    main.addEventListener('click', (ev) => {
+      const btn = ev.target.closest('#pg [data-action]');
+      if (!btn || !main.contains(btn)) return;
+      const fn = main._itReglagesHandlers?.[btn.dataset.action];
+      if (fn) fn(btn);
     });
   },
 
@@ -790,9 +941,12 @@ window.ItPages = {
     const pageId = 'reglages';
     const t0 = performance.now();
     this._mountPage(main, 'Réglages');
+    this._ensureReglagesClickDelegate(main);
     const cached = ItPageCache.get(pageId);
     const s = cached?.payload || { confirmDangerousActions: true };
+    main._itUpdate = main._itUpdate || { status: 'idle', message: 'Prêt', percent: 0, version: '—', remoteVersion: '' };
     this._applyReglages(main, s);
+    this._loadReglagesUpdateMeta(main);
     ItPageLoader.log(pageId, 'shell', performance.now() - t0);
 
     this._fetchInBackground(

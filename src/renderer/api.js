@@ -23,5 +23,14 @@ window.ItApi = {
     ItUi.bindActions(root, Object.fromEntries(
       Object.entries(handlers).map(([id, fn]) => [id, (btn) => ItApi.run(() => fn(btn), btn)])
     ));
+  },
+
+  updates: {
+    check: () => window.italianTweaks.updates.check(),
+    download: () => window.italianTweaks.updates.download(),
+    install: () => window.italianTweaks.updates.install(),
+    getStatus: () => window.italianTweaks.updates.getStatus(),
+    getVersion: () => window.italianTweaks.updates.getVersion(),
+    onStatus: (callback) => window.italianTweaks.updates.onStatus(callback)
   }
 };

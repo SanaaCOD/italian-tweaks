@@ -1060,3 +1060,42 @@ button {
     justify-content: space-between;
   }
 }
+
+/* Réglages — mises à jour GitHub */
+.settings-update__meta {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.settings-update__meta strong {
+  color: var(--text-primary);
+}
+
+.settings-update__status-line {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+
+.settings-update__remote {
+  font-size: 0.68rem;
+  color: var(--accent-cyan);
+}
+
+.settings-update__progress {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  margin-top: 0.25rem;
+}
+
+.settings-update__progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));
+  transition: width 0.2s ease;
+}

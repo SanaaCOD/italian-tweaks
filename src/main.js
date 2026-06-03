@@ -1,6 +1,7 @@
 const { app, BrowserWindow, nativeImage } = require('electron');
 const path = require('path');
 const { registerIpcHandlers } = require('./ipc/handlers');
+const { initUpdateService } = require('./services/update-service');
 
 const WINDOW_WIDTH = 1440;
 const WINDOW_HEIGHT = 900;
@@ -31,6 +32,7 @@ if (!gotLock) {
     const system = require('./services/system');
     system.startMonitor();
     createMainWindow();
+    initUpdateService(() => mainWindow);
   });
 
   app.on('before-quit', () => {

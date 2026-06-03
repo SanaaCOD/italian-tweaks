@@ -7,6 +7,7 @@ const optimizations = require('../services/optimizations');
 const audio = require('../services/audio');
 const games = require('../services/games');
 const settings = require('../services/settings');
+const updateService = require('../services/update-service');
 
 async function confirmDangerous(title, message) {
   if (!settings.load().confirmDangerousActions) return true;
@@ -110,6 +111,17 @@ function registerIpcHandlers() {
   ipcMain.handle('settings:get', () => settings.load());
   ipcMain.handle('settings:save', (_e, d) => settings.save(d));
   ipcMain.handle('settings:reset', () => settings.reset());
+
+  ipcMain.handle('updates:check', () => updateService.checkForUpdates());
+  ipcMain.handle('updates:download', () => updateService.downloadUpdate());
+  ipcMain.handle('updates:install', () => updateService.quitAndInstall());
+  ipcMain.handle('updates:getStatus', () => updateService.getStatus());
+  ipcMain.handle('updates:getVersion', () => ({
+    ok: true,
+    status: 'success',
+    message: '',
+    data: { version: updateService.getAppVersion() }
+  }));
 }
 
 module.exports = { registerIpcHandlers };
