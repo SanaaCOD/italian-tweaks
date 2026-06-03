@@ -9,15 +9,14 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/sanaaxzu/italian-tweaks.git"
+    "url": "https://github.com/SanaaCOD/italian-tweaks.git"
   },
   "scripts": {
     "dev": "electron .",
     "start": "electron .",
-    "build": "electron-builder --win --x64",
-    "build:dir": "electron-builder --win --x64 --dir",
-    "dist": "electron-builder --win --x64 --publish never",
-    "release": "electron-builder --win --x64 --publish always",
+    "build": "electron-builder",
+    "build:dir": "electron-builder --dir",
+    "release": "electron-builder --publish always",
     "postinstall": "node scripts/generate-placeholders.js"
   },
   "dependencies": {
@@ -28,7 +27,7 @@
     "electron-builder": "^25.1.8"
   },
   "build": {
-    "appId": "com.sanaaxzu.italiantweaks",
+    "appId": "com.sanaacod.italiantweaks",
     "productName": "ITALIAN TWEAKS",
     "directories": {
       "output": "build",
@@ -83,7 +82,7 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "sanaaxzu",
+        "owner": "SanaaCOD",
         "repo": "italian-tweaks"
       }
     ]

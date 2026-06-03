@@ -91,7 +91,7 @@ function initUpdateService(mainWindowGetter) {
     const payload = makePayload({
       ok: true,
       status: 'available',
-      message: `Nouvelle version disponible : ${ver}`,
+      message: ver ? `Nouvelle version disponible (${ver})` : 'Nouvelle version disponible',
       data: {
         version: ver,
         releaseNotes: info?.releaseNotes,
@@ -158,7 +158,7 @@ function initUpdateService(mainWindowGetter) {
     clearWaiter('download');
   });
 
-  writeLog('init packaged — autoUpdater ready');
+  writeLog('init packaged — autoUpdater ready (github SanaaCOD/italian-tweaks)');
 }
 
 function getStatus() {

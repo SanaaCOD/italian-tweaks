@@ -764,10 +764,10 @@ window.ItPages = {
     const map = {
       idle: 'Prêt',
       checking: 'Vérification…',
-      available: 'Mise à jour dispo',
+      available: 'Update disponible',
       not_available: 'À jour',
-      downloading: 'Téléchargement…',
-      downloaded: 'Prête à installer',
+      downloading: 'Téléchargement',
+      downloaded: 'Prêt à installer',
       error: 'Erreur'
     };
     return map[status] || status || 'Prêt';
@@ -893,7 +893,7 @@ window.ItPages = {
         </div>
         <div class="action-card__actions">
           <button type="button" class="btn btn--primary" data-action="upd-check">Check update</button>
-          <button type="button" class="btn btn--ghost" data-action="upd-dl" disabled>Télécharger update</button>
+          <button type="button" class="btn btn--ghost" data-action="upd-dl" disabled>Télécharger</button>
           <button type="button" class="btn btn--ghost" data-action="upd-install" disabled>Installer et redémarrer</button>
         </div>
       </article>`,
