@@ -1,0 +1,17 @@
+{
+  "digitalVibrance": 80,
+  "runNipProfile": true,
+  "runDigitalVibrance": true,
+  "runDisplaySettings": true,
+  "runPanelSettings": true,
+  "closeNvidiaPanelAtEnd": true,
+  "bringUnrealToFrontAtEnd": true,
+  "experimentalKeepUnrealInFrontDuringPanelAutomation": false,
+  "panelSettings": {
+    "runNoScaling": true,
+    "runPreviewPerformance": true,
+    "runInverseTelecine": true,
+    "delayAfterNoScalingMs": 4000,
+    "delayBetweenPanelStepsMs": 1000
+  }
+}

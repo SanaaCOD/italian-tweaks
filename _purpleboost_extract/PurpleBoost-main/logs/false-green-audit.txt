@@ -1,0 +1,92 @@
+=== Audit faux statuts verts — NVIDIA supplémentaires ===
+Date: 2026-05-22
+
+----------------------------------------------------------------------
+1. Téléciné inversée — applyNvExtraInverseTelecineFromUi
+----------------------------------------------------------------------
+Fichier: Unreal.hta
+Fonction: nvExtraOutcomeFromStep (SUPPRIMÉE / remplacée)
+Ligne approx.: ~5019-5022 (avant correction)
+
+Bouton: « Désactiver téléciné inversée »
+
+Condition qui mettait le vert:
+  step.status === "Success" && step.verified === true
+  → label « appliqué », tone « ok » (tcp-badge--ok)
+
+Preuve réelle utilisée: AUCUNE preuve obligatoire dans l'UI
+  - Le backend StepResult.Ok() mettait verified=true sans champ evidence
+  - Succès possible si valeurs déjà à zéro ou si compteur verified==found sans chaîne de preuve affichée
+  - L'UI ne vérifiait pas la présence de « 00 00 00 00 00 00 00 00 » dans evidence
+
+Correction:
+  - Backend: StepResult.OkVerified + evidence obligatoire (registry_xalg_cadence)
+  - UI: nvExtraRenderUi → vert seulement si status=applied AND verified=true AND evidence non vide
+
+----------------------------------------------------------------------
+2. Mode performance NVIDIA — applyNvExtraPerformanceFromUi
+----------------------------------------------------------------------
+Fichier: Unreal.hta
+Fonction: nvExtraOutcomeFromStep + runNvidiaAutomationV2ExecAsync --apply-nip
+Ligne approx.: ~5129-5137 (avant correction)
+
+Bouton: « Appliquer mode performance NVIDIA »
+
+Condition qui mettait le vert:
+  nipProfile.status === "Success" && nipProfile.verified === true
+  après import .nip silencieux (process exit 0)
+
+Preuve réelle utilisée: AUCUNE
+  - NipProfileService.ApplyNipProfile retourne Ok(..., true) si exit code 0
+  - Pas de relecture du mode performance dans le driver / registre / panneau
+  - Le .nip n'est pas une preuve (demande utilisateur)
+
+Correction:
+  - Plus d'appel --apply-nip pour ce bouton
+  - Affichage immédiat: status=not_implemented, verified=false, tone gris (muted)
+
+Recherche code existant vérifiable pour mode performance:
+  - Aucune méthode trouvée dans nvidia-automation-v2 hors import .nip
+  - Pas de PowerMizer / PerfMode avec relecture dans le projet
+
+----------------------------------------------------------------------
+3. Pas de mise à l'échelle — applyNvExtraNoScalingFromUi
+----------------------------------------------------------------------
+Fichier: Unreal.hta
+Fonction: nvExtraOutcomeFromScaling
+Ligne approx.: ~5033-5045 (avant correction)
+
+Bouton: « Appliquer pas de mise à l'échelle »
+
+Condition qui mettait parfois le vert:
+  sc.applied === true && sc.verified === true
+  sans exiger evidence
+
+Preuve réelle:
+  - NvApiService.ApplyScaling: branche !changed mettait Applied=true Verified=true SANS relecture TryVerifyScaling
+  - Mode « No scaling » dans label pouvait afficher jaune « ignoré » si NVAPI indisponible (correct)
+  - Faux vert possible si verified=true sans evidence NVAPI
+
+Correction:
+  - NvApiService: TryVerifyScaling(out evidence) obligatoire avant vert; uiStatus=not_implemented si NVAPI absent
+  - UI: vert uniquement si uiStatus=applied, verified, evidence présent
+
+----------------------------------------------------------------------
+4. Autre source connexe (panneau principal, pas les 3 boutons)
+----------------------------------------------------------------------
+Fichier: Unreal.hta
+Fonction: nvStableAppliedLabel
+Ligne approx.: ~5188-5190
+
+Condition dangereuse:
+  if (step.status === "Success") return "appliqué";  // SANS verified
+
+Impact: résumé « Appliquer optimisation Nvidia complète » — hors scope correction actuelle
+
+----------------------------------------------------------------------
+Règle UI après correction (nvExtraRenderUi)
+----------------------------------------------------------------------
+VERT (ok):     status === "applied" && verified === true && evidence non vide
+ROUGE (bad):   error, ou applied sans evidence, ou verified false
+JAUNE (warn):  ignored
+GRIS (muted):  not_implemented

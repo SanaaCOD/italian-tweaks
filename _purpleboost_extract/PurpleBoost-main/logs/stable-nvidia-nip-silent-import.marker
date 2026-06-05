@@ -1,0 +1,14 @@
+stable-nvidia-nip-silent-import
+validated=2026-05-19
+status=locked
+
+Do not rewrite:
+- Unreal.hta: ApplyNipProfile, runNvidiaAutomationV2ApplyNipOnly
+- NvidiaAutomationV2: NipSilentImportService.cs, NipProfileService.ApplyNipProfile
+
+Validated behavior:
+- .nip applies via -silentImport (no NPI window)
+- DDU unchanged
+- NVCleanInstall unchanged
+
+Log line on startup (health check): NPI silent import validated

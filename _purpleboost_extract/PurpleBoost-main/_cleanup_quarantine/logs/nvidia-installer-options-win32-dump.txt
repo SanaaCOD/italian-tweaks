@@ -1,0 +1,31 @@
+﻿DATE=2026-05-24 00:01:13
+ROOT_HWND=5183254 ROOT_TITLE=Programme d'installation NVIDIA
+--- HIGHLIGHT (keywords) ---
+HWND=595754 | className='ATL:6CAC69B8' | text='&Expresse (recommandée)' | visible=True | enabled=True | rect=L1524,T397,R1916,B413 | style=1442906123 | exStyle=32 | parentHWND=5183254
+HWND=262522 | className='ATL:6CAC69B8' | text='&Personnalisée (avancée)' | visible=True | enabled=True | rect=L1524,T477,R1916,B493 | style=1442906123 | exStyle=32 | parentHWND=5183254
+HWND=262530 | className='ATL:6CAC65C8' | text='&SUIVANT' | visible=True | enabled=True | rect=L1726,T650,R1817,B678 | style=1442906123 | exStyle=32 | parentHWND=5183254
+--- ALL CHILDREN count=23 ---
+HWND=197092 | class='ATL:6CAC6A48' | text='Vérification du système' | visible=True | enabled=True | rect=L1381,T368,R1505,B401 | style=1342177280 | exStyle=32 | parent=5183254
+HWND=197130 | class='ATL:6CAC6808' | text='' | visible=True | enabled=True | rect=L1362,T369,R1375,B382 | style=1442840589 | exStyle=0 | parent=5183254
+HWND=197128 | class='ATL:6CAC6A48' | text='Contrat de licence' | visible=True | enabled=True | rect=L1381,T414,R1505,B430 | style=1342177280 | exStyle=32 | parent=5183254
+HWND=197124 | class='ATL:6CAC6808' | text='' | visible=True | enabled=True | rect=L1362,T416,R1375,B429 | style=1442840589 | exStyle=0 | parent=5183254
+HWND=197118 | class='ATL:6CAC6A48' | text='Options' | visible=True | enabled=True | rect=L1381,T445,R1505,B461 | style=1342177280 | exStyle=32 | parent=5183254
+HWND=197116 | class='ATL:6CAC6808' | text='' | visible=False | enabled=True | rect=L1362,T446,R1375,B459 | style=1174405133 | exStyle=0 | parent=5183254
+HWND=197114 | class='ATL:6CAC6A48' | text='Installer' | visible=True | enabled=True | rect=L1381,T476,R1505,B492 | style=1342177280 | exStyle=32 | parent=5183254
+HWND=197090 | class='ATL:6CAC6808' | text='' | visible=False | enabled=True | rect=L1362,T477,R1375,B490 | style=1174405133 | exStyle=0 | parent=5183254
+HWND=197100 | class='ATL:6CAC6A48' | text='Terminer' | visible=True | enabled=True | rect=L1381,T506,R1505,B522 | style=1342177280 | exStyle=32 | parent=5183254
+HWND=661280 | class='ATL:6CAC6808' | text='' | visible=False | enabled=True | rect=L1362,T508,R1375,B521 | style=1174405133 | exStyle=0 | parent=5183254
+HWND=1048842 | class='ATL:6CAC6A48' | text='Pilote graphique NVIDIA' | visible=True | enabled=True | rect=L1361,T289,R1884,B329 | style=1342177280 | exStyle=32 | parent=5183254
+HWND=923426 | class='ATL:6CAC6A48' | text='Version 596.49' | visible=True | enabled=True | rect=L1361,T313,R1884,B353 | style=1342177280 | exStyle=32 | parent=5183254
+HWND=726822 | class='ATL:6CAC6A48' | text='Options d'installation' | visible=True | enabled=True | rect=L1524,T361,R1916,B392 | style=1342177280 | exStyle=32 | parent=5183254
+HWND=595754 | class='ATL:6CAC69B8' | text='&Expresse (recommandée)' | visible=True | enabled=True | rect=L1524,T397,R1916,B413 | style=1442906123 | exStyle=32 | parent=5183254
+HWND=327786 | class='ATL:6CAC6A48' | text='Met à jour les pilotes existants et conserve les paramètres NVIDIA actuels.' | visible=True | enabled=True | rect=L1544,T421,R1827,B481 | style=1342177280 | exStyle=32 | parent=5183254
+HWND=262522 | class='ATL:6CAC69B8' | text='&Personnalisée (avancée)' | visible=True | enabled=True | rect=L1524,T477,R1916,B493 | style=1442906123 | exStyle=32 | parent=5183254
+HWND=262604 | class='ATL:6CAC6A48' | text='Permet de sélectionner les composants que vous souhaitez installer et propose l'option à choisir pour une nouvelle installation.' | visible=True | enabled=True | rect=L1544,T501,R1831,B561 | style=1342177280 | exStyle=32 | parent=5183254
+HWND=262490 | class='ATL:6CAC6A48' | text='Remarque : Veuillez fermer toutes les applications. Des clignotements peuvent survenir pendant l’installation.' | visible=True | enabled=True | rect=L1524,T573,R1916,B626 | style=1342177280 | exStyle=32 | parent=5183254
+HWND=262528 | class='ATL:6CAC65C8' | text='&PRÉCÉDENT' | visible=True | enabled=True | rect=L1636,T650,R1727,B678 | style=1442906123 | exStyle=32 | parent=5183254
+HWND=262530 | class='ATL:6CAC65C8' | text='&SUIVANT' | visible=True | enabled=True | rect=L1726,T650,R1817,B678 | style=1442906123 | exStyle=32 | parent=5183254
+HWND=262600 | class='AtlAxWin140' | text='' | visible=False | enabled=True | rect=L1341,T277,R1933,B637 | style=1073741824 | exStyle=0 | parent=5183254
+HWND=262616 | class='Internet Explorer_Server' | text='' | visible=False | enabled=True | rect=L1341,T277,R1933,B637 | style=1442840576 | exStyle=0 | parent=262600
+HWND=1251486 | class='ATL:6CAC65C8' | text='&ANNULER' | visible=True | enabled=True | rect=L1829,T650,R1920,B678 | style=1442906123 | exStyle=32 | parent=5183254
+--- SUMMARY keyword_hits=3 ---

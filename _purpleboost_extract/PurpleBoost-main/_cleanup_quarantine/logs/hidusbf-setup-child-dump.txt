@@ -1,0 +1,47 @@
+[HIDUSBF-AUTO] Window hwnd=6751058
+[HIDUSBF-AUTO] Dump all descendant controls (Win32 recursive):
+  hwnd=5702492|class=TPanel|text=|rect=804,497,1756,965|visible=True|enabled=True
+  hwnd=34406472|class=TPanel|text=|rect=804,845,1756,965|visible=True|enabled=True
+  hwnd=34276692|class=TMemo|text=|rect=1104,845,1756,965|visible=True|enabled=True
+  hwnd=34276692|class=TMemo|text=|rect=1104,845,1756,965|visible=True|enabled=True
+  hwnd=11077356|class=TPanel|text=|rect=804,807,1756,845|visible=True|enabled=True
+  hwnd=3211496|class=TButton|text=Copy IDs|rect=1310,815,1400,839|visible=True|enabled=True
+  hwnd=18744990|class=TButton|text=Restart|rect=1204,815,1294,839|visible=True|enabled=True
+  hwnd=7144466|class=TComboBox|text=|rect=916,815,1005,836|visible=True|enabled=True
+  hwnd=3146612|class=TCheckBox|text=Filter On Device|rect=812,818,917,835|visible=True|enabled=True
+  hwnd=30803434|class=TButton|text=Close|rect=1416,815,1506,839|visible=True|enabled=True
+  hwnd=5702680|class=TButton|text=Install Service|rect=1098,815,1188,839|visible=True|enabled=True
+  hwnd=3211496|class=TButton|text=Copy IDs|rect=1310,815,1400,839|visible=True|enabled=True
+  hwnd=18744990|class=TButton|text=Restart|rect=1204,815,1294,839|visible=True|enabled=True
+  hwnd=7144466|class=TComboBox|text=|rect=916,815,1005,836|visible=True|enabled=True
+  hwnd=3146612|class=TCheckBox|text=Filter On Device|rect=812,818,917,835|visible=True|enabled=True
+  hwnd=30803434|class=TButton|text=Close|rect=1416,815,1506,839|visible=True|enabled=True
+  hwnd=5702680|class=TButton|text=Install Service|rect=1098,815,1188,839|visible=True|enabled=True
+  hwnd=4719488|class=TDrawGrid|text=|rect=804,535,1756,807|visible=True|enabled=True
+  hwnd=18482748|class=TPanel|text=|rect=804,497,1756,535|visible=True|enabled=True
+  hwnd=5440414|class=TButton|text=About|rect=1642,505,1732,529|visible=True|enabled=True
+  hwnd=11666448|class=TComboBox|text=|rect=828,505,981,526|visible=True|enabled=True
+  hwnd=5440414|class=TButton|text=About|rect=1642,505,1732,529|visible=True|enabled=True
+  hwnd=11666448|class=TComboBox|text=|rect=828,505,981,526|visible=True|enabled=True
+  hwnd=34406472|class=TPanel|text=|rect=804,845,1756,965|visible=True|enabled=True
+  hwnd=34276692|class=TMemo|text=|rect=1104,845,1756,965|visible=True|enabled=True
+  hwnd=34276692|class=TMemo|text=|rect=1104,845,1756,965|visible=True|enabled=True
+  hwnd=11077356|class=TPanel|text=|rect=804,807,1756,845|visible=True|enabled=True
+  hwnd=3211496|class=TButton|text=Copy IDs|rect=1310,815,1400,839|visible=True|enabled=True
+  hwnd=18744990|class=TButton|text=Restart|rect=1204,815,1294,839|visible=True|enabled=True
+  hwnd=7144466|class=TComboBox|text=|rect=916,815,1005,836|visible=True|enabled=True
+  hwnd=3146612|class=TCheckBox|text=Filter On Device|rect=812,818,917,835|visible=True|enabled=True
+  hwnd=30803434|class=TButton|text=Close|rect=1416,815,1506,839|visible=True|enabled=True
+  hwnd=5702680|class=TButton|text=Install Service|rect=1098,815,1188,839|visible=True|enabled=True
+  hwnd=3211496|class=TButton|text=Copy IDs|rect=1310,815,1400,839|visible=True|enabled=True
+  hwnd=18744990|class=TButton|text=Restart|rect=1204,815,1294,839|visible=True|enabled=True
+  hwnd=7144466|class=TComboBox|text=|rect=916,815,1005,836|visible=True|enabled=True
+  hwnd=3146612|class=TCheckBox|text=Filter On Device|rect=812,818,917,835|visible=True|enabled=True
+  hwnd=30803434|class=TButton|text=Close|rect=1416,815,1506,839|visible=True|enabled=True
+  hwnd=5702680|class=TButton|text=Install Service|rect=1098,815,1188,839|visible=True|enabled=True
+  hwnd=4719488|class=TDrawGrid|text=|rect=804,535,1756,807|visible=True|enabled=True
+  hwnd=18482748|class=TPanel|text=|rect=804,497,1756,535|visible=True|enabled=True
+  hwnd=5440414|class=TButton|text=About|rect=1642,505,1732,529|visible=True|enabled=True
+  hwnd=11666448|class=TComboBox|text=|rect=828,505,981,526|visible=True|enabled=True
+  hwnd=5440414|class=TButton|text=About|rect=1642,505,1732,529|visible=True|enabled=True
+  hwnd=11666448|class=TComboBox|text=|rect=828,505,981,526|visible=True|enabled=True

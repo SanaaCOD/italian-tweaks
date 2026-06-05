@@ -1,0 +1,11 @@
+﻿STATUS=[DDU] Ouverture DDU...
+STATUS=[DDU] Fenêtre détectée.
+STATUS=[DDU] Surveillance pop-ups DDU dÃ©marrÃ©e.
+STATUS=[DDU] Recherche popup avertissement DDU...
+STATUS=[DDU] Aucune popup OK dÃ©tectÃ©e aprÃ¨s 1500 ms, continuation workflow.
+STATUS=[DDU] SÃ©lection type pÃ©riphÃ©rique GPU...
+STATUS=SÃ©lection GPU / INTELâ€¦
+STATUS=[SAFECLICK] Fallback coordonnÃ©es bloquÃ© pour sÃ©curitÃ© : DDU Nettoyer : offset fixe Left+135 Top+154 dÃ©sactivÃ©
+STATUS=[DDU] Bouton Nettoyer et NE PAS redÃ©marrer introuvable via UIA, action manuelle requise.
+STATUS=Action manuelle requise â€” clique Â« Nettoyer et NE PAS redÃ©marrer Â» dans DDU.
+STATUS=[DDU] Surveillance pop-ups DDU arrÃªtÃ©e.

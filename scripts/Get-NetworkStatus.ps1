@@ -1,6 +1,7 @@
 #Requires -Version 5.1
 param([string]$AppRoot = '', [string]$LogDir = '')
 
+. (Join-Path $PSScriptRoot '_common\Kojo.Json.ps1')
 $ErrorActionPreference = 'SilentlyContinue'
 $adapters = @(Get-NetAdapter -ErrorAction SilentlyContinue | Where-Object { $_.Status -eq 'Up' } | Select-Object Name, InterfaceDescription, LinkSpeed)
 $dns = @(Get-DnsClientServerAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue | Where-Object { $_.ServerAddresses } | Select-Object -First 1 -ExpandProperty ServerAddresses)
@@ -18,7 +19,7 @@ $out = [ordered]@{
     dns = $dns
     pingMs = $pingMs
     tcpGlobalSnippet = ($globalTcp -split "`n" | Select-Object -First 12) -join "`n"
-    tcpOptimizerPath = 'C:\ProgramData\ItalianTweaks\Tools\TCPOptimizer\TCPOptimizer.exe'
+    tcpOptimizerPath = Join-Path (Join-Path (Get-KojoProgramDataRoot) 'Tools\TCPOptimizer') 'TCPOptimizer.exe'
     profileLog = Join-Path $LogDir 'network-profiles.log'
 }
 Write-Output ($out | ConvertTo-Json -Depth 4 -Compress)

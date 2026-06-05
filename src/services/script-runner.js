@@ -1,4 +1,4 @@
-const { spawn } = require('child_process');
+const { spawn, execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const { getBundledContentRoot, getLogsDir, resolveScriptPath, scriptExists } = require('./paths');
@@ -9,7 +9,7 @@ const DEFAULT_READ_MS = 4500;
 const DEFAULT_ACTION_MS = 300000;
 
 /**
- * Exécute scripts/<relativePath> et retourne le JSON du contrat ITALIAN TWEAKS.
+ * Exécute scripts/<relativePath> et retourne le JSON du contrat Kojo.
  * options.read=true → timeout court (lecture statut, 4,5 s).
  */
 function runScript(relativePath, extraArgs = [], options = {}) {
@@ -55,12 +55,20 @@ function runScript(relativePath, extraArgs = [], options = {}) {
       if (settled) return;
       settled = true;
       clearTimeout(timer);
-      resolve(normalizeResult(json, errText, code, relativePath, scriptPath));
+      resolve(normalizeResult(json, errText, code, relativePath, scriptPath, stdout));
     };
 
     const timer = setTimeout(() => {
       try {
-        child.kill();
+        if (options.killProcessTree && process.platform === 'win32' && child.pid) {
+          try {
+            execSync(`taskkill /F /T /PID ${child.pid}`, { windowsHide: true, stdio: 'ignore' });
+          } catch {
+            child.kill();
+          }
+        } else {
+          child.kill();
+        }
       } catch {
         /* ignore */
       }
@@ -111,9 +119,17 @@ function parseJsonStdout(stdout) {
   }
 }
 
-function normalizeResult(json, stderr, exitCode, script, scriptPath) {
+function normalizeResult(json, stderr, exitCode, script, scriptPath, stdout = '') {
   if (json && typeof json.ok === 'boolean') {
-    return { ...json, exitCode, stderr: stderr || undefined, script, scriptPath };
+    const outTail = (stdout || '').trim();
+    return {
+      ...json,
+      exitCode,
+      stderr: stderr || undefined,
+      stdout: outTail ? outTail.slice(-800) : undefined,
+      script,
+      scriptPath
+    };
   }
   return {
     ok: false,

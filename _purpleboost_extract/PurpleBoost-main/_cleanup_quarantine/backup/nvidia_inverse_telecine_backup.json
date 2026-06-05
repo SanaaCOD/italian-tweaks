@@ -1,0 +1,32 @@
+{
+  "savedAt": "2026-05-22T05:22:41.2919443Z",
+  "foundCount": 4,
+  "modifiedCount": 0,
+  "writeVerifiedCount": 0,
+  "entries": [
+    {
+      "registryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Video\\{009904DB-51C1-11F1-BF25-DD3E80CECE10}\\0000",
+      "valueName": "_User_SUB0_DFP5_XALG_Cadence",
+      "beforeHex": "00 00 00 00 00 00 00 00",
+      "kind": "Binary"
+    },
+    {
+      "registryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Video\\{009904DB-51C1-11F1-BF25-DD3E80CECE10}\\0001",
+      "valueName": "_User_SUB0_DFP5_XALG_Cadence",
+      "beforeHex": "00 00 00 00 00 00 00 00",
+      "kind": "Binary"
+    },
+    {
+      "registryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Video\\{009904DB-51C1-11F1-BF25-DD3E80CECE10}\\0002",
+      "valueName": "_User_SUB0_DFP5_XALG_Cadence",
+      "beforeHex": "00 00 00 00 00 00 00 00",
+      "kind": "Binary"
+    },
+    {
+      "registryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Video\\{009904DB-51C1-11F1-BF25-DD3E80CECE10}\\0003",
+      "valueName": "_User_SUB0_DFP5_XALG_Cadence",
+      "beforeHex": "00 00 00 00 00 00 00 00",
+      "kind": "Binary"
+    }
+  ]
+}

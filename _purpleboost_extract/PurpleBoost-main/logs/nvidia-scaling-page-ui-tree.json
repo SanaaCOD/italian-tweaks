@@ -1,0 +1,1551 @@
+﻿{
+  "dumpedAt": "2026-05-20T21:40:58.4798074Z",
+  "elementCount": 127,
+  "elements": [
+    {
+      "depth": 0,
+      "name": "Panneau de configuration NVIDIA",
+      "automationId": "",
+      "controlType": "ControlType.Window",
+      "className": "Afx:00007FF711AC0000:b:0000000000010003:0000000000000006:0000000017500871",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "100;100;1280;900",
+      "patterns": []
+    },
+    {
+      "depth": 1,
+      "name": "",
+      "automationId": "59392",
+      "controlType": "ControlType.ToolBar",
+      "className": "ToolbarWindow32",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "108;153;3865;38",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Arri\u00E8re",
+      "automationId": "",
+      "controlType": "ControlType.SplitButton",
+      "className": "",
+      "isEnabled": false,
+      "isOffscreen": false,
+      "boundingRectangle": "112;153;95;38",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 2,
+      "name": "Avancer",
+      "automationId": "",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": false,
+      "isOffscreen": false,
+      "boundingRectangle": "207;153;35;38",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 2,
+      "name": "D\u00E9but",
+      "automationId": "",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": false,
+      "isOffscreen": false,
+      "boundingRectangle": "252;153;35;38",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 1,
+      "name": "S\u00E9lectionnez une t\u00E2che...",
+      "automationId": "59420",
+      "controlType": "ControlType.Pane",
+      "className": "Afx:00007FF711AC0000:8:0000000000010003:0000000000100063:0000000000000000",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "106;191;260;801",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Left View",
+      "automationId": "59649",
+      "controlType": "ControlType.Pane",
+      "className": "AfxFrameOrView140su",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "111;213;250;779",
+      "patterns": []
+    },
+    {
+      "depth": 3,
+      "name": "",
+      "automationId": "1020",
+      "controlType": "ControlType.Tree",
+      "className": "SysTreeView32",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "111;213;250;734",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "Changer la r\u00E9solution",
+      "automationId": "4099",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;231;106;16",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "R\u00E9gler les param\u00E8tres des couleurs du bureau",
+      "automationId": "4100",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;247;224;16",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "Pivoter l\u2019affichage",
+      "automationId": "4101",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;263;90;16",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "Afficher l\u2019\u00E9tat HDCP",
+      "automationId": "4102",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;279;99;16",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "Configuration du son num\u00E9rique",
+      "automationId": "4103",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;295;157;16",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "R\u00E9gler la taille et la position du bureau",
+      "automationId": "4104",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;311;187;16",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "Configuration de G-SYNC",
+      "automationId": "4105",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;327;124;16",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "Configurer plusieurs affichages",
+      "automationId": "4106",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;343;153;16",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "R\u00E9gler les param\u00E8tres d\u0027image avec Aper\u00E7u",
+      "automationId": "4110",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;375;211;16",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "G\u00E9rer les param\u00E8tres 3D",
+      "automationId": "4111",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;391;121;16",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "Configurer Surround et PhysX",
+      "automationId": "4112",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;407;147;16",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "R\u00E9gler les param\u00E8tres des couleurs vid\u00E9o",
+      "automationId": "4115",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;439;201;16",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "R\u00E9gler les param\u00E8tres d\u0027image vid\u00E9o",
+      "automationId": "4116",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;455;177;16",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "Barre de d\u00E9filement horizontale",
+      "automationId": "Horizontal ScrollBar",
+      "controlType": "ControlType.ScrollBar",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "113;928;246;17",
+      "patterns": [
+        "RangeValuePattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "Revenir en arri\u00E8re de peu",
+      "automationId": "SmallDecrement",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "113;928;17;17",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "Revenir en arri\u00E8re de beaucoup",
+      "automationId": "LargeDecrement",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "Empty",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "Curseur de d\u00E9filement",
+      "automationId": "Thumb",
+      "controlType": "ControlType.Thumb",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "130;928;197;17",
+      "patterns": []
+    },
+    {
+      "depth": 5,
+      "name": "Avancer de beaucoup",
+      "automationId": "LargeIncrement",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "327;928;15;17",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "Avancer de peu",
+      "automationId": "SmallIncrement",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "342;928;17;17",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "Affichage",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "135;215;50;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "Changer la r\u00E9solution",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;231;106;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "R\u00E9gler les param\u00E8tres des couleurs du bureau",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;247;224;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "Pivoter l\u2019affichage",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;263;90;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "Afficher l\u2019\u00E9tat HDCP",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;279;99;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "Configuration du son num\u00E9rique",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;295;157;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "R\u00E9gler la taille et la position du bureau",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;311;187;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "Configuration de G-SYNC",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;327;124;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "Configurer plusieurs affichages",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;343;153;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "Param\u00E8tres 3D",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "135;359;75;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "R\u00E9gler les param\u00E8tres d\u0027image avec Aper\u00E7u",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;375;211;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "G\u00E9rer les param\u00E8tres 3D",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;391;121;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "Configurer Surround et PhysX",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;407;147;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "Vid\u00E9o",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "135;423;30;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "R\u00E9gler les param\u00E8tres des couleurs vid\u00E9o",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;439;201;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 5,
+      "name": "R\u00E9gler les param\u00E8tres d\u0027image vid\u00E9o",
+      "automationId": "",
+      "controlType": "ControlType.TreeItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "154;455;177;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 3,
+      "name": "Informations syst\u00E8me",
+      "automationId": "1041",
+      "controlType": "ControlType.Button",
+      "className": "Button",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "111;947;250;55",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "Informations syst\u00E8me",
+      "automationId": "1041",
+      "controlType": "ControlType.Hyperlink",
+      "className": "SysLink",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "140;963;221;23",
+      "patterns": []
+    },
+    {
+      "depth": 5,
+      "name": "",
+      "automationId": "",
+      "controlType": "ControlType.Hyperlink",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "140;963;221;23",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 1,
+      "name": "{73BCA54E-6AEB-4597-8F27-E1284FF12722}:{6539579C-2657-45E5-985F-835E197959C2}",
+      "automationId": "59648",
+      "controlType": "ControlType.Pane",
+      "className": "AfxFrameOrView140su",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "364;191;1008;801",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Restaurer les valeurs par d\u00E9faut",
+      "automationId": "256",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "1164;225;183;15",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Rapport largeur/hauteur",
+      "automationId": "325",
+      "controlType": "ControlType.Button",
+      "className": "Button",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;541;411;26",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 2,
+      "name": "Plein \u00E9cran",
+      "automationId": "326",
+      "controlType": "ControlType.Button",
+      "className": "Button",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;569;411;26",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 2,
+      "name": "Pas de mise \u00E0 l\u0027\u00E9chelle",
+      "automationId": "327",
+      "controlType": "ControlType.Button",
+      "className": "Button",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;597;411;26",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 2,
+      "name": "Mise \u00E0 l\u0027\u00E9chelle par nombres entiers",
+      "automationId": "328",
+      "controlType": "ControlType.Button",
+      "className": "Button",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;624;501;26",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 2,
+      "name": "Effectuer la mise \u00E0 l\u0027\u00E9chelle sur\u00A0:",
+      "automationId": "9328",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;657;165;13",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Effectuer la mise \u00E0 l\u0027\u00E9chelle sur\u00A0:",
+      "automationId": "9329",
+      "controlType": "ControlType.ComboBox",
+      "className": "ComboBox",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;675;165;22",
+      "patterns": [
+        "ValuePattern"
+      ]
+    },
+    {
+      "depth": 3,
+      "name": "Effectuer la mise \u00E0 l\u0027\u00E9chelle sur\u00A0:",
+      "automationId": "ListBox",
+      "controlType": "ControlType.List",
+      "className": "ComboLBox",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "747;571;165;141",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "Processeur graphique",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;572;163;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "Affichage",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;588;163;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 3,
+      "name": "Bouton de liste d\u00E9roulante",
+      "automationId": "DropDown",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "585;676;15;20",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 2,
+      "name": "Remplace le mode de mise \u00E0 l\u0027\u00E9chelle d\u00E9fini par les jeux et les programmes",
+      "automationId": "9330",
+      "controlType": "ControlType.CheckBox",
+      "className": "Button",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;705;435;16",
+      "patterns": [
+        "TogglePattern"
+      ]
+    },
+    {
+      "depth": 2,
+      "name": "R\u00E9solution :",
+      "automationId": "9331",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;757;164;13",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "R\u00E9solution :",
+      "automationId": "9332",
+      "controlType": "ControlType.ComboBox",
+      "className": "ComboBox",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;775;165;22",
+      "patterns": [
+        "ValuePattern"
+      ]
+    },
+    {
+      "depth": 3,
+      "name": "R\u00E9solution :",
+      "automationId": "ListBox",
+      "controlType": "ControlType.List",
+      "className": "ComboLBox",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "747;671;165;303",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "2560 x 1440 (en cours)",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;672;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1920 x 1440",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;688;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1920 x 1200",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;704;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1920 x 1080",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;720;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1680 x 1050",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;736;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1600 x 1200",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;752;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1600 x 1024",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;768;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1600 x 900",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;784;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1440 x 1080",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;800;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1366 x 768",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;816;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1360 x 768",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;832;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1280 x 1024",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;848;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1280 x 960",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;864;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1280 x 800",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;880;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1280 x 768",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;896;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1280 x 720",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;912;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1176 x 664",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;928;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1152 x 864",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;944;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "1024 x 768",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;960;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "800 x 600",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;976;146;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 3,
+      "name": "Bouton de liste d\u00E9roulante",
+      "automationId": "DropDown",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "585;776;15;20",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 2,
+      "name": "",
+      "automationId": "9333",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "654;764;255;143",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "R\u00E9solution native :",
+      "automationId": "9334",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;858;165;13",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "S\u00E9lectionnez un mode de mise \u00E0 l\u0027\u00E9chelle\u00A0:",
+      "automationId": "9366",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;519;221;13",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Fr\u00E9quence de rafra\u00EEchissement\u00A0:",
+      "automationId": "9367",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;806;167;13",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Fr\u00E9quence de rafra\u00EEchissement\u00A0:",
+      "automationId": "9240",
+      "controlType": "ControlType.ComboBox",
+      "className": "ComboBox",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;824;165;22",
+      "patterns": [
+        "ValuePattern"
+      ]
+    },
+    {
+      "depth": 3,
+      "name": "Fr\u00E9quence de rafra\u00EEchissement\u00A0:",
+      "automationId": "ListBox",
+      "controlType": "ControlType.List",
+      "className": "ComboLBox",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "747;720;165;206",
+      "patterns": []
+    },
+    {
+      "depth": 4,
+      "name": "240\u00A0Hz",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;721;163;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "144\u00A0Hz",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;737;163;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "120\u00A0Hz",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;753;163;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 4,
+      "name": "60\u00A0Hz",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "748;769;163;16",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 3,
+      "name": "Bouton de liste d\u00E9roulante",
+      "automationId": "DropDown",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "585;825;15;20",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 2,
+      "name": "2560 x 1440",
+      "automationId": "9365",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;874;164;13",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Aper\u00E7u",
+      "automationId": "9358",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "436;735;41;13",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Aper\u00E7u",
+      "automationId": "9359",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "481;741;463;2",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "",
+      "automationId": "12320",
+      "controlType": "ControlType.Tab",
+      "className": "SysTabControl32",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "417;490;548;431",
+      "patterns": []
+    },
+    {
+      "depth": 3,
+      "name": "Mise \u00E0 l\u0027\u00E9chelle",
+      "automationId": "",
+      "controlType": "ControlType.TabItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "419;492;82;18",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 3,
+      "name": "Taille",
+      "automationId": "",
+      "controlType": "ControlType.TabItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "501;492;42;18",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 2,
+      "name": "1. S\u00E9lectionnez l\u0027affichage \u00E0 modifier.",
+      "automationId": "529",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "399;307;324;16",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "1. S\u00E9lectionnez l\u0027affichage \u00E0 modifier.",
+      "automationId": "528",
+      "controlType": "ControlType.List",
+      "className": "SysListView32",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "414;332;518;111",
+      "patterns": []
+    },
+    {
+      "depth": 3,
+      "name": "LG Electronics L...\n(Compatibilit\u00E9 G...",
+      "automationId": "",
+      "controlType": "ControlType.ListItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "414;332;167;93",
+      "patterns": [
+        "SelectionItemPattern"
+      ]
+    },
+    {
+      "depth": 2,
+      "name": "2. Choisissez les param\u00E8tres suivants\u00A0:",
+      "automationId": "530",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "399;458;243;24",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Description :",
+      "automationId": "405",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "384;948;80;13",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Description :",
+      "automationId": "410",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "399;965;599;39",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Sc\u00E9narios d\u0027usage type :",
+      "automationId": "407",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "384;1016;147;13",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Sc\u00E9narios d\u0027usage type :",
+      "automationId": "412",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "399;1034;569;93",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "",
+      "automationId": "391",
+      "controlType": "ControlType.Text",
+      "className": "Static",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "384;291;599;644",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Barre de d\u00E9filement verticale",
+      "automationId": "Vertical ScrollBar",
+      "controlType": "ControlType.ScrollBar",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "1353;193;17;797",
+      "patterns": [
+        "RangeValuePattern"
+      ]
+    },
+    {
+      "depth": 3,
+      "name": "Revenir en arri\u00E8re de peu",
+      "automationId": "SmallDecrement",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "1353;193;17;17",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 3,
+      "name": "Revenir en arri\u00E8re de beaucoup",
+      "automationId": "LargeDecrement",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": true,
+      "boundingRectangle": "Empty",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 3,
+      "name": "Curseur de d\u00E9filement",
+      "automationId": "Thumb",
+      "controlType": "ControlType.Thumb",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "1353;210;17;645",
+      "patterns": []
+    },
+    {
+      "depth": 3,
+      "name": "Avancer de beaucoup",
+      "automationId": "LargeIncrement",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "1353;855;17;118",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 3,
+      "name": "Avancer de peu",
+      "automationId": "SmallIncrement",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "1353;973;17;17",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 1,
+      "name": "Panneau de configuration NVIDIA",
+      "automationId": "TitleBar",
+      "controlType": "ControlType.TitleBar",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "108;108;1264;23",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Barre de menus syst\u00E8me",
+      "automationId": "SystemMenuBar",
+      "controlType": "ControlType.MenuBar",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "108;108;22;22",
+      "patterns": []
+    },
+    {
+      "depth": 3,
+      "name": "Syst\u00E8me",
+      "automationId": "Item 1",
+      "controlType": "ControlType.MenuItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "108;108;22;22",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "R\u00E9duire",
+      "automationId": "Minimize",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "1233;101;47;30",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 2,
+      "name": "Agrandir",
+      "automationId": "Maximize",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "1280;101;46;30",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 2,
+      "name": "Fermer",
+      "automationId": "Close",
+      "controlType": "ControlType.Button",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "1326;101;47;30",
+      "patterns": [
+        "InvokePattern"
+      ]
+    },
+    {
+      "depth": 1,
+      "name": "Application",
+      "automationId": "MenuBar",
+      "controlType": "ControlType.MenuBar",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "108;131;1264;19",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Fichier",
+      "automationId": "Item 1",
+      "controlType": "ControlType.MenuItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "108;131;49;19",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Modifier",
+      "automationId": "Item 2",
+      "controlType": "ControlType.MenuItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "157;131;59;19",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Bureau",
+      "automationId": "Item 3",
+      "controlType": "ControlType.MenuItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "216;131;51;19",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "\u00C9cran",
+      "automationId": "Item 4",
+      "controlType": "ControlType.MenuItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "267;131;43;19",
+      "patterns": []
+    },
+    {
+      "depth": 2,
+      "name": "Aide",
+      "automationId": "Item 5",
+      "controlType": "ControlType.MenuItem",
+      "className": "",
+      "isEnabled": true,
+      "isOffscreen": false,
+      "boundingRectangle": "310;131;38;19",
+      "patterns": []
+    }
+  ]
+}

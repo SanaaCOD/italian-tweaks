@@ -1,0 +1,32 @@
+[
+  {
+    "path": "C:\\ProgramData\\NVIDIA Corporation\\Drs\\nvAppTimestamps",
+    "sha256": "A48E749845E966376F28757B1264F6429EDA5B5FD0189584966A324A9F9AB1B0",
+    "size": "2798",
+    "modifiedUtc": "2026-05-21T05:54:27.0495558Z"
+  },
+  {
+    "path": "C:\\ProgramData\\NVIDIA Corporation\\Drs\\nvdrsdb0.bin",
+    "sha256": "F30BB373895BAFA64DCD14AE8A3E4A97D7CB592D3F4A9F419C75F61038D12695",
+    "size": "2582724",
+    "modifiedUtc": "2026-05-21T05:36:32.0089230Z"
+  },
+  {
+    "path": "C:\\ProgramData\\NVIDIA Corporation\\Drs\\nvdrsdb1.bin",
+    "sha256": "D8F569341B2C4A618225C639A3ED55D3994F413585E22FE4B39DC165FC3040FE",
+    "size": "2582724",
+    "modifiedUtc": "2026-05-21T05:36:32.3201878Z"
+  },
+  {
+    "path": "C:\\ProgramData\\NVIDIA Corporation\\Drs\\nvdrssel.bin",
+    "sha256": "4BF5122F344554C53BDE2EBB8CD2B7E3D1600AD631C385A5D7CCE23C7785459A",
+    "size": "1",
+    "modifiedUtc": "2026-05-21T05:36:32.3201878Z"
+  },
+  {
+    "path": "C:\\ProgramData\\NVIDIA Corporation\\Drs\\update.bin",
+    "sha256": "F1AD54A428D388C2E24002A271F889DCFDE37FDEA4B47C286C4AD4889CDE4EE7",
+    "size": "432",
+    "modifiedUtc": "2026-05-18T15:39:30.9929065Z"
+  }
+]

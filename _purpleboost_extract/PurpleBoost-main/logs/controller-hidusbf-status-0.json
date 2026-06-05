@@ -1,0 +1,21 @@
+{
+    "Message":  "Boost 8000 Hz detecte",
+    "DeviceFound":  true,
+    "Optimized":  true,
+    "Present":  true,
+    "ConfiguredRate":  8000,
+    "Success":  true,
+    "Badge":  "OPTIMISE",
+    "Extra":  {
+                  "HidusbfFilterPresent":  true,
+                  "Vid":  "054C",
+                  "UsbParentDeviceId":  "USB\\VID_054C\u0026PID_0CE6\\5\u002630741cdd\u00260\u00264",
+                  "PatchUSBXHCI":  3,
+                  "PatchUSBPort":  1,
+                  "Pid":  "0CE6"
+              },
+    "Verified":  true,
+    "Status":  "Optimized8000",
+    "ResponseTimeMs":  0.125,
+    "ConfirmedRate":  8000
+}

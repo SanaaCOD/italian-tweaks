@@ -1,9 +1,10 @@
 const { ipcMain, dialog } = require('electron');
 const system = require('../services/system');
-const controllers = require('../services/controllers');
+const controllerOc = require('../services/controller-oc');
 const drivers = require('../services/drivers');
 const network = require('../services/network');
 const optimizations = require('../services/optimizations');
+const optimizationModules = require('../services/optimization-modules-service');
 const audio = require('../services/audio');
 const games = require('../services/games');
 const settings = require('../services/settings');
@@ -29,20 +30,7 @@ function registerIpcHandlers() {
   ipcMain.handle('system:revertAll', () => system.revertAll());
   ipcMain.handle('system:masterRunAll', () => system.masterRunAll());
 
-  ipcMain.handle('controllers:list', () => controllers.list());
-  ipcMain.handle('controllers:applyPolling', async (_e, p) => {
-    if (!(await confirmDangerous('Manette', 'Appliquer le polling USB ?'))) return { ok: false, status: 'cancelled', message: 'Annulé' };
-    return controllers.applyPolling(p.device, p.rate);
-  });
-  ipcMain.handle('controllers:restorePolling', async (_e, p) => {
-    if (!(await confirmDangerous('Manette', 'Restaurer 125 Hz ?'))) return { ok: false, status: 'cancelled', message: 'Annulé' };
-    return controllers.restorePolling(p.device);
-  });
-  ipcMain.handle('controllers:applyOc', async (_e, p) => {
-    if (!(await confirmDangerous('Controller OC', 'Appliquer Controller OC ?'))) return { ok: false, status: 'cancelled' };
-    return controllers.applyControllerOc(p.device);
-  });
-  ipcMain.handle('controllers:detectUsb', () => controllers.detectUsb());
+  controllerOc.registerControllerOcHandlers(ipcMain);
 
   ipcMain.handle('drivers:getNvidiaStatus', () => drivers.getNvidiaStatus());
   ipcMain.handle('drivers:runDdu', async () => {
@@ -58,21 +46,21 @@ function registerIpcHandlers() {
   ipcMain.handle('drivers:openNip', () => drivers.openNipProfile());
 
   ipcMain.handle('network:status', () => network.getStatus());
-  ipcMain.handle('network:gaming', async () => {
-    if (!(await confirmDangerous('Réseau', 'Profil Gaming (admin) ?'))) return { ok: false, status: 'cancelled' };
-    return network.applyGamingProfile();
-  });
-  ipcMain.handle('network:download', async () => {
-    if (!(await confirmDangerous('Réseau', 'Profil Download (admin) ?'))) return { ok: false, status: 'cancelled' };
-    return network.applyDownloadProfile();
-  });
-  ipcMain.handle('network:restore', async () => {
-    if (!(await confirmDangerous('Réseau', 'Restaurer défauts ?'))) return { ok: false, status: 'cancelled' };
-    return network.restoreDefaults();
-  });
+  ipcMain.handle('network:gaming', () => network.applyGamingProfile());
+  ipcMain.handle('network:download', () => network.applyDownloadProfile());
+  ipcMain.handle('network:restore', () => network.restoreDefaults());
+  ipcMain.handle('network:applyTcpGaming', () => network.applyTcpGaming());
   ipcMain.handle('network:optimization', () => network.applyOptimization());
-  ipcMain.handle('network:latency', () => network.applyLatencyReduction());
   ipcMain.handle('network:tcp', () => network.launchTcpOptimizer());
+  ipcMain.handle('network:runNetworkTest', () => network.runNetworkTest());
+
+  ipcMain.handle('optim:modulesApply', async (_e, payload) => {
+    if (!(await confirmDangerous(
+      'Optimisation',
+      'Appliquer les modules sélectionnés ? Les scripts PowerShell seront exécutés selon l\'état des toggles.'
+    ))) return { ok: false, status: 'cancelled' };
+    return optimizationModules.applyModules(payload);
+  });
 
   ipcMain.handle('optim:status', () => optimizations.getStatus());
   ipcMain.handle('optim:debloat', async () => {

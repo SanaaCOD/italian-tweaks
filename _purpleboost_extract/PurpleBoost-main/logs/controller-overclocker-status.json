@@ -1,0 +1,17 @@
+{
+    "Message":  "Boost 1000 Hz detecte",
+    "Status":  "Optimized1000",
+    "Vid":  "054C",
+    "Pid":  "09CC",
+    "Success":  true,
+    "PatchUSBXHCI":  1,
+    "ConfiguredRate":  1000,
+    "Optimized":  true,
+    "HidusbfFilterPresent":  true,
+    "ConfirmedRate":  1000,
+    "DeviceBadge":  "PS4 DUALSHOCK",
+    "ResponseTimeMs":  1,
+    "UsbParentDeviceId":  "USB\\VID_054C\u0026PID_09CC\\5\u002630719adf\u00260\u00263",
+    "Badge":  "OPTIMISE",
+    "Verified":  true
+}

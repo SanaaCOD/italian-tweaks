@@ -87,7 +87,7 @@ function getBuildInfo() {
     displayLine,
     packaged,
     devMode,
-    productName: fileInfo?.productName || 'ITALIAN TWEAKS'
+    productName: fileInfo?.productName || 'Kojo'
   };
 
   return cached;

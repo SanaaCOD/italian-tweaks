@@ -1,0 +1,5 @@
+﻿DATE=2026-05-24 00:01:13
+ROOT_HWND=5183254
+--- HIGHLIGHT (keywords) ---
+ERROR=AccessibleObjectFromWindow failed
+--- SUMMARY keyword_hits=0 ---

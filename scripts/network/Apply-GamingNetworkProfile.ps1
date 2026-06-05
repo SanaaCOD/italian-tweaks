@@ -1,19 +1,31 @@
 #Requires -Version 5.1
 param([string]$AppRoot = '', [string]$LogDir = '')
 
-. (Join-Path $PSScriptRoot '..\_common\ItalianTweaks.Json.ps1')
-$dir = Join-Path $env:ProgramData 'ItalianTweaks\Scripts'
-if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
-$bat = @'
-@echo off
-netsh int set global uro=enabled
-netsh winsock set autotuning on
-netsh int tcp set security profile=disabled
-netsh int tcp set global autotuninglevel=disabled
-'@
-$path = Join-Path $dir 'Gaming.bat'
+. (Join-Path $PSScriptRoot '..\_common\Kojo.Json.ps1')
+. (Join-Path $PSScriptRoot '_Network-Paths.ps1')
+Initialize-NetworkPaths -LogDir $LogDir
+
+Write-Host '[network] NETWORK_PROFILE_APPLY_START gaming'
+Write-ConnectionProfilesLog 'Clic : Profil Gaming'
+
+$bat = "@echo off`r`nnetsh int set global uro=enabled`r`nnetsh winsock set autotuning on`r`nnetsh int tcp set security profile=disabled`r`nnetsh int tcp set global autotuninglevel=disabled`r`n"
+$path = Join-Path $script:NetworkScriptsDir 'Gaming.bat'
+Write-ConnectionProfilesLog 'Fichier BAT créé ou remplacé : Gaming.bat'
+Write-ConnectionProfilesLog "Chemin du BAT : $path"
 [System.IO.File]::WriteAllText($path, $bat, [System.Text.UTF8Encoding]::new($false))
-$p = Start-Process -FilePath $path -Verb RunAs -PassThru -Wait
-Write-ItalianTweaksLog -LogDir $LogDir -Name 'network' -Line "Gaming profile exit=$($p.ExitCode)"
-Write-ItalianTweaksJson -Ok ($p.ExitCode -eq 0) -Status $(if ($p.ExitCode -eq 0) { 'success' } else { 'error' }) `
-    -Action 'ApplyGamingNetworkProfile' -Message 'Profil Gaming appliqué (UAC)' -Data @{ batPath = $path; exitCode = $p.ExitCode }
+
+try {
+    $p = Start-Process -FilePath $path -Wait -PassThru -WindowStyle Hidden
+    $ok = ($p.ExitCode -eq 0)
+    Write-ConnectionProfilesLog "Profil Gaming terminé exit=$($p.ExitCode)"
+    if ($ok) { Set-ActiveNetworkProfile -Profile 'gaming' | Out-Null }
+    Write-Host "[network] NETWORK_PROFILE_APPLY_RESULT ok=$ok profile=gaming"
+    Write-KojoJson -Ok $ok -Status $(if ($ok) { 'success' } else { 'error' }) `
+        -Action 'ApplyGamingNetworkProfile' `
+        -Message $(if ($ok) { 'Profil Gaming appliqué.' } else { 'Erreur profil Gaming.' }) `
+        -Data @{ batPath = $path; exitCode = $p.ExitCode; activeProfile = $(if ($ok) { 'gaming' } else { $null }) }
+} catch {
+    Write-ConnectionProfilesLog "Erreur : $($_.Exception.Message)"
+    Write-Host '[network] NETWORK_PROFILE_APPLY_RESULT ok=false profile=gaming'
+    Write-KojoJson -Ok $false -Status 'error' -Action 'ApplyGamingNetworkProfile' -Message $_.Exception.Message -Data @{}
+}

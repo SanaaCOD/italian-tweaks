@@ -7,7 +7,8 @@ param(
 )
 
 $ErrorActionPreference = 'Continue'
-$dir = Join-Path $env:ProgramData 'ItalianTweaks\Scripts'
+. (Join-Path $PSScriptRoot '_common\Kojo.Json.ps1')
+$dir = Join-Path (Get-KojoProgramDataRoot) 'Scripts'
 if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
 
 if ($Profile -eq 'download') {

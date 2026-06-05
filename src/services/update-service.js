@@ -120,7 +120,7 @@ async function checkGitHubReleaseReadOnly() {
     const res = await fetch(GITHUB_RELEASES_LATEST, {
       headers: {
         Accept: 'application/vnd.github+json',
-        'User-Agent': 'ITALIAN-TWEAKS-UpdateCheck'
+        'User-Agent': 'KOJO-UpdateCheck'
       }
     });
 
@@ -328,7 +328,7 @@ function initUpdateService(mainWindowGetter) {
     clearWaiter('download');
   });
 
-  writeLog('init installed — autoUpdater ready (github SanaaCOD/italian-tweaks)');
+  writeLog('init installed — autoUpdater ready (Kojo / github SanaaCOD/italian-tweaks)');
 }
 
 function getStatus() {

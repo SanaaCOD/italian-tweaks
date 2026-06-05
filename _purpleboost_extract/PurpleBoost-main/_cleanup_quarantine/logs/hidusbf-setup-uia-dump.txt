@@ -1,0 +1,2 @@
+[HIDUSBF-AUTO] UIA dump hwnd=6751058
+UIAutomation not available

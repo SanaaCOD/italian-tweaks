@@ -1,0 +1,11 @@
+{
+    "Timestamp":  "2026-05-24T15:01:48",
+    "DeviceInstanceId":  "USB\\VID_054C\u0026PID_0CE6\u0026MI_03\\6\u00262BA514F0\u00260\u00260003",
+    "UsbParentDeviceId":  "USB\\VID_054C\u0026PID_0CE6",
+    "UsbParentKey":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6",
+    "DriverClassKey":  "",
+    "LowerFiltersBefore":  [
+                               null
+                           ],
+    "BIntervalBefore":  null
+}

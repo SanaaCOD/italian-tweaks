@@ -1,0 +1,24 @@
+{
+    "CardKey":  "USB\\VID_054C\u0026PID_09CC\\5\u002630719adf\u00260\u00263",
+    "DeviceInstanceId":  "HID\\VID_054C\u0026PID_09CC\u0026MI_03\\7\u002629C78060\u00260\u00260000",
+    "UsbParentDeviceId":  "USB\\VID_054C\u0026PID_09CC\\5\u002630719adf\u00260\u00263",
+    "Vid":  "054C",
+    "Pid":  13772,
+    "Status":  {
+                   "Success":  true,
+                   "ConfirmedRate":  1000,
+                   "ConfiguredRate":  1000,
+                   "Status":  "Optimized1000",
+                   "Badge":  "OPTIMISE",
+                   "Optimized":  true,
+                   "Verified":  true,
+                   "ResponseTimeMs":  1,
+                   "Message":  "Boost 1000 Hz detecte",
+                   "UsbParentDeviceId":  "USB\\VID_054C\u0026PID_09CC\\5\u002630719adf\u00260\u00263",
+                   "Vid":  "054C",
+                   "Pid":  "13772",
+                   "HidusbfFilterPresent":  true,
+                   "PatchUSBXHCI":  1,
+                   "DeviceBadge":  "HID CONTROLLER"
+               }
+}

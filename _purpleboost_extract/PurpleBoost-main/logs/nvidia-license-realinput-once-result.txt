@@ -1,0 +1,8 @@
+﻿[ONE-SHOT-REAL] NVIDIA root found: HWND=655816 title='Programme d'installation NVIDIA'
+[ONE-SHOT-REAL] Accept hwnd found: text='&ACCEPTER ET CONTINUER' HWND=464794 id=1027 class='ATL:6E0165C8'
+[ONE-SHOT-REAL] Accept rect: L=2118 T=834 R=2298 B=862
+[ONE-SHOT-REAL] Accept center (screen): X=2208 Y=848
+[ONE-SHOT-REAL] SetForegroundWindow OK
+[ONE-SHOT-REAL] Real mouse click sent to center of accept hwnd
+[ONE-SHOT-REAL] Accept button disappeared
+DATE=2026-05-24 00:41:45

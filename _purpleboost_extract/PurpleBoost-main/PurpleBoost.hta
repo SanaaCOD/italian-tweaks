@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=11" />
+<title>Unreal</title>
+<HTA:APPLICATION
+  ID="PurpleBoostRedirect"
+  APPLICATIONNAME="Unreal"
+  BORDER="none"
+  CAPTION="no"
+  SHOWINTASKBAR="no"
+  SINGLEINSTANCE="yes"
+  SYSMENU="no"
+  SCROLL="no"
+  WINDOWSTATE="minimize"
+  INNERBORDER="no"
+/>
+<script type="text/javascript">
+/* Redirection vers le lanceur natif (une instance, pas de MSHTA visible). */
+(function () {
+  try {
+    window.resizeTo(0, 0);
+    window.moveTo(-32000, -32000);
+  } catch (eWin) {}
+  try {
+    var fso = new ActiveXObject("Scripting.FileSystemObject");
+    var sh = new ActiveXObject("WScript.Shell");
+    var htaPath = "";
+    try {
+      var p = String(location.pathname || "");
+      if (p.indexOf(":") >= 0) htaPath = p.replace(/\//g, "\\");
+    } catch (e0) {}
+    var dir = "";
+    if (htaPath && fso.FileExists(htaPath)) {
+      dir = fso.GetParentFolderName(htaPath);
+    } else {
+      dir = sh.CurrentDirectory;
+    }
+    var exe = fso.BuildPath(fso.BuildPath(dir, "dist"), "Unreal Gaming Optimizer.exe");
+    if (fso.FileExists(exe)) {
+      sh.Run('"' + exe + '"', 1, false);
+    } else {
+      var hta = fso.BuildPath(dir, "Unreal.hta");
+      if (fso.FileExists(hta)) {
+        sh.Run('mshta.exe "' + hta + '" --base-dir "' + dir + '" --launcher-mode', 0, false);
+      }
+    }
+  } catch (e1) {}
+  try { window.close(); } catch (e2) {}
+})();
+</script>
+</head>
+<body style="margin:0;padding:0;background:#000;overflow:hidden;"></body>
+</html>

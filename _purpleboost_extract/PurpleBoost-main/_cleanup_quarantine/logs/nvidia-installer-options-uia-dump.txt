@@ -1,0 +1,10 @@
+﻿DATE=2026-05-24 00:01:13
+WINDOW=Programme d'installation NVIDIA
+HWND=5183254
+MATCH_METHOD=title
+SCOPE=Programme d installation NVIDIA only
+--- HIGHLIGHT (keywords) ---
+Name='Expresse (recommandée)' | AutomationId='1015' | ControlType=ControlType.Pane | IsEnabled=True | IsOffscreen=False | HasKeyboardFocus=False | BoundingRectangle=L1524,T397,W392,H16 | InvokePattern=no | SelectionItemPattern=no | TogglePattern=no | LegacyIAccessiblePattern=no
+Name='Personnalisée (avancée)' | AutomationId='1017' | ControlType=ControlType.Pane | IsEnabled=True | IsOffscreen=False | HasKeyboardFocus=False | BoundingRectangle=L1524,T477,W392,H16 | InvokePattern=no | SelectionItemPattern=no | TogglePattern=no | LegacyIAccessiblePattern=no
+Name='SUIVANT' | AutomationId='1022' | ControlType=ControlType.Pane | IsEnabled=True | IsOffscreen=False | HasKeyboardFocus=False | BoundingRectangle=L1726,T650,W91,H28 | InvokePattern=no | SelectionItemPattern=no | TogglePattern=no | LegacyIAccessiblePattern=no
+--- SUMMARY total_descendants=18 keyword_hits=3 ---

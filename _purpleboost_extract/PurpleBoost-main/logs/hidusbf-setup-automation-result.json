@@ -1,0 +1,18 @@
+{
+    "Pid":  "0CE6",
+    "Vid":  "054C",
+    "ConfirmedRate":  0,
+    "UIADumpPath":  "C:\\Users\\Sanaa\\.cursor\\projects\\empty-window\\PurpleBoost\\logs\\hidusbf-setup-uia-dump.txt",
+    "ChildDumpPath":  "C:\\Users\\Sanaa\\.cursor\\projects\\empty-window\\PurpleBoost\\logs\\hidusbf-setup-child-dump.txt",
+    "Verified":  false,
+    "Code":  "LISTVIEW_NOT_FOUND",
+    "RowDetectionMethod":  "none",
+    "SetupWindowFound":  true,
+    "RowsFound":  0,
+    "Rate":  1000,
+    "Success":  false,
+    "Mode":  "Apply",
+    "DeviceInstanceId":  "USB\\VID_054C\u0026PID_0CE6\u0026MI_03\\6\u00262BA514F0\u00260\u00260003",
+    "Message":  "Liste peripheriques HIDUSBF introuvable",
+    "FilterStatus":  ""
+}

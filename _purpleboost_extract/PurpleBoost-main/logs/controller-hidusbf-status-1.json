@@ -1,0 +1,21 @@
+{
+    "Message":  "125 Hz (defaut)",
+    "DeviceFound":  true,
+    "Optimized":  false,
+    "Present":  true,
+    "ConfiguredRate":  125,
+    "Success":  true,
+    "Badge":  "DEFAULT",
+    "Extra":  {
+                  "HidusbfFilterPresent":  false,
+                  "Vid":  "054C",
+                  "UsbParentDeviceId":  "USB\\VID_054C\u0026PID_09CC\\5\u002630741cdd\u00260\u00267",
+                  "PatchUSBXHCI":  1,
+                  "PatchUSBPort":  1,
+                  "Pid":  "09CC"
+              },
+    "Verified":  false,
+    "Status":  "Default",
+    "ResponseTimeMs":  8,
+    "ConfirmedRate":  125
+}

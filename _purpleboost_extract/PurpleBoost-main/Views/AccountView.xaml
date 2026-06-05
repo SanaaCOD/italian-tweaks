@@ -1,0 +1,92 @@
+<UserControl x:Class="PurpleBoost.Views.AccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="800"
+             d:DesignWidth="980">
+
+  <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+    <StackPanel>
+      <TextBlock Text="Compte / Abonnement" Style="{StaticResource PbTitle}" />
+      <TextBlock Style="{StaticResource PbSubtitle}"
+                 Margin="0,8,0,0"
+                 Text="Connexion mockée locale (fichier JSON). Astuce : un email contenant « +sub » simule un abonnement actif. Architecture prête pour API + Stripe." />
+
+      <UniformGrid Margin="0,16,0,0" Columns="2">
+        <Border Style="{StaticResource PbCard}" Margin="0,0,10,0">
+          <StackPanel>
+            <TextBlock Text="Connexion" FontWeight="SemiBold" FontSize="16" />
+
+            <TextBlock Margin="0,12,0,0" Foreground="{StaticResource Brush.Muted}" Text="Email" />
+            <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="0,8,0,0" />
+
+            <TextBlock Margin="0,12,0,0" Foreground="{StaticResource Brush.Muted}" Text="Mot de passe" />
+            <PasswordBox x:Name="PwBox"
+                         Margin="0,8,0,0"
+                         PasswordChanged="PwBox_OnPasswordChanged" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,14,0,0">
+              <Button Style="{StaticResource PbPrimaryButton}"
+                      Content="Se connecter"
+                      Command="{Binding LoginCommand}" />
+              <Button Style="{StaticResource PbGhostButton}"
+                      Margin="10,0,0,0"
+                      Content="Créer un compte"
+                      Command="{Binding RegisterCommand}" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource PbCard}">
+          <StackPanel>
+            <TextBlock Text="Statut" FontWeight="SemiBold" FontSize="16" />
+
+            <Border Style="{StaticResource PbCard}" Margin="0,12,0,0" Padding="12">
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Foreground="{StaticResource Brush.Muted}" Text="Abonnement" />
+                <TextBlock Grid.Column="1" FontWeight="SemiBold" Text="{Binding SubscriptionStatus}" />
+              </Grid>
+            </Border>
+
+            <Border Style="{StaticResource PbCard}" Margin="0,10,0,0" Padding="12">
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Foreground="{StaticResource Brush.Muted}" Text="Session" />
+                <TextBlock Grid.Column="1"
+                           Text="{Binding SessionEmail}"
+                           TextWrapping="Wrap"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Right" />
+              </Grid>
+            </Border>
+
+            <StackPanel Orientation="Horizontal" Margin="0,14,0,0">
+              <Button Style="{StaticResource PbGhostButton}"
+                      Content="Gérer mon abonnement"
+                      IsEnabled="False" />
+              <Button Style="{StaticResource PbGhostButton}"
+                      Margin="10,0,0,0"
+                      Content="Se déconnecter"
+                      Command="{Binding LogoutCommand}" />
+            </StackPanel>
+
+            <TextBlock Margin="0,12,0,0"
+                       Foreground="{StaticResource Brush.Muted}"
+                       TextWrapping="Wrap"
+                       FontSize="12"
+                       Text="Extension : remplacez AuthService par un client HTTP + portail Stripe (SubscriptionService.Refresh)." />
+          </StackPanel>
+        </Border>
+      </UniformGrid>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

@@ -1,0 +1,63 @@
+﻿{
+  "capturedAt": "2026-05-22T07:16:08.1800865\u002B02:00",
+  "phase": "after",
+  "registryPath": "HKCU\\Software\\NVIDIA Corporation\\Global\\NVTweak\\Devices\\2712060590-0",
+  "deviceKey": "2712060590-0",
+  "values": [
+    {
+      "name": "DigitalVibrance",
+      "kind": "Int32",
+      "preview": "80"
+    },
+    {
+      "name": "DigitalVibranceLevel",
+      "kind": "Int32",
+      "preview": "80"
+    },
+    {
+      "name": "GpuScaling",
+      "kind": "Int32",
+      "preview": "0"
+    },
+    {
+      "name": "ImageSettings",
+      "kind": "Int32",
+      "preview": "2"
+    },
+    {
+      "name": "ImageSharpening",
+      "kind": "Int32",
+      "preview": "0"
+    },
+    {
+      "name": "ImageSharpeningDefault",
+      "kind": "Int32",
+      "preview": "0"
+    },
+    {
+      "name": "ImageSharpeningSlider",
+      "kind": "Int32",
+      "preview": "0"
+    },
+    {
+      "name": "ScaleLocation",
+      "kind": "Int32",
+      "preview": "1"
+    },
+    {
+      "name": "Scaling",
+      "kind": "Int32",
+      "preview": "1"
+    },
+    {
+      "name": "ScalingMode",
+      "kind": "Int32",
+      "preview": "1"
+    },
+    {
+      "name": "ScalingSource",
+      "kind": "Int32",
+      "preview": "1"
+    }
+  ]
+}

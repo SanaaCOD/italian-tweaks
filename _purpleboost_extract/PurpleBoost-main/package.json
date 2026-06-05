@@ -1,0 +1,67 @@
+{
+  "name": "unreal-gaming-optimizer",
+  "version": "1.0.0",
+  "description": "Unreal / PurpleBoost — application Windows (shell Electron + moteur HTA)",
+  "main": "main.js",
+  "author": "PurpleBoost",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win --x64",
+    "build:portable": "electron-builder --win portable --x64",
+    "build:installer": "electron-builder --win nsis --x64"
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.purpleboost.unreal",
+    "productName": "Unreal Gaming Optimizer",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "asar": false,
+    "files": [
+      "main.js",
+      "package.json",
+      "Unreal.hta",
+      "PurpleBoost.hta",
+      "unreal.html",
+      "Scripts/**/*",
+      "assets/**/*",
+      "config/**/*",
+      "tools/**/*",
+      "!logs/**",
+      "!dist/**",
+      "!node_modules/**",
+      "!_cleanup_quarantine/**",
+      "!**/*.log",
+      "!**/.git/**"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        },
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-Portable.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "${productName}-${version}-Setup.exe"
+    }
+  }
+}

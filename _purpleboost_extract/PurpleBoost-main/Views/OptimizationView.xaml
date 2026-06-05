@@ -1,0 +1,77 @@
+<UserControl x:Class="PurpleBoost.Views.OptimizationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="800"
+             d:DesignWidth="980">
+
+  <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+    <StackPanel>
+      <TextBlock Text="Optimisation" Style="{StaticResource PbTitle}" />
+      <TextBlock Style="{StaticResource PbSubtitle}"
+                 Margin="0,8,0,0"
+                 Text="Débloat, services, alimentation et latence système. Aucune modification réelle tant que les scripts PowerShell ne sont pas branchés et validés." />
+
+      <Border Style="{StaticResource PbCard}" Margin="0,16,0,0">
+        <StackPanel>
+          <TextBlock Text="Test simulé" FontWeight="SemiBold" FontSize="15" />
+          <TextBlock Foreground="{StaticResource Brush.Muted}"
+                     TextWrapping="Wrap"
+                     Margin="0,8,0,0"
+                     Text="Bouton de démonstration : confirmation obligatoire, logs, progression, statut final." />
+
+          <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+            <Button Style="{StaticResource PbPrimaryButton}"
+                    Content="Tester optimisation"
+                    Command="{Binding TestOptimizationCommand}" />
+          </StackPanel>
+
+          <TextBlock Margin="0,10,0,0" Foreground="{StaticResource Brush.Muted}" Text="Statut" />
+          <TextBlock Text="{Binding StatusText}" FontSize="16" FontWeight="SemiBold" />
+
+          <ProgressBar Height="10"
+                       Margin="0,10,0,0"
+                       Minimum="0"
+                       Maximum="100"
+                       Value="{Binding Progress}"
+                       Background="#14000000" />
+        </StackPanel>
+      </Border>
+
+      <TextBlock Text="Cartes (préparation scripts)" Style="{StaticResource PbSubtitle}" Margin="0,18,0,0" FontWeight="SemiBold" Foreground="{StaticResource Brush.Text}" />
+
+      <UniformGrid Margin="0,10,0,0" Columns="2">
+        <Border Style="{StaticResource PbCard}" Margin="0,0,10,10">
+          <StackPanel>
+            <TextBlock Text="Debloat Windows" FontWeight="SemiBold" />
+            <TextBlock Foreground="{StaticResource Brush.Muted}" TextWrapping="Wrap" Margin="0,8,0,0"
+                       Text="Emplacement pour scripts + point de restauration (à venir)." />
+          </StackPanel>
+        </Border>
+        <Border Style="{StaticResource PbCard}" Margin="0,0,0,10">
+          <StackPanel>
+            <TextBlock Text="Plan d’alimentation" FontWeight="SemiBold" />
+            <TextBlock Foreground="{StaticResource Brush.Muted}" TextWrapping="Wrap" Margin="0,8,0,0"
+                       Text="Profils haute performance / latence (à venir)." />
+          </StackPanel>
+        </Border>
+        <Border Style="{StaticResource PbCard}" Margin="0,0,10,0">
+          <StackPanel>
+            <TextBlock Text="Services Windows" FontWeight="SemiBold" />
+            <TextBlock Foreground="{StaticResource Brush.Muted}" TextWrapping="Wrap" Margin="0,8,0,0"
+                       Text="Liste blanche / rollback (à venir)." />
+          </StackPanel>
+        </Border>
+        <Border Style="{StaticResource PbCard}">
+          <StackPanel>
+            <TextBlock Text="Latence système" FontWeight="SemiBold" />
+            <TextBlock Foreground="{StaticResource Brush.Muted}" TextWrapping="Wrap" Margin="0,8,0,0"
+                       Text="Timers / MMCSS / tweaks documentés (à venir)." />
+          </StackPanel>
+        </Border>
+      </UniformGrid>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

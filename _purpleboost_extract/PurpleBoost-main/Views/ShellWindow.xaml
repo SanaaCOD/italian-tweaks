@@ -1,0 +1,190 @@
+<Window x:Class="PurpleBoost.Views.ShellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:PurpleBoost.ViewModels"
+        xmlns:views="clr-namespace:PurpleBoost.Views"
+        xmlns:models="clr-namespace:PurpleBoost.Models"
+        mc:Ignorable="d"
+        Title="PurpleBoost Gaming Optimizer"
+        Height="820"
+        Width="1260"
+        MinHeight="680"
+        MinWidth="980"
+        WindowStartupLocation="CenterScreen">
+
+  <Window.Resources>
+    <DataTemplate DataType="{x:Type vm:HomeViewModel}">
+      <views:HomeView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SimplePageViewModel}">
+      <views:SimplePageView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:OptimizationViewModel}">
+      <views:OptimizationView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AccountViewModel}">
+      <views:AccountView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+      <views:SettingsView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type models:LogEntry}">
+      <TextBlock TextWrapping="Wrap"
+                 FontFamily="Consolas"
+                 FontSize="12"
+                 LineHeight="16">
+        <TextBlock.Text>
+          <MultiBinding StringFormat="{}{0:HH:mm:ss} [{1}] {2}">
+            <Binding Path="Timestamp" />
+            <Binding Path="Level" />
+            <Binding Path="Message" />
+          </MultiBinding>
+        </TextBlock.Text>
+        <TextBlock.Style>
+          <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#E2E8F0" />
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding Level}" Value="{x:Static models:LogLevel.Error}">
+                <Setter Property="Foreground" Value="#FCA5A5" />
+              </DataTrigger>
+              <DataTrigger Binding="{Binding Level}" Value="{x:Static models:LogLevel.Success}">
+                <Setter Property="Foreground" Value="#86EFAC" />
+              </DataTrigger>
+              <DataTrigger Binding="{Binding Level}" Value="{x:Static models:LogLevel.Pending}">
+                <Setter Property="Foreground" Value="#FDE047" />
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </TextBlock.Style>
+      </TextBlock>
+    </DataTemplate>
+  </Window.Resources>
+
+  <Grid>
+    <Grid.Background>
+      <SolidColorBrush Color="#07060D" />
+    </Grid.Background>
+
+    <!-- Smoke / glow layers -->
+    <Grid IsHitTestVisible="False">
+      <Rectangle Opacity="0.55">
+        <Rectangle.Fill>
+          <RadialGradientBrush GradientOrigin="0.2,0" Center="0.2,0" RadiusX="0.9" RadiusY="0.55">
+            <GradientStop Color="#241C3AED" Offset="0" />
+            <GradientStop Color="#00000000" Offset="1" />
+          </RadialGradientBrush>
+        </Rectangle.Fill>
+      </Rectangle>
+      <Rectangle Opacity="0.35">
+        <Rectangle.Fill>
+          <RadialGradientBrush GradientOrigin="0.85,0.1" Center="0.85,0.1" RadiusX="0.75" RadiusY="0.45">
+            <GradientStop Color="#1A7C3AED" Offset="0" />
+            <GradientStop Color="#00000000" Offset="1" />
+          </RadialGradientBrush>
+        </Rectangle.Fill>
+      </Rectangle>
+    </Grid>
+
+    <Grid Margin="0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="270" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <Border Grid.Column="0"
+              Background="#CC0C0A14"
+              BorderBrush="#221FFFFFFF"
+              BorderThickness="0,0,1,0">
+        <DockPanel Margin="14">
+          <StackPanel DockPanel.Dock="Top" Margin="6,6,6,14">
+            <StackPanel Orientation="Horizontal">
+              <Border Width="44"
+                      Height="44"
+                      CornerRadius="14"
+                      VerticalAlignment="Center"
+                      Margin="0,0,12,0">
+                <Border.Background>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#7C3AED" Offset="0" />
+                    <GradientStop Color="#C084FC" Offset="1" />
+                  </LinearGradientBrush>
+                </Border.Background>
+                <Border.Effect>
+                  <DropShadowEffect BlurRadius="26" ShadowDepth="0" Opacity="0.35" Color="#C084FC" />
+                </Border.Effect>
+                <TextBlock Text="PB"
+                           Foreground="White"
+                           FontWeight="Black"
+                           FontSize="16"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+              </Border>
+              <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="PurpleBoost" FontWeight="SemiBold" FontSize="15" />
+                <TextBlock Text="Gaming Optimizer"
+                           Foreground="{StaticResource Brush.Muted}"
+                           FontSize="12" />
+              </StackPanel>
+            </StackPanel>
+            <TextBlock Text="Application native WPF — aucun navigateur intégré."
+                       Foreground="{StaticResource Brush.Muted}"
+                       FontSize="12"
+                       TextWrapping="Wrap"
+                       Margin="0,10,0,0" />
+          </StackPanel>
+
+          <ListBox DockPanel.Dock="Top"
+                   Style="{StaticResource PbNavListBox}"
+                   ItemsSource="{Binding NavItems}"
+                   SelectedItem="{Binding SelectedNavItem, Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Title}" Foreground="{StaticResource Brush.Text}" />
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+
+          <TextBlock DockPanel.Dock="Bottom"
+                     Text="Sécurité : aucun script PowerShell réel n’est exécuté dans cette version de démonstration."
+                     Foreground="{StaticResource Brush.Muted}"
+                     FontSize="11"
+                     TextWrapping="Wrap"
+                     Margin="6,14,6,6" />
+        </DockPanel>
+      </Border>
+
+      <Grid Grid.Column="1">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+          <RowDefinition Height="210" />
+        </Grid.RowDefinitions>
+
+        <ContentControl Grid.Row="0"
+                        Margin="18,18,18,10"
+                        Content="{Binding CurrentContent}" />
+
+        <Border Grid.Row="1"
+                Margin="18,0,18,14"
+                Style="{StaticResource PbCard}">
+          <DockPanel LastChildFill="True">
+            <TextBlock DockPanel.Dock="Top"
+                       Text="Logs"
+                       FontWeight="SemiBold"
+                       FontSize="14"
+                       Margin="0,0,0,8" />
+            <ListBox ItemsSource="{Binding Logs.Entries}"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     VirtualizingStackPanel.IsVirtualizing="True"
+                     VirtualizingStackPanel.VirtualizationMode="Recycling" />
+          </DockPanel>
+        </Border>
+      </Grid>
+    </Grid>
+  </Grid>
+</Window>

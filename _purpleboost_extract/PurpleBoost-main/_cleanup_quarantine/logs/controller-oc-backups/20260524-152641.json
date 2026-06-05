@@ -1,0 +1,13 @@
+{
+    "Timestamp":  "2026-05-24T15:26:41",
+    "DeviceInstanceId":  "USB\\VID_054C\u0026PID_0CE6\u0026MI_03\\6\u00262BA514F0\u00260\u00260003",
+    "UsbParentDeviceId":  "USB\\VID_054C\u0026PID_0CE6\\5\u002630741cdd\u00260\u00264",
+    "TargetHidusbfDeviceId":  "USB\\VID_054C\u0026PID_0CE6\\5\u002630741cdd\u00260\u00264",
+    "UsbCompositeParentId":  "USB\\VID_054C\u0026PID_0CE6\\5\u002630741cdd\u00260\u00264",
+    "UsbParentKey":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\\5\u002630741cdd\u00260\u00264",
+    "DriverClassKey":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{36fc9e60-c465-11cf-8056-444553540000}\\0016",
+    "LowerFiltersBefore":  [
+                               "hidusbf"
+                           ],
+    "BIntervalBefore":  1
+}

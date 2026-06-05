@@ -1,5 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
+/** API preload interne (nom historique italianTweaks — non affiché à l'utilisateur). */
 contextBridge.exposeInMainWorld('italianTweaks', {
   app: {
     getBuildInfo: () => ipcRenderer.invoke('app:getBuildInfo')
@@ -10,12 +11,13 @@ contextBridge.exposeInMainWorld('italianTweaks', {
     revertAll: () => ipcRenderer.invoke('system:revertAll'),
     masterRunAll: () => ipcRenderer.invoke('system:masterRunAll')
   },
-  controllers: {
-    list: () => ipcRenderer.invoke('controllers:list'),
-    applyPolling: (device, rate) => ipcRenderer.invoke('controllers:applyPolling', { device, rate }),
-    restorePolling: (device) => ipcRenderer.invoke('controllers:restorePolling', { device }),
-    applyOc: (device) => ipcRenderer.invoke('controllers:applyOc', { device }),
-    detectUsb: () => ipcRenderer.invoke('controllers:detectUsb')
+  controllerOc: {
+    isElevated: () => ipcRenderer.invoke('controllerOc:isElevated'),
+    enumerate: () => ipcRenderer.invoke('controllerOc:enumerate'),
+    applyOverclock: (instanceId, usbParentId, rateHz) =>
+      ipcRenderer.invoke('controllerOc:applyOverclock', instanceId, usbParentId, rateHz),
+    removeOverclock: (instanceId, usbParentId) =>
+      ipcRenderer.invoke('controllerOc:removeOverclock', instanceId, usbParentId)
   },
   drivers: {
     getNvidiaStatus: () => ipcRenderer.invoke('drivers:getNvidiaStatus'),
@@ -33,9 +35,19 @@ contextBridge.exposeInMainWorld('italianTweaks', {
     gaming: () => ipcRenderer.invoke('network:gaming'),
     download: () => ipcRenderer.invoke('network:download'),
     restore: () => ipcRenderer.invoke('network:restore'),
+    applyTcpGaming: () => ipcRenderer.invoke('network:applyTcpGaming'),
     optimization: () => ipcRenderer.invoke('network:optimization'),
-    latency: () => ipcRenderer.invoke('network:latency'),
-    tcp: () => ipcRenderer.invoke('network:tcp')
+    tcp: () => ipcRenderer.invoke('network:tcp'),
+    runNetworkTest: () => ipcRenderer.invoke('network:runNetworkTest'),
+    onNetworkTestProgress: (callback) => {
+      if (typeof callback !== 'function') return () => {};
+      const handler = (_event, payload) => callback(payload);
+      ipcRenderer.on('network:testProgress', handler);
+      return () => ipcRenderer.removeListener('network:testProgress', handler);
+    }
+  },
+  optimModules: {
+    apply: (payload) => ipcRenderer.invoke('optim:modulesApply', payload)
   },
   optim: {
     status: () => ipcRenderer.invoke('optim:status'),

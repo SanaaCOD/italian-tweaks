@@ -74,9 +74,20 @@ function encodePng(width, height, rgba) {
   ]);
 }
 
+const { execSync } = require('child_process');
+const logoSource = path.join(assetsDir, 'kojo-logo-source.png');
+const logoOut = path.join(assetsDir, 'logo.png');
+
 writeBackgroundLowPoly(path.join(assetsDir, 'background.png'), 1280, 720);
-writeLogoPng(path.join(assetsDir, 'logo.png'), 256);
-writePng(path.join(assetsDir, 'icon.png'), 255, 45, 154, 256);
+
+if (fs.existsSync(logoSource)) {
+  execSync('node scripts/process-kojo-logo.js', { cwd: root, stdio: 'inherit' });
+} else if (!fs.existsSync(logoOut)) {
+  writeLogoPng(logoOut, 256);
+  writePng(path.join(assetsDir, 'icon.png'), 255, 122, 24, 256);
+} else {
+  console.log('[placeholders] logo.png conservé (Kojo)');
+}
 
 function writeBackgroundLowPoly(filePath, width, height) {
   const raw = Buffer.alloc(width * height * 4);

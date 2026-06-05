@@ -1,0 +1,17 @@
+﻿{
+  "timestamp": "2026-05-22T07:12:40.6356071\u002B02:00",
+  "valueName": "ImageSettings",
+  "targetValue": 2,
+  "entries": [
+    {
+      "DeviceKey": "2712060590-0",
+      "RegistryPath": "HKCU\\Software\\NVIDIA Corporation\\Global\\NVTweak\\Devices\\2712060590-0",
+      "OldValue": 2,
+      "NewValue": 2,
+      "ReadBackValue": 2,
+      "WriteOk": true,
+      "Verified": true,
+      "Status": "readback_ok"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Unreal Gaming Optimizer</AssemblyName>
+    <RootNamespace>UnrealLauncher</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>..\assets\images\icon.ico</ApplicationIcon>
+    <Product>Unreal Gaming Optimizer</Product>
+    <AssemblyTitle>Unreal Gaming Optimizer</AssemblyTitle>
+    <Company>Unreal</Company>
+    <Description>Lanceur natif Unreal (splash noir + MSHTA caché)</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Management" Version="8.0.0" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,53 @@
+{
+  "presetId": "unreal-gaming-minimal",
+  "presetName": "NVCleanInstall Gaming / Unreal",
+  "presetVersion": 1,
+  "description": "Installation NVIDIA minimale orientée gaming / latence — Display Driver + PhysX + DLSS, sans NVIDIA App ni overlays inutiles.",
+  "components": {
+    "displayDriver": { "enabled": true, "required": true, "label": "Display Driver" },
+    "physX": { "enabled": true, "label": "PhysX" },
+    "nvidiaDlss": { "enabled": true, "label": "NVIDIA DLSS" },
+    "legacyControlPanel": { "enabled": false, "label": "Legacy Control Panel" },
+    "hdAudioHdmi": { "enabled": false, "label": "HD Audio via HDMI" },
+    "vcpp2017": { "enabled": false, "label": "Microsoft Visual C++ 2017 Runtimes" },
+    "usbC": { "enabled": false, "label": "USB-C Driver" },
+    "frameViewSdk": { "enabled": false, "label": "FrameView SDK" },
+    "quadroView": { "enabled": false, "label": "Quadro View / VR" },
+    "virtualAudio": { "enabled": false, "label": "Virtual Audio" },
+    "telemetry": { "enabled": false, "label": "Telemetry" },
+    "nvPlatformControllers": { "enabled": false, "label": "NV Platform Controllers" },
+    "nvidiaApp": { "enabled": false, "label": "NVIDIA App" },
+    "nvContainer": { "enabled": false, "label": "NV Container" },
+    "shadowPlay": { "enabled": false, "label": "ShadowPlay" },
+    "nvBackend": { "enabled": false, "label": "NV Backend" },
+    "nvidiaAppMessageBus": { "enabled": false, "label": "NVIDIA App MessageBus" }
+  },
+  "tweaks": {
+    "disableInstallerTelemetryAdvertising": { "enabled": true, "label": "Disable Installer Telemetry & Advertising" },
+    "unattendedExpressInstallation": { "enabled": false, "label": "Unattended Express Installation" },
+    "performCleanInstallation": { "enabled": true, "label": "Perform a Clean Installation" },
+    "addHardwareSupport": { "enabled": false, "label": "Add Hardware Support" },
+    "enableDlssIndicator": { "enabled": false, "label": "Enable DLSS Indicator" },
+    "disableMpo": { "enabled": true, "label": "Disable Multiplane Overlay (MPO)" },
+    "disableAnsel": { "enabled": true, "label": "Disable Ansel" },
+    "showExpertTweaks": { "enabled": true, "label": "Show Expert Tweaks" },
+    "disableDriverTelemetryExperimental": { "enabled": true, "label": "Disable Driver Telemetry (Experimental)" },
+    "disableNvidiaContainerExperimental": { "enabled": false, "label": "Disable NVIDIA Container (Experimental)" },
+    "disableHdAudioSleepTimer": { "enabled": false, "label": "Disable NVIDIA HD Audio device sleep timer" },
+    "enableMsi": { "enabled": true, "label": "Enable Message Signaled Interrupts (MSI)" },
+    "interruptPolicy": { "value": "Default", "label": "Interrupt Policy" },
+    "interruptPriority": { "value": "Default", "label": "Interrupt Priority" },
+    "disableHdcp": { "enabled": true, "label": "Disable HDCP" },
+    "applyNvencSessionLimitPatch": { "enabled": false, "label": "Apply NVENC session limit patch" },
+    "startExternalApplication": { "enabled": false, "label": "Start external application" },
+    "rebuildDigitalSignature": { "enabled": true, "label": "Rebuild digital signature" },
+    "easyAntiCheatCompatibleMethod": { "enabled": true, "label": "Use method compatible with Easy-Anti-Cheat" },
+    "autoAcceptDriverUnsignedWarning": { "enabled": true, "label": "Automatically accept driver unsigned warning" }
+  },
+  "postInstallVerify": {
+    "mpoDisabled": { "registry": "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm", "value": "OverlayTestMode", "expected": 5 },
+    "telemetryReduced": { "note": "Vérification partielle via services NVIDIA" },
+    "hdcpDisabled": { "note": "Non vérifiable de façon fiable sur tous les pilotes" },
+    "msiEnabled": { "note": "Vérification partielle via registre / gestionnaire de périphériques" }
+  }
+}

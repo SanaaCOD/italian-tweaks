@@ -1,0 +1,39 @@
+{
+  "success": false,
+  "startedAt": "2026-06-03T11:43:13.665Z",
+  "endedAt": "2026-06-03T11:44:19.303Z",
+  "steps": {
+    "nip": {
+      "status": "error",
+      "log": "logs/nvidia-final/01-nip.log"
+    },
+    "digitalVibrance": {
+      "status": "error",
+      "value": 80,
+      "log": "logs/nvidia-final/02-digital-vibrance.log"
+    },
+    "display": {
+      "status": "success",
+      "log": "logs/nvidia-final/03-display.log",
+      "resolution": {
+        "status": "success",
+        "message": "appliquée (1920x1080)"
+      },
+      "refreshRate": {
+        "status": "success",
+        "message": "appliquée (144Hz)"
+      }
+    },
+    "panelSettings": {
+      "status": "error",
+      "label": "erreur",
+      "log": "logs/nvidia-final/04-panel-settings.log",
+      "children": {
+        "noScaling": "error",
+        "previewPerformance": "error",
+        "inverseTelecine": "error"
+      },
+      "verified": false
+    }
+  }
+}

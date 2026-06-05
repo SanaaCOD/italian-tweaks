@@ -4,7 +4,7 @@ const { getLogsDir } = require('./paths');
 
 function logStatsDiag(line) {
   const msg = `[${new Date().toISOString()}] ${line}`;
-  console.log(`[ITALIAN-TWEAKS stats] ${line}`);
+  console.log(`[Kojo stats] ${line}`);
   try {
     const dir = getLogsDir();
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });

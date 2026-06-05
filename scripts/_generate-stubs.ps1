@@ -1,4 +1,4 @@
-# Génère les scripts stub ITALIAN TWEAKS (contrat JSON)
+# Génère les scripts stub Kojo (contrat JSON)
 $root = Split-Path -Parent $PSScriptRoot
 
 function New-Stub($relPath, $action, $tunedpc) {
@@ -19,8 +19,6 @@ Write-ItalianTweaksStub -Action '$action' -Message "Equivalent TUNEDPC: $tunedpc
 }
 
 $stubs = @(
-    @('controllers/Apply-ControllerOC.ps1','ApplyControllerOC','Apply-ControllerOC.ps1.enc'),
-    @('controllers/Detect-USBDevices.ps1','DetectUSBDevices','Detect-USBDevices.ps1.enc'),
     @('drivers/Install-LatestNvidiaDriver.ps1','InstallLatestNvidiaDriver','—'),
     @('drivers/Apply-NvidiaOptimization.ps1','ApplyNvidiaOptimization','13_GPU_Optimization.ps1.enc'),
     @('drivers/Apply-SQEngine.ps1','ApplySQEngine','SQEngine.ps1.enc'),

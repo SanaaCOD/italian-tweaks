@@ -1,0 +1,7 @@
+﻿DATE=2026-05-24 08:21:22
+ROOT_HWND=3736890
+ROOT_TITLE=Programme d'installation NVIDIA
+DETECTED_STATE=Unknown
+--- VISIBLE CHILDREN ---
+HWND=2950076 | class='ATL:6D0D6A48' | text='Préparation de l'installation' | visible=True | enabled=True | rect=L995,T865,R1566,B885 | parent=3736890 | sidebar=False
+HWND=394712 | class='ATL:6D0D6928' | text='' | visible=True | enabled=True | rect=L995,T886,R1566,B906 | parent=3736890 | sidebar=False

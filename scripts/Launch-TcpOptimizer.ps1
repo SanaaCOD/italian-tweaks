@@ -1,7 +1,8 @@
 #Requires -Version 5.1
 param([string]$AppRoot = '', [string]$LogDir = '')
 
-$dir = Join-Path $env:ProgramData 'ItalianTweaks\Tools\TCPOptimizer'
+. (Join-Path $PSScriptRoot '_common\Kojo.Json.ps1')
+$dir = Join-Path (Get-KojoProgramDataRoot) 'Tools\TCPOptimizer'
 $exe = Join-Path $dir 'TCPOptimizer.exe'
 $url = 'https://www.speedguide.net/files/TCPOptimizer.exe'
 

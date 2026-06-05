@@ -2,59 +2,51 @@ const path = require('path');
 const fs = require('fs');
 const { app } = require('electron');
 
-/** Racine projet (dev) ou contenu déballé (build) — scripts + package.json */
+/** Racine dev (repo) ou resources/ en build — un seul arbre scripts (extraResources). */
 function getBundledContentRoot() {
   if (!app.isPackaged) {
     return path.join(__dirname, '..', '..');
   }
-  const unpacked = path.join(process.resourcesPath, 'app.asar.unpacked');
-  if (fs.existsSync(path.join(unpacked, 'scripts', 'system', 'Collect-HomeStats.ps1'))) {
-    return unpacked;
-  }
-  const extraScripts = path.join(process.resourcesPath, 'scripts');
-  if (fs.existsSync(path.join(extraScripts, 'system', 'Collect-HomeStats.ps1'))) {
-    return process.resourcesPath;
-  }
-  return unpacked;
+  return process.resourcesPath;
 }
 
-/** HIDUSBF : dev tools/hidusbf ; build app.asar.unpacked/tools ou resources/tools */
+/** Scripts PowerShell : uniquement resources/scripts (TunedPC). */
+function getScriptsDir() {
+  if (!app.isPackaged) {
+    return path.join(__dirname, '..', '..', 'scripts');
+  }
+  return path.join(process.resourcesPath, 'scripts');
+}
+
+/** HIDUSBF bundle (TunedPC: resources/hidusbf uniquement). */
+function getHidusbfDriverDir() {
+  if (app.isPackaged) {
+    return path.join(process.resourcesPath, 'hidusbf');
+  }
+  const bundled = path.join(getBundledContentRoot(), 'resources', 'hidusbf');
+  if (fs.existsSync(path.join(bundled, 'HIDUSBF_AS.INF'))) {
+    return bundled;
+  }
+  return bundled;
+}
+
+/** Outils tiers (DDU, etc.) — jamais HIDUSBF. */
 function getToolsDir() {
   if (!app.isPackaged) {
     return path.join(getBundledContentRoot(), 'tools');
   }
-  const candidates = [
-    path.join(process.resourcesPath, 'app.asar.unpacked', 'tools'),
-    path.join(process.resourcesPath, 'tools'),
-    path.join(getBundledContentRoot(), 'tools'),
-    path.join(getAppRoot(), 'resources', 'tools')
-  ];
-  for (const dir of candidates) {
-    if (fs.existsSync(path.join(dir, 'hidusbf', 'HIDUSBF_AS.INF'))) {
-      return dir;
-    }
+  const dir = path.join(process.resourcesPath, 'tools');
+  if (fs.existsSync(dir)) {
+    return dir;
   }
   return path.join(getBundledContentRoot(), 'tools');
 }
 
-/** Dossier d’installation (répertoire de l’EXE) */
 function getAppRoot() {
   if (!app.isPackaged) {
-    return path.join(__dirname, '..', '..');
+    return getBundledContentRoot();
   }
   return path.dirname(app.getPath('exe'));
-}
-
-function getScriptsDir() {
-  return path.join(getBundledContentRoot(), 'scripts');
-}
-
-/** Logs en userData en build (écriture garantie hors Program Files) */
-function getLogsDir() {
-  if (app.isPackaged) {
-    return path.join(app.getPath('userData'), 'logs');
-  }
-  return path.join(getAppRoot(), 'logs');
 }
 
 function resolveScriptPath(relativePath) {
@@ -65,6 +57,13 @@ function scriptExists(relativePath) {
   return fs.existsSync(resolveScriptPath(relativePath));
 }
 
+function getLogsDir() {
+  if (app.isPackaged) {
+    return path.join(app.getPath('userData'), 'logs');
+  }
+  return path.join(getAppRoot(), 'logs');
+}
+
 function getSettingsPath() {
   return path.join(getLogsDir(), 'app-settings.json');
 }
@@ -72,6 +71,7 @@ function getSettingsPath() {
 module.exports = {
   getAppRoot,
   getBundledContentRoot,
+  getHidusbfDriverDir,
   getToolsDir,
   getScriptsDir,
   getLogsDir,

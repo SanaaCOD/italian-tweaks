@@ -65,7 +65,7 @@ function createMainWindow() {
     show: false,
     backgroundColor: '#0a0a0a',
     autoHideMenuBar: true,
-    title: 'ITALIAN TWEAKS',
+    title: 'Kojo',
     icon: icon.isEmpty() ? undefined : icon,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),

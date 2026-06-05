@@ -1,5 +1,5 @@
 /**
- * ITALIAN TWEAKS — shell navigation + pages fonctionnelles
+ * Kojo — shell navigation + pages fonctionnelles
  */
 
 const NAV = [
@@ -125,72 +125,6 @@ function stopStatsRefresh() {
   }
 }
 
-function initLowPolyCanvas() {
-  const canvas = document.getElementById('lowpoly-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let triangles = [];
-  const SHADES = ['#0b0b0d', '#0c0c0f', '#0d0d11', '#0e0e12', '#101014', '#111116', '#121218'];
-  const hash = (i, j) => ((i * 92837111) ^ (j * 689287499)) >>> 0;
-  const shadeAt = (i, j) => SHADES[hash(i, j) % SHADES.length];
-
-  function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    canvas.style.width = `${w}px`;
-    canvas.style.height = `${h}px`;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const cellW = 118;
-    const cellH = cellW * 0.866;
-    const jitter = cellW * 0.06;
-    triangles = [];
-    const pointAt = (col, row) => {
-      const offsetX = row % 2 ? cellW * 0.5 : 0;
-      const hx = hash(col, row);
-      return {
-        x: col * cellW + offsetX + ((hx % 1000) / 1000 - 0.5) * jitter - cellW,
-        y: row * cellH + (((hx >> 10) % 1000) / 1000 - 0.5) * jitter - cellH
-      };
-    };
-    for (let row = 0; row < Math.ceil(h / cellH) + 3; row++) {
-      for (let col = 0; col < Math.ceil(w / cellW) + 3; col++) {
-        const a = pointAt(col, row);
-        const b = pointAt(col + 1, row);
-        const c = pointAt(col, row + 1);
-        const d = pointAt(col + 1, row + 1);
-        if (hash(col, row) % 2 === 0) {
-          triangles.push({ pts: [a, b, c], fill: shadeAt(col, row) });
-          triangles.push({ pts: [b, d, c], fill: shadeAt(col + 1, row) });
-        } else {
-          triangles.push({ pts: [a, b, d], fill: shadeAt(col, row) });
-          triangles.push({ pts: [a, d, c], fill: shadeAt(col, row + 1) });
-        }
-      }
-    }
-    ctx.clearRect(0, 0, w, h);
-    triangles.forEach((t) => {
-      ctx.beginPath();
-      ctx.moveTo(t.pts[0].x, t.pts[0].y);
-      ctx.lineTo(t.pts[1].x, t.pts[1].y);
-      ctx.lineTo(t.pts[2].x, t.pts[2].y);
-      ctx.closePath();
-      ctx.fillStyle = t.fill;
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(255,255,255,0.025)';
-      ctx.stroke();
-    });
-  }
-  let t;
-  window.addEventListener('resize', () => {
-    clearTimeout(t);
-    t = setTimeout(resize, 150);
-  });
-  resize();
-}
-
 async function initSidebarBuildInfo() {
   const el = document.getElementById('sidebar-build-id');
   const devHint = document.getElementById('sidebar-dev-hint');
@@ -243,5 +177,4 @@ mainContent.dataset.navGen = '1';
 renderSidebar();
 renderPage();
 startStatsRefresh();
-initLowPolyCanvas();
 initSidebarBuildInfo();

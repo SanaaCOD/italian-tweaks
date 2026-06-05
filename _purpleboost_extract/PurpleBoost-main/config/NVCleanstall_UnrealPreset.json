@@ -1,0 +1,18 @@
+{
+  "bestDriverForHardware": true,
+  "components": {
+    "displayDriver": true
+  },
+  "tweaks": {
+    "disableInstallerTelemetryAdvertising": true,
+    "performCleanInstall": true,
+    "disableMPO": true,
+    "disableAnsel": true,
+    "showExpertTweaks": true,
+    "disableDriverTelemetry": true,
+    "enableMSI": true,
+    "disableHDCP": true,
+    "easyAntiCheatCompatible": true,
+    "acceptUnsignedWarning": true
+  }
+}

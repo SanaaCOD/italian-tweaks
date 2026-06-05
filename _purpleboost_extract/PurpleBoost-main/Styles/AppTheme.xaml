@@ -1,0 +1,236 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Color x:Key="PbBg">#07060D</Color>
+  <Color x:Key="PbPanel">#12101C</Color>
+  <Color x:Key="PbPanel2">#1A1628</Color>
+  <Color x:Key="PbNeon">#C084FC</Color>
+  <Color x:Key="PbNeonDim">#7C3AED</Color>
+  <Color x:Key="PbText">#F8FAFC</Color>
+  <Color x:Key="PbMuted">#94A3B8</Color>
+
+  <SolidColorBrush x:Key="Brush.Bg" Color="{StaticResource PbBg}" />
+  <SolidColorBrush x:Key="Brush.Panel" Color="{StaticResource PbPanel}" />
+  <SolidColorBrush x:Key="Brush.Panel2" Color="{StaticResource PbPanel2}" />
+  <SolidColorBrush x:Key="Brush.Neon" Color="{StaticResource PbNeon}" />
+  <SolidColorBrush x:Key="Brush.NeonDim" Color="{StaticResource PbNeonDim}" />
+  <SolidColorBrush x:Key="Brush.Text" Color="{StaticResource PbText}" />
+  <SolidColorBrush x:Key="Brush.Muted" Color="{StaticResource PbMuted}" />
+  <SolidColorBrush x:Key="Brush.Line" Color="#1FFFFFFF" />
+
+  <Style TargetType="Window">
+    <Setter Property="Background" Value="{StaticResource Brush.Bg}" />
+    <Setter Property="Foreground" Value="{StaticResource Brush.Text}" />
+    <Setter Property="FontFamily" Value="Segoe UI Variable, Segoe UI" />
+    <Setter Property="FontSize" Value="14" />
+  </Style>
+
+  <Style x:Key="PbSidebarItem" TargetType="Button">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource Brush.Muted}" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="Padding" Value="12,10" />
+    <Setter Property="Margin" Value="0,2" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Border x:Name="bd"
+                  CornerRadius="12"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="#33C084FC"
+                  BorderThickness="0">
+            <ContentPresenter Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="Center" />
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="bd" Property="Background" Value="#14FFFFFF" />
+              <Setter Property="Foreground" Value="{StaticResource Brush.Text}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Opacity" Value="0.45" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="PbSidebarItemActive" TargetType="Button" BasedOn="{StaticResource PbSidebarItem}">
+    <Setter Property="Background" Value="#1AFFFFFF" />
+    <Setter Property="Foreground" Value="{StaticResource Brush.Text}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Border CornerRadius="12"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="#55C084FC"
+                  BorderThickness="1">
+            <ContentPresenter Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="Center" />
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="PbPrimaryButton" TargetType="Button">
+    <Setter Property="Foreground" Value="White" />
+    <Setter Property="Padding" Value="16,10" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Border x:Name="bd" CornerRadius="14" Padding="{TemplateBinding Padding}">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="{StaticResource PbNeonDim}" Offset="0" />
+                <GradientStop Color="{StaticResource PbNeon}" Offset="1" />
+              </LinearGradientBrush>
+            </Border.Background>
+            <Border.Effect>
+              <DropShadowEffect BlurRadius="22"
+                                ShadowDepth="0"
+                                Opacity="0.35"
+                                Color="{StaticResource PbNeon}" />
+            </Border.Effect>
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="bd" Property="Opacity" Value="0.95" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter TargetName="bd" Property="Opacity" Value="0.88" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter TargetName="bd" Property="Opacity" Value="0.45" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="PbGhostButton" TargetType="Button">
+    <Setter Property="Foreground" Value="{StaticResource Brush.Text}" />
+    <Setter Property="Padding" Value="16,10" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Border x:Name="bd"
+                  CornerRadius="14"
+                  Background="#0FFFFFFF"
+                  BorderBrush="#22FFFFFF"
+                  BorderThickness="1"
+                  Padding="{TemplateBinding Padding}">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="bd" Property="Background" Value="#18FFFFFF" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter TargetName="bd" Property="Opacity" Value="0.45" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="PbCard" TargetType="Border">
+    <Setter Property="CornerRadius" Value="16" />
+    <Setter Property="Padding" Value="16" />
+    <Setter Property="Background" Value="#CC12101C" />
+    <Setter Property="BorderBrush" Value="#22FFFFFF" />
+    <Setter Property="BorderThickness" Value="1" />
+  </Style>
+
+  <Style x:Key="PbMotherboardCard" TargetType="Border">
+    <Setter Property="CornerRadius" Value="18" />
+    <Setter Property="Padding" Value="18" />
+    <Setter Property="BorderBrush" Value="#33C084FC" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <Setter Property="Effect">
+      <Setter.Value>
+        <DropShadowEffect BlurRadius="34"
+                          ShadowDepth="0"
+                          Opacity="0.22"
+                          Color="{StaticResource PbNeonDim}" />
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Background">
+      <Setter.Value>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+          <GradientStop Color="#FF12101C" Offset="0" />
+          <GradientStop Color="#FF0E0C16" Offset="0.45" />
+          <GradientStop Color="#FF1A1628" Offset="1" />
+        </LinearGradientBrush>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="PbTitle" TargetType="TextBlock">
+    <Setter Property="FontSize" Value="26" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="Foreground" Value="{StaticResource Brush.Text}" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+
+  <Style x:Key="PbSubtitle" TargetType="TextBlock">
+    <Setter Property="FontSize" Value="13" />
+    <Setter Property="Foreground" Value="{StaticResource Brush.Muted}" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="LineHeight" Value="20" />
+  </Style>
+
+  <Style x:Key="PbNavListBox" TargetType="ListBox">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    <Setter Property="ItemContainerStyle">
+      <Setter.Value>
+        <Style TargetType="ListBoxItem">
+          <Setter Property="Margin" Value="0,2" />
+          <Setter Property="Padding" Value="0" />
+          <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="ListBoxItem">
+                <Border x:Name="Bd"
+                        CornerRadius="12"
+                        Background="Transparent"
+                        BorderBrush="#33C084FC"
+                        BorderThickness="0"
+                        SnapsToDevicePixels="True">
+                  <ContentPresenter Margin="12,10" />
+                </Border>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Bd" Property="Background" Value="#14FFFFFF" />
+                  </Trigger>
+                  <Trigger Property="IsSelected" Value="True">
+                    <Setter TargetName="Bd" Property="Background" Value="#1AFFFFFF" />
+                    <Setter TargetName="Bd" Property="BorderThickness" Value="1" />
+                  </Trigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

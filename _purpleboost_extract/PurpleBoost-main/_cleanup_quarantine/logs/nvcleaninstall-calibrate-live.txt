@@ -1,0 +1,4 @@
+﻿STATUS=Va sur la page Installation Tweaks, puis place la souris sur chaque case et appuie sur F8.
+STATUS=Va sur la page Installation Tweaks, puis utilise F8 pour chaque case.
+STATUS=Place la souris sur : Show Expert Tweaks — puis F8 (Échap = annuler)
+STATUS=Calibration annulée.

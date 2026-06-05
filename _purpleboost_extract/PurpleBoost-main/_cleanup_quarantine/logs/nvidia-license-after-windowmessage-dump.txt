@@ -1,0 +1,24 @@
+﻿DATE=2026-05-24 00:34:58
+ROOT_HWND=655816
+ROOT_TITLE=Programme d'installation NVIDIA
+ROOT_CLASS=NVISetupFrame
+--- VISIBLE CHILDREN AFTER TEST ---
+HWND=9181342 | className='ATL:6E016A48' | text='Vérification du système' | visible=True | enabled=True | rect=L1862,T552,R1986,B585 | style=1342177280 | exStyle=32 | GetDlgCtrlID=1000
+HWND=989322 | className='ATL:6E016808' | text='' | visible=True | enabled=True | rect=L1843,T553,R1856,B566 | style=1442840589 | exStyle=0 | GetDlgCtrlID=1001
+HWND=1316932 | className='ATL:6E016A48' | text='Contrat de licence' | visible=True | enabled=True | rect=L1862,T598,R1986,B614 | style=1342177280 | exStyle=32 | GetDlgCtrlID=1002
+HWND=858176 | className='ATL:6E016A48' | text='Options' | visible=True | enabled=True | rect=L1862,T629,R1986,B645 | style=1342177280 | exStyle=32 | GetDlgCtrlID=1004
+HWND=1775662 | className='ATL:6E016A48' | text='Installer' | visible=True | enabled=True | rect=L1862,T660,R1986,B676 | style=1342177280 | exStyle=32 | GetDlgCtrlID=1006
+HWND=2692952 | className='ATL:6E016A48' | text='Terminer' | visible=True | enabled=True | rect=L1862,T690,R1986,B706 | style=1342177280 | exStyle=32 | GetDlgCtrlID=1008
+HWND=1316642 | className='ATL:6E016A48' | text='Pilote graphique NVIDIA' | visible=True | enabled=True | rect=L1842,T473,R2365,B513 | style=1342177280 | exStyle=32 | GetDlgCtrlID=1010
+HWND=988960 | className='ATL:6E016A48' | text='Version 596.49' | visible=True | enabled=True | rect=L1842,T497,R2365,B537 | style=1342177280 | exStyle=32 | GetDlgCtrlID=1011
+HWND=1704528 | className='ATL:6E016400' | text='' | visible=True | enabled=True | rect=L2005,T594,R2005,B814 | style=1442908164 | exStyle=32 | GetDlgCtrlID=1017
+HWND=1770026 | className='ATL:6E016B68' | text='<a href="file://C:\Program Files\NVIDIA Corporation\Installer2\installer.{AA068DB5-2D72-4E3C-BF56-B4656F4A97DB}/NvApp\Unified_EULA\EULA_DD_NvApp_fr-FR.html">Contrat de licence de l'utilisateur final</a>' | visible=True | enabled=True | rect=L1834,T838,R1834,B851 | style=1442906112 | exStyle=32 | GetDlgCtrlID=1019
+HWND=3408218 | className='SysLink' | text='' | visible=True | enabled=True | rect=L1834,T838,R1834,B851 | style=1342177281 | exStyle=32 | GetDlgCtrlID=1
+HWND=923642 | className='ATL:6E016B68' | text='<a href="file://C:\Program Files\NVIDIA Corporation\Installer2\installer.{AA068DB5-2D72-4E3C-BF56-B4656F4A97DB}\NvApp\PrivacyPolicy\PrivacyPolicy_fr-FR.htm">Politique de confidentialité NVIDIA</a>' | visible=True | enabled=True | rect=L1834,T852,R1834,B875 | style=1442906112 | exStyle=32 | GetDlgCtrlID=1020
+HWND=530276 | className='SysLink' | text='' | visible=True | enabled=True | rect=L1834,T852,R1834,B875 | style=1342177281 | exStyle=32 | GetDlgCtrlID=1
+HWND=530278 | className='ATL:6E016A48' | text='Contrat de licence du logiciel NVIDIA' | visible=True | enabled=True | rect=L2005,T545,R2397,B576 | style=1342177280 | exStyle=32 | GetDlgCtrlID=1021
+HWND=530280 | className='ATL:6E016A48' | text='Veuillez lire attentivement le contrat de licence du logiciel NVIDIA suivant.' | visible=True | enabled=True | rect=L2005,T581,R2397,B601 | style=1342177280 | exStyle=32 | GetDlgCtrlID=1022
+HWND=5249098 | className='ATL:6E016400' | text='' | visible=True | enabled=True | rect=L2005,T601,R2397,B781 | style=1445005316 | exStyle=512 | GetDlgCtrlID=1023
+HWND=530310 | className='ATL:6E016A48' | text='Cliquez sur Accepter et continuer si vous acceptez les termes de ce contrat.' | visible=True | enabled=True | rect=L2005,T790,R2397,B810 | style=1342177280 | exStyle=32 | GetDlgCtrlID=1024
+HWND=464794 | className='ATL:6E0165C8' | text='&ACCEPTER ET CONTINUER' | visible=True | enabled=True | rect=L2118,T834,R2298,B862 | style=1442906123 | exStyle=32 | GetDlgCtrlID=1027
+HWND=596078 | className='ATL:6E0165C8' | text='&ANNULER' | visible=True | enabled=True | rect=L2310,T834,R2401,B862 | style=1442906123 | exStyle=32 | GetDlgCtrlID=1028

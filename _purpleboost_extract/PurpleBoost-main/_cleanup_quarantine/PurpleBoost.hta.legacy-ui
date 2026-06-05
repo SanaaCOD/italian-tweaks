@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=11" />
+<meta charset="UTF-8" />
+<title>PurpleBoost Gaming Optimizer</title>
+<HTA:APPLICATION
+  ID="PurpleBoostApp"
+  APPLICATIONNAME="PurpleBoost Gaming Optimizer"
+  BORDER="thin"
+  BORDERSTYLE="complex"
+  CAPTION="yes"
+  ICON="none"
+  MAXIMIZEBUTTON="yes"
+  MINIMIZEBUTTON="yes"
+  SHOWINTASKBAR="yes"
+  SINGLEINSTANCE="yes"
+  SYSMENU="yes"
+  SCROLL="yes"
+  WINDOWSTATE="normal"
+  INNERBORDER="no"
+  SELECTION="no"
+/>
+
+<style type="text/css">
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: "Segoe UI", "Segoe UI Variable", Tahoma, sans-serif;
+    font-size: 14px;
+    color: #e8e8f0;
+    background: #07060d;
+    overflow: hidden;
+  }
+
+  .smoke {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 55% at 18% 0%, rgba(124, 58, 237, 0.18), transparent 55%),
+      radial-gradient(ellipse 60% 45% at 88% 8%, rgba(192, 132, 252, 0.10), transparent 52%),
+      radial-gradient(ellipse 100% 65% at 50% 100%, rgba(10, 8, 18, 0.95), transparent 62%);
+    opacity: 0.95;
+  }
+
+  .app {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    height: 100%;
+    min-height: 640px;
+  }
+
+  .sidebar {
+    width: 260px;
+    flex: 0 0 260px;
+    background: rgba(12, 10, 20, 0.92);
+    border-right: 1px solid rgba(255, 255, 255, 0.10);
+    display: flex;
+    flex-direction: column;
+    padding: 16px 12px;
+    box-sizing: border-box;
+  }
+
+  .brand {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 6px 8px 14px;
+  }
+  .logo {
+    width: 44px; height: 44px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    color: #fff;
+    background: linear-gradient(135deg, #7c3aed, #c084fc);
+    box-shadow: 0 0 28px rgba(192, 132, 252, 0.35);
+  }
+  .brand h1 {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.15;
+    font-weight: 800;
+  }
+  .brand p {
+    margin: 2px 0 0;
+    font-size: 12px;
+    color: #94a3b8;
+  }
+
+  .nav {
+    flex: 1;
+    overflow: auto;
+    padding: 6px 4px;
+  }
+  .nav button {
+    width: 100%;
+    text-align: left;
+    border: 0;
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin: 4px 0;
+    cursor: pointer;
+    color: #cbd5e1;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .nav button:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+  }
+  .nav button.active {
+    background: rgba(255, 255, 255, 0.10);
+    color: #fff;
+    box-shadow: inset 0 0 0 1px rgba(192, 132, 252, 0.35);
+  }
+
+  .sidebar-foot {
+    font-size: 11px;
+    color: #94a3b8;
+    line-height: 1.45;
+    padding: 10px 8px 4px;
+  }
+
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: transparent;
+  }
+
+  .content {
+    flex: 1;
+    overflow: auto;
+    padding: 18px 22px 10px;
+  }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  h2.page-title {
+    margin: 0 0 8px;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  p.lead {
+    margin: 0 0 16px;
+    color: #94a3b8;
+    line-height: 1.55;
+    max-width: 900px;
+  }
+
+  .mother {
+    border-radius: 18px;
+    padding: 18px;
+    border: 1px solid rgba(192, 132, 252, 0.22);
+    background: linear-gradient(145deg, #12101c 0%, #0e0c16 45%, #1a1628 100%);
+    box-shadow: 0 0 0 1px rgba(192, 132, 252, 0.12), 0 0 40px rgba(124, 58, 237, 0.18);
+    position: relative;
+    overflow: hidden;
+  }
+  .mother:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 40%, rgba(192, 132, 252, 0.04) 50%, transparent 60%);
+    animation: shine 14s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes shine {
+    0%, 100% { transform: translateX(-30%); opacity: 0.35; }
+    50% { transform: translateX(30%); opacity: 0.65; }
+  }
+  .mother-inner { position: relative; z-index: 1; }
+
+  .kicker {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c084fc;
+    font-weight: 800;
+  }
+  .grid3 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .chip {
+    flex: 1 1 220px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(0, 0, 0, 0.28);
+    border-radius: 14px;
+    padding: 14px;
+    box-sizing: border-box;
+  }
+  .chip .label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    font-weight: 800;
+  }
+  .chip .value {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+  .grid2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .panel {
+    flex: 1 1 300px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(0, 0, 0, 0.22);
+    border-radius: 14px;
+    padding: 14px;
+    box-sizing: border-box;
+  }
+  .panel h3 {
+    margin: 0 0 10px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    font-weight: 800;
+  }
+  .row { margin-top: 10px; }
+  .row .l { color: #94a3b8; font-size: 12px; }
+  .row .v { font-size: 16px; font-weight: 700; margin-top: 4px; }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .card {
+    flex: 1 1 220px;
+    border: 1px dashed rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 14px;
+    padding: 14px;
+    box-sizing: border-box;
+    color: #cbd5e1;
+  }
+  .card strong {
+    display: block;
+    color: #f1f5f9;
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .btn {
+    border: 0;
+    border-radius: 14px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 13px;
+    color: #fff;
+    background: linear-gradient(90deg, #7c3aed, #c084fc);
+    box-shadow: 0 0 22px rgba(192, 132, 252, 0.22);
+  }
+  .btn:hover { filter: brightness(1.06); }
+  .btn.secondary {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+    color: #e5e7eb;
+  }
+
+  input {
+    width: 100%;
+    max-width: 520px;
+    box-sizing: border-box;
+    margin-top: 8px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    outline: none;
+  }
+  label {
+    display: block;
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    font-weight: 800;
+  }
+
+  .progress {
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    margin-top: 10px;
+    max-width: 520px;
+  }
+  .progress > i {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #7c3aed, #c084fc);
+  }
+
+  .logs {
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(0, 0, 0, 0.35);
+    padding: 10px 14px 12px;
+    max-height: 200px;
+    overflow: auto;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #cbd5e1;
+  }
+  .logline { margin: 4px 0; white-space: pre-wrap; }
+  .log-INFO { color: #e2e8f0; }
+  .log-PENDING { color: #fde047; }
+  .log-SUCCESS { color: #86efac; }
+  .log-ERROR { color: #fca5a5; }
+
+  .toolbar { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+</style>
+
+<script type="text/javascript">
+/* PurpleBoost Gaming Optimizer — HTA monofichier (WMI + UI). ES5 pour compatibilité MSHTML. */
+
+var APP_VERSION = "0.2.0-hta";
+
+function $(id) { return document.getElementById(id); }
+
+function nowTime() {
+  var d = new Date();
+  function z(n) { return n < 10 ? "0" + n : "" + n; }
+  return z(d.getHours()) + ":" + z(d.getMinutes()) + ":" + z(d.getSeconds());
+}
+
+function log(level, message) {
+  var box = $("logBox");
+  if (!box) return;
+  var line = document.createElement("div");
+  line.className = "logline log-" + level;
+  line.textContent = "[" + nowTime() + "] [" + level + "] " + message;
+  box.insertBefore(line, box.firstChild);
+  while (box.childNodes.length > 250) {
+    box.removeChild(box.lastChild);
+  }
+  try { appendSessionLog(level, message); } catch (e0) {}
+}
+
+function getLocalDataPath() {
+  var sh = new ActiveXObject("WScript.Shell");
+  var base = sh.ExpandEnvironmentStrings("%LOCALAPPDATA%") + "\\PurpleBoost";
+  var fso = new ActiveXObject("Scripting.FileSystemObject");
+  if (!fso.FolderExists(base)) fso.CreateFolder(base);
+  return base;
+}
+
+function appendSessionLog(level, message) {
+  var fso = new ActiveXObject("Scripting.FileSystemObject");
+  var path = getLocalDataPath() + "\\hta-logs.txt";
+  var ts = new Date().toString();
+  var line = ts + "\t" + level + "\t" + message + "\r\n";
+  var stream = 8; // ForAppending
+  if (!fso.FileExists(path)) {
+    var f = fso.CreateTextFile(path, true);
+    f.Write(line);
+    f.Close();
+    return;
+  }
+  var t = fso.OpenTextFile(path, stream, true);
+  t.Write(line);
+  t.Close();
+}
+
+function exportLogs() {
+  try {
+    var sh = new ActiveXObject("WScript.Shell");
+    var path = getLocalDataPath() + "\\purpleboost-export-" + Date.now() + ".txt";
+    var fso = new ActiveXObject("Scripting.FileSystemObject");
+    var f = fso.CreateTextFile(path, true);
+    f.Write($("logBox").innerText || "");
+    f.Close();
+    log("SUCCESS", "Logs exportés : " + path);
+    alert("Export terminé.\n\n" + path);
+  } catch (e) {
+    log("ERROR", "Export impossible : " + e.message);
+    alert("Export impossible : " + e.message);
+  }
+}
+
+function runPowerShell(command) {
+  // Prévu : exécution contrôlée (UAC, confirmation, scripts versionnés).
+  // var sh = new ActiveXObject("WScript.Shell");
+  // sh.Run('powershell -NoProfile -ExecutionPolicy Bypass -Command ' + JSON.stringify(command), 1, true);
+  log("INFO", "runPowerShell (désactivé / sécurité) : " + command);
+}
+
+function wmiQuery(wql) {
+  var locator = new ActiveXObject("WbemScripting.SWbemLocator");
+  var svc = locator.ConnectServer(".", "root\\cimv2");
+  return svc.ExecQuery(wql);
+}
+
+function firstProp(enumItems, prop) {
+  try {
+    var e = new Enumerator(enumItems);
+    for (; !e.atEnd(); e.moveNext()) {
+      var o = e.item();
+      var v = o[prop];
+      if (v !== null && v !== undefined && v !== "") return v;
+    }
+  } catch (e2) {}
+  return null;
+}
+
+function firstNumber(enumItems, prop) {
+  var v = firstProp(enumItems, prop);
+  if (v === null || v === undefined) return null;
+  var n = parseFloat(v);
+  if (isNaN(n)) return null;
+  return n;
+}
+
+function formatRamKB(kb) {
+  if (!kb || isNaN(kb)) return "—";
+  var gb = kb / 1024 / 1024;
+  if (gb >= 1) return (Math.round(gb * 10) / 10) + " Go";
+  var mb = kb / 1024;
+  return (Math.round(mb)) + " Mo";
+}
+
+function tryCpuUsagePercent() {
+  try {
+    var q = wmiQuery("SELECT PercentProcessorTime FROM Win32_PerfFormattedData_PerfOS_Processor WHERE Name='_Total'");
+    var v = firstNumber(q, "PercentProcessorTime");
+    if (v === null) return null;
+    if (v < 0) v = 0;
+    if (v > 100) v = 100;
+    return Math.round(v * 10) / 10;
+  } catch (e) {
+    return null;
+  }
+}
+
+function tryGpuUsagePercent() {
+  try {
+    var q = wmiQuery("SELECT UtilizationPercentage FROM Win32_PerfFormattedData_GPUPerformanceCounters");
+    var max = null;
+    var e = new Enumerator(q);
+    for (; !e.atEnd(); e.moveNext()) {
+      var o = e.item();
+      var v = o.UtilizationPercentage;
+      if (v === null || v === undefined) continue;
+      var n = parseFloat(v);
+      if (isNaN(n)) continue;
+      if (max === null || n > max) max = n;
+    }
+    if (max === null) return null;
+    if (max < 0) max = 0;
+    if (max > 100) max = 100;
+    return Math.round(max * 10) / 10;
+  } catch (e) {
+    return null;
+  }
+}
+
+function refreshHardware() {
+  log("INFO", "Rafraîchissement matériel (WMI)…");
+  try {
+    var cpuName = firstProp(wmiQuery("SELECT Name FROM Win32_Processor"), "Name") || "—";
+    var gpuName = firstProp(wmiQuery("SELECT Name FROM Win32_VideoController"), "Name") || "—";
+
+    var totalKb = firstNumber(wmiQuery("SELECT TotalVisibleMemorySize FROM Win32_OperatingSystem"), "TotalVisibleMemorySize");
+    var freeKb = firstNumber(wmiQuery("SELECT FreePhysicalMemory FROM Win32_OperatingSystem"), "FreePhysicalMemory");
+    var ramTotal = formatRamKB(totalKb);
+    var ramUsage = "—";
+    if (totalKb && freeKb !== null && totalKb > 0) {
+      var used = totalKb - freeKb;
+      ramUsage = (Math.round((used * 1000) / totalKb) / 10) + " %";
+    }
+
+    var cpuPct = tryCpuUsagePercent();
+    var cpuUsageStr = cpuPct === null ? "—" : (cpuPct + " %");
+
+    var gpuPct = tryGpuUsagePercent();
+    var gpuUsageStr = gpuPct === null ? "GPU usage : À connecter plus tard" : ("GPU usage : " + gpuPct + " %");
+
+    $("valCpuName").innerText = cpuName;
+    $("valCpuUsage").innerText = cpuUsageStr;
+    $("valGpuName").innerText = gpuName;
+    $("valRamTotal").innerText = ramTotal;
+    $("valRamUsage").innerText = ramUsage;
+    $("valGpuUsage").innerText = gpuUsageStr;
+    $("valCpuTemp").innerText = "À connecter plus tard";
+    $("valGpuTemp").innerText = "À connecter plus tard";
+
+    log("SUCCESS", "Matériel mis à jour.");
+  } catch (e) {
+    log("ERROR", "WMI : " + e.message);
+    alert("Impossible de lire le matériel via WMI.\n" + e.message);
+  }
+}
+
+function setActiveNav(page) {
+  var buttons = document.getElementsByClassName("navbtn");
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].className = "navbtn" + (buttons[i].getAttribute("data-page") === page ? " active" : "");
+  }
+  var pages = document.getElementsByClassName("page");
+  for (var j = 0; j < pages.length; j++) {
+    var pid = pages[j].id;
+    var want = "page-" + page;
+    pages[j].className = "page" + (pid === want ? " active" : "");
+  }
+  log("INFO", "Navigation : " + page);
+}
+
+function readSession() {
+  try {
+    var fso = new ActiveXObject("Scripting.FileSystemObject");
+    var path = getLocalDataPath() + "\\hta-session.json";
+    if (!fso.FileExists(path)) return null;
+    var t = fso.OpenTextFile(path, 1);
+    var json = t.ReadAll();
+    t.Close();
+    if (!json) return null;
+    return JSON.parse(json);
+  } catch (e) {
+    return null;
+  }
+}
+
+function writeSession(obj) {
+  var fso = new ActiveXObject("Scripting.FileSystemObject");
+  var path = getLocalDataPath() + "\\hta-session.json";
+  var f = fso.CreateTextFile(path, true);
+  f.Write(JSON.stringify(obj));
+  f.Close();
+}
+
+function clearSession() {
+  try {
+    var fso = new ActiveXObject("Scripting.FileSystemObject");
+    var path = getLocalDataPath() + "\\hta-session.json";
+    if (fso.FileExists(path)) fso.DeleteFile(path);
+  } catch (e) {}
+}
+
+function refreshAccountUi() {
+  var s = readSession();
+  if (!s || !s.email) {
+    $("subStatus").innerText = "Inactif";
+    $("sessEmail").innerText = "Non connecté";
+    return;
+  }
+  $("sessEmail").innerText = s.email;
+  $("subStatus").innerText = s.subscriptionActive ? "Actif" : "Inactif";
+}
+
+function loginMock() {
+  var email = $("inEmail").value.replace(/^\s+|\s+$/g, "");
+  var pw = $("inPassword").value;
+  if (!email || !pw) {
+    alert("Email et mot de passe requis.");
+    return;
+  }
+  var active = email.indexOf("+sub") !== -1;
+  writeSession({ email: email, token: "mock_" + Date.now(), subscriptionActive: active });
+  refreshAccountUi();
+  log("SUCCESS", "Connexion mockée enregistrée.");
+}
+
+function registerMock() {
+  var email = $("inEmail").value.replace(/^\s+|\s+$/g, "");
+  var pw = $("inPassword").value;
+  if (!email || pw.length < 4) {
+    alert("Mot de passe trop court (mock : min. 4 caractères).");
+    return;
+  }
+  writeSession({ email: email, token: "mock_" + Date.now(), subscriptionActive: false });
+  refreshAccountUi();
+  log("SUCCESS", "Compte mock créé (abonnement inactif).");
+}
+
+function logoutMock() {
+  clearSession();
+  refreshAccountUi();
+  log("INFO", "Déconnexion (session locale supprimée).");
+}
+
+function testOptimization() {
+  if (!confirm("Cette optimisation peut modifier des paramètres Windows. Continuer ?")) {
+    log("INFO", "Optimisation test annulée par l’utilisateur.");
+    return;
+  }
+  log("PENDING", "Optimisation test lancée");
+  $("optStatus").innerText = "En cours…";
+  $("optBar").style.width = "0%";
+  var p = 0;
+  var id = window.setInterval(function () {
+    p += 10;
+    if (p > 100) p = 100;
+    $("optBar").style.width = p + "%";
+    if (p >= 100) {
+      window.clearInterval(id);
+      $("optStatus").innerText = "Succès";
+      log("SUCCESS", "Optimisation test terminée (simulation).");
+    }
+  }, 140);
+}
+
+function initSettingsUi() {
+  $("setTheme").innerText = "Sombre (smoke / néon violet)";
+  $("setLang").innerText = "Français";
+  $("setLogsDir").innerText = getLocalDataPath();
+  $("setVersion").innerText = APP_VERSION;
+}
+
+window.onload = function () {
+  try {
+    window.resizeTo(1260, 860);
+  } catch (e0) {}
+  log("INFO", "PurpleBoost HTA démarré.");
+  initSettingsUi();
+  refreshAccountUi();
+  refreshHardware();
+};
+</script>
+</head>
+
+<body>
+  <div class="smoke"></div>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">PB</div>
+        <div>
+          <h1>PurpleBoost</h1>
+          <p>Gaming Optimizer</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="navbtn active" type="button" data-page="home" onclick="setActiveNav('home')">Accueil</button>
+        <button class="navbtn" type="button" data-page="peripheral" onclick="setActiveNav('peripheral')">Périphérique</button>
+        <button class="navbtn" type="button" data-page="drivers" onclick="setActiveNav('drivers')">Drivers</button>
+        <button class="navbtn" type="button" data-page="conn" onclick="setActiveNav('conn')">Connexion</button>
+        <button class="navbtn" type="button" data-page="game" onclick="setActiveNav('game')">Jeu</button>
+        <button class="navbtn" type="button" data-page="opt" onclick="setActiveNav('opt')">Optimisation</button>
+        <button class="navbtn" type="button" data-page="sound" onclick="setActiveNav('sound')">Son</button>
+        <button class="navbtn" type="button" data-page="account" onclick="setActiveNav('account')">Compte / Abonnement</button>
+        <button class="navbtn" type="button" data-page="settings" onclick="setActiveNav('settings')">Paramètres</button>
+      </nav>
+
+      <div class="sidebar-foot">
+        HTA Windows — aucun runtime externe. WMI via ActiveX. Les scripts PowerShell restent désactivés par défaut (sécurité).
+      </div>
+    </aside>
+
+    <section class="main">
+      <div class="content">
+
+        <div id="page-home" class="page active">
+          <h2 class="page-title">Accueil</h2>
+          <p class="lead">Dashboard performance : lecture WMI locale. Les températures et certains compteurs GPU peuvent être indisponibles selon le système.</p>
+          <div class="toolbar">
+            <button class="btn secondary" type="button" onclick="refreshHardware()">Rafraîchir</button>
+          </div>
+
+          <div class="mother" style="margin-top:14px;">
+            <div class="mother-inner">
+              <div class="kicker">Panneau performance</div>
+              <div style="font-size:20px;font-weight:800;margin-top:6px;">Carte mère — instantané</div>
+              <p class="lead" style="margin-top:8px;margin-bottom:0;">Vue matérielle rapide orientée gaming / latence.</p>
+
+              <div class="grid3">
+                <div class="chip"><div class="label">Processeur</div><div class="value" id="valCpuName">—</div></div>
+                <div class="chip"><div class="label">Carte graphique</div><div class="value" id="valGpuName">—</div></div>
+                <div class="chip"><div class="label">RAM totale</div><div class="value" id="valRamTotal">—</div></div>
+              </div>
+
+              <div class="grid2">
+                <div class="panel">
+                  <h3>Charge</h3>
+                  <div class="row"><div class="l">Utilisation CPU</div><div class="v" id="valCpuUsage">—</div></div>
+                  <div class="row"><div class="l">Utilisation RAM</div><div class="v" id="valRamUsage">—</div></div>
+                  <div class="row"><div class="l">Statut GPU</div><div class="v" id="valGpuUsage">—</div></div>
+                </div>
+                <div class="panel">
+                  <h3>Températures</h3>
+                  <div class="row"><div class="l">Température CPU</div><div class="v" id="valCpuTemp">À connecter plus tard</div></div>
+                  <div class="row"><div class="l">Température GPU</div><div class="v" id="valGpuTemp">À connecter plus tard</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="page-peripheral" class="page">
+          <h2 class="page-title">Périphérique</h2>
+          <p class="lead">Manette, souris, clavier, USB — emplacements pour scripts / actions futures.</p>
+          <div class="cards">
+            <div class="card"><strong>Manette</strong>À venir</div>
+            <div class="card"><strong>Souris</strong>À venir</div>
+            <div class="card"><strong>Clavier</strong>À venir</div>
+            <div class="card"><strong>USB</strong>À venir</div>
+          </div>
+        </div>
+
+        <div id="page-drivers" class="page">
+          <h2 class="page-title">Drivers</h2>
+          <p class="lead">Pilotes GPU, chipset et audio — contenu à brancher.</p>
+          <div class="cards">
+            <div class="card"><strong>NVIDIA</strong>À venir</div>
+            <div class="card"><strong>AMD</strong>À venir</div>
+            <div class="card"><strong>Chipset</strong>À venir</div>
+            <div class="card"><strong>Audio</strong>À venir</div>
+          </div>
+        </div>
+
+        <div id="page-conn" class="page">
+          <h2 class="page-title">Connexion</h2>
+          <p class="lead">DNS, TCP, ping, latence — contenu à brancher.</p>
+          <div class="cards">
+            <div class="card"><strong>DNS</strong>À venir</div>
+            <div class="card"><strong>TCP Optimizer</strong>À venir</div>
+            <div class="card"><strong>Ping</strong>À venir</div>
+            <div class="card"><strong>Latence réseau</strong>À venir</div>
+          </div>
+        </div>
+
+        <div id="page-game" class="page">
+          <h2 class="page-title">Jeu</h2>
+          <p class="lead">Profils par titre — contenu à brancher.</p>
+          <div class="cards">
+            <div class="card"><strong>Warzone</strong>À venir</div>
+            <div class="card"><strong>Fortnite</strong>À venir</div>
+            <div class="card"><strong>Apex</strong>À venir</div>
+            <div class="card"><strong>Profils personnalisés</strong>À venir</div>
+          </div>
+        </div>
+
+        <div id="page-opt" class="page">
+          <h2 class="page-title">Optimisation</h2>
+          <p class="lead">Débloat, services, alimentation, latence — aucune modification automatique dans cette version.</p>
+
+          <div class="cards">
+            <div class="card"><strong>Debloat Windows</strong>À venir</div>
+            <div class="card"><strong>Plan d’alimentation</strong>À venir</div>
+            <div class="card"><strong>Services Windows</strong>À venir</div>
+            <div class="card"><strong>Latence système</strong>À venir</div>
+          </div>
+
+          <div class="mother" style="margin-top:16px;">
+            <div class="mother-inner">
+              <div class="kicker">Test</div>
+              <div style="font-size:18px;font-weight:800;margin-top:6px;">Simulation d’optimisation</div>
+              <p class="lead" style="margin-top:8px;margin-bottom:0;">Confirmation obligatoire + logs + progression (aucun changement réel).</p>
+              <div class="toolbar">
+                <button class="btn" type="button" onclick="testOptimization()">Tester optimisation</button>
+              </div>
+              <div class="row" style="margin-top:10px;">
+                <div class="l">Statut</div>
+                <div class="v" id="optStatus">En attente</div>
+              </div>
+              <div class="progress"><i id="optBar"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="page-sound" class="page">
+          <h2 class="page-title">Son</h2>
+          <p class="lead">VoiceMeeter, Discord, audio — contenu à brancher.</p>
+          <div class="cards">
+            <div class="card"><strong>VoiceMeeter</strong>À venir</div>
+            <div class="card"><strong>Discord</strong>À venir</div>
+            <div class="card"><strong>Périphérique audio</strong>À venir</div>
+            <div class="card"><strong>Optimisation Warzone audio</strong>À venir</div>
+          </div>
+        </div>
+
+        <div id="page-account" class="page">
+          <h2 class="page-title">Compte / Abonnement</h2>
+          <p class="lead">Login mock local (fichier JSON). Astuce : email contenant « +sub » → abonnement actif.</p>
+
+          <label for="inEmail">Email</label>
+          <input id="inEmail" type="text" autocomplete="off" />
+
+          <label for="inPassword">Mot de passe</label>
+          <input id="inPassword" type="password" autocomplete="off" />
+
+          <div class="toolbar">
+            <button class="btn" type="button" onclick="loginMock()">Connexion</button>
+            <button class="btn secondary" type="button" onclick="registerMock()">Créer un compte</button>
+            <button class="btn secondary" type="button" onclick="logoutMock()">Se déconnecter</button>
+          </div>
+
+          <div class="grid2" style="margin-top:14px;">
+            <div class="panel">
+              <h3>Abonnement</h3>
+              <div class="row"><div class="l">Statut</div><div class="v" id="subStatus">Inactif</div></div>
+            </div>
+            <div class="panel">
+              <h3>Session</h3>
+              <div class="row"><div class="l">Email</div><div class="v" id="sessEmail">Non connecté</div></div>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <button class="btn secondary" type="button" disabled title="À brancher (Stripe / portail)">Gérer mon abonnement</button>
+          </div>
+        </div>
+
+        <div id="page-settings" class="page">
+          <h2 class="page-title">Paramètres</h2>
+          <p class="lead">Informations locales et export des logs.</p>
+          <div class="cards">
+            <div class="card"><strong>Thème</strong><span id="setTheme">—</span></div>
+            <div class="card"><strong>Langue</strong><span id="setLang">—</span></div>
+            <div class="card"><strong>Dossier logs</strong><span id="setLogsDir" style="word-break:break-all;">—</span></div>
+            <div class="card"><strong>Version application</strong><span id="setVersion">—</span></div>
+          </div>
+          <div class="toolbar">
+            <button class="btn" type="button" onclick="exportLogs()">Exporter logs</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="logs" id="logBox"></div>
+    </section>
+  </div>
+</body>
+</html>

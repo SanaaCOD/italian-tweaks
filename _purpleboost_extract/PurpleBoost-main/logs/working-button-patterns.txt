@@ -1,0 +1,87 @@
+=== Patterns boutons fonctionnels — PurpleBoost / Unreal.hta ===
+Date: 2026-05-22
+
+Objectif: réutiliser ces mécaniques pour les 3 réglages NVIDIA supplémentaires (pas de V3, pas de diagnostic).
+
+----------------------------------------------------------------------
+1. DDU — Ouvrir / télécharger
+----------------------------------------------------------------------
+Bouton UI: btnDduOpenDownload → downloadOrOpenDduOpenOnly()
+Lancement: launchDduLikeHidusbf(exePath) → launchFileAsAdmin(exePath)
+Admin: Shell.Application.ShellExecute(..., "runas", 1)
+Attente: non (outil interactif)
+Logs: logs/ddu-open-download.log (writeDduOpenDownloadLog)
+Statut: setDduStatus / setDduOpenDownloadBadge
+
+----------------------------------------------------------------------
+2. NVCleanInstall — Ouvrir / preset / auto experimental
+----------------------------------------------------------------------
+Bouton UI: openNvcleanstall(), prepareNvcleanstallPreset(), launchNvcleaninstallAutoExperimental()
+Lancement: WScript.Shell.Run ou ShellExecute sur NVCleanstall.exe
+Logs: logs/nvcleaninstall-preset.log, logs/nv-media.log
+Statut: setNvcleanstallOpenStatus, badges preset
+
+----------------------------------------------------------------------
+3. Optimisation Nvidia complète (PRINCIPAL — à copier pour actions unitaires)
+----------------------------------------------------------------------
+Bouton UI: btnApplyNvidiaGaming → applyNvidiaGamingOptimizationFromUi()
+Pattern:
+  - setNvGamingStatus(msg, tone) sur #nvidiaGamingStatus
+  - appendNvGamingLogLine(...)
+  - renderNvGamingStepsPanel(payload, fullOptOnly=true) pour résumé
+  - Sous-actions via NvidiaAutomationV2.exe:
+      runNvidiaAutomationV2ExecAsync(cliArgs, logTag, timeoutMs, onDone)
+  - Wrapper: script .ps1 temporaire dans logs/ + powershell -File (fenêtre cachée)
+  - Exe: tools/nvidia-automation-v2/NvidiaAutomationV2.exe
+  - Args: --<action> --json --purpleboost-root "<app>"
+  - Sortie: stdout capturé → logs/<logTag>-result.json → JSON.parse
+  - Poll: shell.Exec + setTimeout jusqu'à Status===1 ou timeout
+  - NIP silencieux: --apply-nip (NipSilentImportService, pas d'UI NPI)
+  - Téléciné: --disable-inverse-telecine-registry-only
+  - G-Sync: --disable-gsync-only
+  - DV 80%: --apply-digital-vibrance-80
+
+Meilleur pattern pour 3 nouveaux boutons: runNvidiaAutomationV2ExecAsync + setNvExtraRegStatus
+
+----------------------------------------------------------------------
+4. Résolution max / Fréquence max (helper affichage)
+----------------------------------------------------------------------
+Fonctions HTA: ApplyMaxResolution(), ApplyMaxRefreshRate()
+Moteur: runNvGamingDisplayApply() → UnrealNvidiaDisplayHelper.exe
+  Args: --apply-full --skip-digital-vibrance --json
+  Wrapper PS: logs/nvidia-gaming-display-run.ps1 (caché)
+  Parse: payload.displayMode (resolution, refreshRate, verified)
+Logs: logs/nvidia-gaming.log
+Statut: intégré au flux gaming / makeNvGamingResult
+
+Pour « pas de mise à l'échelle »: MÊME exe, nouvel arg --scaling-only --json
+  Parse: payload.scaling (applied, verified, mode)
+
+----------------------------------------------------------------------
+5. Reset réglages 3D NVIDIA
+----------------------------------------------------------------------
+Bouton UI: resetNvidiaPanelProfile()
+Fonction: runNvidiaNativeDriverSettingsReset()
+  - Script PS logs/nvidia-native-reset.ps1
+  - Suppression DRS nvdrsdb / nvappdb + registre NVTweak
+  - PAS de Profile Inspector, PAS de .nip
+Logs: logNvidiaPanelDev (dev)
+Statut: setNvidiaPanelStatus (si présent) / messages dans flux
+
+----------------------------------------------------------------------
+6. Tests unitaires gaming (modèle UI simple)
+----------------------------------------------------------------------
+Exemples: applyGsyncOffTestFromUi(), applyInverseTelecineOffTestFromUi()
+  - setNvGamingStatus + runNvidiaAutomationV2ExecAsync
+  - finishNvPanelTest ou renderNvGamingStepsPanel partiel
+Labels: nvStableAppliedLabel(step) → appliqué / ignoré / erreur
+
+----------------------------------------------------------------------
+RECOMMANDATION — 3 actions supplémentaires
+----------------------------------------------------------------------
+| Action                         | Mécanique à réutiliser                                      |
+| Désactiver téléciné inversée     | runNvidiaAutomationV2ExecAsync --disable-inverse-telecine-registry-only |
+| Mode performance NVIDIA          | runNvidiaAutomationV2ExecAsync --apply-nip (silentImport)   |
+| Pas de mise à l'échelle        | runUnrealDisplayHelperExecAsync --scaling-only --json       |
+
+Interdit: NvidiaV3Diagnostics, diagnostic forensic, ouverture NPI hors --apply-nip silencieux.

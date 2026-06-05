@@ -1,0 +1,466 @@
+{
+    "Pid":  "0CE6",
+    "Entries":  [
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6",
+                        "Values":  {
+
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\\5\u002630741cdd\u00260\u00264",
+                        "Values":  {
+                                       "LowerFilters":  "[hidusbf",
+                                       "CompatibleIDs":  "[USB\\COMPAT_VID_054C\u0026DevClass_00\u0026SubClass_00\u0026Prot00 USB\\COMPAT_VID_054C\u0026DevClass_00\u0026SubClass_00 USB\\COMPAT_VID_054C\u0026DevClass_00 USB\\DevClass_00\u0026SubClass_00\u0026Prot_00 USB\\DevClass_00\u0026SubClass_00 USB\\DevClass_00 USB\\COMPOSITE",
+                                       "DeviceDesc":  "@usb.inf,%usb\\composite.devicedesc%;USB Composite Device",
+                                       "Mfg":  "@usb.inf,%generic.mfg%;(Standard USB Host Controller)",
+                                       "LocationInformation":  "Port_#0004.Hub_#0001",
+                                       "ParentIdPrefix":  "6\u00262ba514f0\u00260",
+                                       "Address":  "4",
+                                       "Capabilities":  "132",
+                                       "Service":  "usbccgp",
+                                       "ConfigFlags":  "0",
+                                       "HardwareID":  "[USB\\VID_054C\u0026PID_0CE6\u0026REV_0100 USB\\VID_054C\u0026PID_0CE6",
+                                       "ClassGUID":  "{36fc9e60-c465-11cf-8056-444553540000}",
+                                       "ContainerID":  "{f2967216-452a-11f1-bf07-806e6f6e6963}",
+                                       "Driver":  "{36fc9e60-c465-11cf-8056-444553540000}\\0016"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\\5\u002630741cdd\u00260\u00264\\Device Parameters",
+                        "Values":  {
+                                       "EnumerationRetryCount":  "0",
+                                       "SymbolicName":  "\\??\\USB#VID_054C\u0026PID_0CE6#5\u002630741cdd\u00260\u00264#{a5dcbf10-6530-11d2-901f-00c04fb951ed}"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\\5\u002630741cdd\u00260\u00264\\Device Parameters\\Ceip",
+                        "Values":  {
+                                       "DescriptorValidationInfo5":  "0",
+                                       "DescriptorValidationInfo0":  "0",
+                                       "DescriptorValidationInfo3":  "0",
+                                       "DescriptorValidationInfo2":  "65536",
+                                       "DescriptorValidationInfo1":  "0",
+                                       "DescriptorValidationInfo4":  "0",
+                                       "DeviceInformation":  "8",
+                                       "DescriptorValidationInfo6":  "0",
+                                       "PortInterconnectType":  "0"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\\6\u0026306893d8\u00260\u00264",
+                        "Values":  {
+                                       "LowerFilters":  "[hidusbf",
+                                       "CompatibleIDs":  "[USB\\COMPAT_VID_054C\u0026DevClass_00\u0026SubClass_00\u0026Prot00 USB\\COMPAT_VID_054C\u0026DevClass_00\u0026SubClass_00 USB\\COMPAT_VID_054C\u0026DevClass_00 USB\\DevClass_00\u0026SubClass_00\u0026Prot_00 USB\\DevClass_00\u0026SubClass_00 USB\\DevClass_00 USB\\COMPOSITE",
+                                       "DeviceDesc":  "@usb.inf,%usb\\composite.devicedesc%;USB Composite Device",
+                                       "Mfg":  "@usb.inf,%generic.mfg%;(Standard USB Host Controller)",
+                                       "LocationInformation":  "Port_#0004.Hub_#0002",
+                                       "ParentIdPrefix":  "7\u0026156acc9\u00260",
+                                       "Address":  "4",
+                                       "Capabilities":  "132",
+                                       "Service":  "usbccgp",
+                                       "ConfigFlags":  "0",
+                                       "HardwareID":  "[USB\\VID_054C\u0026PID_0CE6\u0026REV_0100 USB\\VID_054C\u0026PID_0CE6",
+                                       "ClassGUID":  "{36fc9e60-c465-11cf-8056-444553540000}",
+                                       "ContainerID":  "{bc197f67-423c-11f1-bef7-b1a30722f35c}",
+                                       "Driver":  "{36fc9e60-c465-11cf-8056-444553540000}\\0015"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\\6\u0026306893d8\u00260\u00264\\Device Parameters",
+                        "Values":  {
+                                       "EnumerationRetryCount":  "0",
+                                       "SymbolicName":  "\\??\\USB#VID_054C\u0026PID_0CE6#6\u0026306893d8\u00260\u00264#{a5dcbf10-6530-11d2-901f-00c04fb951ed}"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\\6\u0026306893d8\u00260\u00264\\Device Parameters\\Ceip",
+                        "Values":  {
+                                       "DescriptorValidationInfo5":  "0",
+                                       "DescriptorValidationInfo0":  "0",
+                                       "DescriptorValidationInfo3":  "0",
+                                       "DescriptorValidationInfo2":  "65536",
+                                       "DescriptorValidationInfo1":  "0",
+                                       "DescriptorValidationInfo4":  "0",
+                                       "DeviceInformation":  "8",
+                                       "DescriptorValidationInfo6":  "0",
+                                       "PortInterconnectType":  "0"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_00",
+                        "Values":  {
+
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_00\\6\u00262ba514f0\u00260\u00260000",
+                        "Values":  {
+                                       "CompatibleIDs":  "[USB\\COMPAT_VID_054c\u0026Class_01\u0026SubClass_01\u0026Prot_00 USB\\COMPAT_VID_054c\u0026Class_01\u0026SubClass_01 USB\\COMPAT_VID_054c\u0026Class_01 USB\\Class_01\u0026SubClass_01\u0026Prot_00 USB\\Class_01\u0026SubClass_01 USB\\Class_01",
+                                       "DeviceDesc":  "@wdma_usb.inf,%usb\\class_01.devicedesc%;USB Audio Device",
+                                       "Mfg":  "@wdma_usb.inf,%mfgname%;(Generic USB Audio)",
+                                       "LocationInformation":  "0000.0014.0000.004.000.000.000.000.000",
+                                       "Address":  "4",
+                                       "Capabilities":  "160",
+                                       "Service":  "usbaudio",
+                                       "ConfigFlags":  "0",
+                                       "HardwareID":  "[USB\\VID_054C\u0026PID_0CE6\u0026REV_0100\u0026MI_00 USB\\VID_054C\u0026PID_0CE6\u0026MI_00",
+                                       "ClassGUID":  "{4d36e96c-e325-11ce-bfc1-08002be10318}",
+                                       "ContainerID":  "{f2967216-452a-11f1-bf07-806e6f6e6963}",
+                                       "FriendlyName":  "DualSense Wireless Controller",
+                                       "Driver":  "{4d36e96c-e325-11ce-bfc1-08002be10318}\\0016"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_00\\6\u00262ba514f0\u00260\u00260000\\Device Parameters",
+                        "Values":  {
+                                       "RevisionId":  "256",
+                                       "ExtPropDescSemaphore":  "1",
+                                       "VendorRevision":  "0"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_00\\6\u00262ba514f0\u00260\u00260000\\Device Parameters\\e5b3b5ac-9725-4f78-963f-03dfb1d828c7",
+                        "Values":  {
+
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_00\\7\u0026156acc9\u00260\u00260000",
+                        "Values":  {
+                                       "CompatibleIDs":  "[USB\\COMPAT_VID_054c\u0026Class_01\u0026SubClass_01\u0026Prot_00 USB\\COMPAT_VID_054c\u0026Class_01\u0026SubClass_01 USB\\COMPAT_VID_054c\u0026Class_01 USB\\Class_01\u0026SubClass_01\u0026Prot_00 USB\\Class_01\u0026SubClass_01 USB\\Class_01",
+                                       "DeviceDesc":  "@wdma_usb.inf,%usb\\class_01.devicedesc%;USB Audio Device",
+                                       "Mfg":  "@wdma_usb.inf,%mfgname%;(Generic USB Audio)",
+                                       "LocationInformation":  "0000.0014.0000.011.004.000.000.000.000",
+                                       "Address":  "4",
+                                       "Capabilities":  "160",
+                                       "Service":  "usbaudio",
+                                       "ConfigFlags":  "0",
+                                       "HardwareID":  "[USB\\VID_054C\u0026PID_0CE6\u0026REV_0100\u0026MI_00 USB\\VID_054C\u0026PID_0CE6\u0026MI_00",
+                                       "ClassGUID":  "{4d36e96c-e325-11ce-bfc1-08002be10318}",
+                                       "ContainerID":  "{bc197f67-423c-11f1-bef7-b1a30722f35c}",
+                                       "FriendlyName":  "DualSense Wireless Controller",
+                                       "Driver":  "{4d36e96c-e325-11ce-bfc1-08002be10318}\\0015"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_00\\7\u0026156acc9\u00260\u00260000\\Device Parameters",
+                        "Values":  {
+                                       "RevisionId":  "256",
+                                       "ExtPropDescSemaphore":  "1",
+                                       "VendorRevision":  "0"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_00\\7\u0026156acc9\u00260\u00260000\\Device Parameters\\e5b3b5ac-9725-4f78-963f-03dfb1d828c7",
+                        "Values":  {
+
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_03",
+                        "Values":  {
+
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_03\\6\u00262ba514f0\u00260\u00260003",
+                        "Values":  {
+                                       "CompatibleIDs":  "[USB\\COMPAT_VID_054c\u0026Class_03\u0026SubClass_00\u0026Prot_00 USB\\COMPAT_VID_054c\u0026Class_03\u0026SubClass_00 USB\\COMPAT_VID_054c\u0026Class_03 USB\\Class_03\u0026SubClass_00\u0026Prot_00 USB\\Class_03\u0026SubClass_00 USB\\Class_03",
+                                       "DeviceDesc":  "@input.inf,%hid.devicedesc%;USB Input Device",
+                                       "Mfg":  "@input.inf,%stdmfg%;(Standard system devices)",
+                                       "LocationInformation":  "0000.0014.0000.004.000.000.000.000.000",
+                                       "ParentIdPrefix":  "7\u0026519de54\u00260",
+                                       "Address":  "7",
+                                       "Capabilities":  "128",
+                                       "Service":  "HidUsb",
+                                       "ConfigFlags":  "0",
+                                       "HardwareID":  "[USB\\VID_054C\u0026PID_0CE6\u0026REV_0100\u0026MI_03 USB\\VID_054C\u0026PID_0CE6\u0026MI_03",
+                                       "ClassGUID":  "{745a17a0-74d3-11d0-b6fe-00a0c90f57da}",
+                                       "ContainerID":  "{f2967216-452a-11f1-bf07-806e6f6e6963}",
+                                       "Driver":  "{745a17a0-74d3-11d0-b6fe-00a0c90f57da}\\0057"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_03\\6\u00262ba514f0\u00260\u00260003\\Device Parameters",
+                        "Values":  {
+                                       "SelectiveSuspendEnabled":  "[0",
+                                       "AllowIdleIrpInD3":  "1",
+                                       "ExtPropDescSemaphore":  "1",
+                                       "LegacyTouchScaling":  "0",
+                                       "VendorRevision":  "0",
+                                       "EnhancedPowerManagementEnabled":  "1",
+                                       "DeviceResetNotificationEnabled":  "1",
+                                       "RevisionId":  "256",
+                                       "WriteReportExSupported":  "1"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_03\\6\u00262ba514f0\u00260\u00260003\\Device Parameters\\e5b3b5ac-9725-4f78-963f-03dfb1d828c7",
+                        "Values":  {
+
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_03\\7\u0026156acc9\u00260\u00260003",
+                        "Values":  {
+                                       "CompatibleIDs":  "[USB\\COMPAT_VID_054c\u0026Class_03\u0026SubClass_00\u0026Prot_00 USB\\COMPAT_VID_054c\u0026Class_03\u0026SubClass_00 USB\\COMPAT_VID_054c\u0026Class_03 USB\\Class_03\u0026SubClass_00\u0026Prot_00 USB\\Class_03\u0026SubClass_00 USB\\Class_03",
+                                       "DeviceDesc":  "@input.inf,%hid.devicedesc%;USB Input Device",
+                                       "Mfg":  "@input.inf,%stdmfg%;(Standard system devices)",
+                                       "LocationInformation":  "0000.0014.0000.011.004.000.000.000.000",
+                                       "ParentIdPrefix":  "8\u002623a1f713\u00260",
+                                       "Address":  "7",
+                                       "Capabilities":  "128",
+                                       "Service":  "HidUsb",
+                                       "ConfigFlags":  "0",
+                                       "HardwareID":  "[USB\\VID_054C\u0026PID_0CE6\u0026REV_0100\u0026MI_03 USB\\VID_054C\u0026PID_0CE6\u0026MI_03",
+                                       "ClassGUID":  "{745a17a0-74d3-11d0-b6fe-00a0c90f57da}",
+                                       "ContainerID":  "{bc197f67-423c-11f1-bef7-b1a30722f35c}",
+                                       "Driver":  "{745a17a0-74d3-11d0-b6fe-00a0c90f57da}\\0055"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_03\\7\u0026156acc9\u00260\u00260003\\Device Parameters",
+                        "Values":  {
+                                       "SelectiveSuspendEnabled":  "[0",
+                                       "AllowIdleIrpInD3":  "1",
+                                       "ExtPropDescSemaphore":  "1",
+                                       "LegacyTouchScaling":  "0",
+                                       "VendorRevision":  "0",
+                                       "EnhancedPowerManagementEnabled":  "1",
+                                       "DeviceResetNotificationEnabled":  "1",
+                                       "RevisionId":  "256",
+                                       "WriteReportExSupported":  "1"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_03\\7\u0026156acc9\u00260\u00260003\\Device Parameters\\e5b3b5ac-9725-4f78-963f-03dfb1d828c7",
+                        "Values":  {
+
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\HID\\VID_054C\u0026PID_0CE6\u0026MI_03",
+                        "Values":  {
+
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\HID\\VID_054C\u0026PID_0CE6\u0026MI_03\\7\u0026519de54\u00260\u00260000",
+                        "Values":  {
+                                       "HardwareID":  "[HID\\VID_054C\u0026PID_0CE6\u0026REV_0100\u0026MI_03 HID\\VID_054C\u0026PID_0CE6\u0026MI_03 HID\\VID_054C\u0026UP:0001_U:0005 HID_DEVICE_SYSTEM_GAME HID_DEVICE_UP:0001_U:0005 HID_DEVICE",
+                                       "ClassGUID":  "{745a17a0-74d3-11d0-b6fe-00a0c90f57da}",
+                                       "ContainerID":  "{f2967216-452a-11f1-bf07-806e6f6e6963}",
+                                       "Capabilities":  "224",
+                                       "Driver":  "{745a17a0-74d3-11d0-b6fe-00a0c90f57da}\\0058",
+                                       "Mfg":  "@input.inf,%stdmfg%;(Standard system devices)",
+                                       "Address":  "1",
+                                       "ConfigFlags":  "0",
+                                       "DeviceDesc":  "@input.inf,%hid_device_system_game%;HID-compliant game controller",
+                                       "CompatibleIDs":  "["
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\HID\\VID_054C\u0026PID_0CE6\u0026MI_03\\7\u0026519de54\u00260\u00260000\\Device Parameters",
+                        "Values":  {
+
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\HID\\VID_054C\u0026PID_0CE6\u0026MI_03\\8\u002623a1f713\u00260\u00260000",
+                        "Values":  {
+                                       "HardwareID":  "[HID\\VID_054C\u0026PID_0CE6\u0026REV_0100\u0026MI_03 HID\\VID_054C\u0026PID_0CE6\u0026MI_03 HID\\VID_054C\u0026UP:0001_U:0005 HID_DEVICE_SYSTEM_GAME HID_DEVICE_UP:0001_U:0005 HID_DEVICE",
+                                       "ClassGUID":  "{745a17a0-74d3-11d0-b6fe-00a0c90f57da}",
+                                       "ContainerID":  "{bc197f67-423c-11f1-bef7-b1a30722f35c}",
+                                       "Capabilities":  "224",
+                                       "Driver":  "{745a17a0-74d3-11d0-b6fe-00a0c90f57da}\\0056",
+                                       "Mfg":  "@input.inf,%stdmfg%;(Standard system devices)",
+                                       "Address":  "1",
+                                       "ConfigFlags":  "0",
+                                       "DeviceDesc":  "@input.inf,%hid_device_system_game%;HID-compliant game controller",
+                                       "CompatibleIDs":  "["
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\HID\\VID_054C\u0026PID_0CE6\u0026MI_03\\8\u002623a1f713\u00260\u00260000\\Device Parameters",
+                        "Values":  {
+
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\hidusbf",
+                        "Values":  {
+                                       "DisplayName":  "USB Mouse Rate Adjuster Lower Filter by SweetLow",
+                                       "ErrorControl":  "1",
+                                       "ImagePath":  "\\SystemRoot\\system32\\DRIVERS\\hidusbf.sys",
+                                       "Type":  "1",
+                                       "Start":  "3"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\hidusbf\\Parameters",
+                        "Values":  {
+                                       "PatchUSBXHCI":  "3",
+                                       "PatchUSBPort":  "1"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\hidusbf\\Enum",
+                        "Values":  {
+                                       "0":  "USB\\VID_054C\u0026PID_0CE6\\5\u002630741cdd\u00260\u00264",
+                                       "2":  "HID\\VID_054C\u0026PID_0CE6\u0026MI_03\\7\u0026519de54\u00260\u00260000",
+                                       "1":  "USB\\VID_054C\u0026PID_0CE6\u0026MI_03\\6\u00262ba514f0\u00260\u00260003",
+                                       "Count":  "3",
+                                       "NextInstance":  "3"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\HIDUSBF",
+                        "Values":  {
+                                       "PatchUSBXHCI":  "3",
+                                       "PatchUSBPort":  "1"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{36fc9e60-c465-11cf-8056-444553540000}\\0009",
+                        "Values":  {
+                                       "bInterval":  "1"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{36fc9e60-c465-11cf-8056-444553540000}\\0012",
+                        "Values":  {
+                                       "bInterval":  "1"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{36fc9e60-c465-11cf-8056-444553540000}\\0015",
+                        "Values":  {
+                                       "bInterval":  "1"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{36fc9e60-c465-11cf-8056-444553540000}\\0016",
+                        "Values":  {
+                                       "bInterval":  "4"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e967-e325-11ce-bfc1-08002be10318}",
+                        "Values":  {
+                                       "UpperFilters":  "[partmgr",
+                                       "LowerFilters":  "[EhStorClass"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e96b-e325-11ce-bfc1-08002be10318}",
+                        "Values":  {
+                                       "UpperFilters":  "[kbdclass"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e96c-e325-11ce-bfc1-08002be10318}",
+                        "Values":  {
+                                       "UpperFilters":  "[ksthunk"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e96c-e325-11ce-bfc1-08002be10318}\\0000\\GlobalSettings\\SpdifIn",
+                        "Values":  {
+                                       "SpdifInputSampleRate":  "[1 0 0 0"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e96c-e325-11ce-bfc1-08002be10318}\\0000\\GlobalSettings\\SpdifOut",
+                        "Values":  {
+                                       "ExternalSpdifReceiverSupportedSampleRates48000":  "[1 0 0 0",
+                                       "ExternalSpdifReceiverSupportedSampleRates44100":  "[0 0 0 0",
+                                       "ExternalSpdifReceiverSupportedSampleRates96000":  "[0 0 0 0"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e96c-e325-11ce-bfc1-08002be10318}\\0004\\GlobalSettings\\SpdifIn",
+                        "Values":  {
+                                       "SpdifInputSampleRate":  "[1 0 0 0"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e96c-e325-11ce-bfc1-08002be10318}\\0004\\GlobalSettings\\SpdifOut",
+                        "Values":  {
+                                       "ExternalSpdifReceiverSupportedSampleRates48000":  "[1 0 0 0",
+                                       "ExternalSpdifReceiverSupportedSampleRates44100":  "[0 0 0 0",
+                                       "ExternalSpdifReceiverSupportedSampleRates96000":  "[0 0 0 0"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e96f-e325-11ce-bfc1-08002be10318}",
+                        "Values":  {
+                                       "UpperFilters":  "[mouclass"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{50dd5230-ba8a-11d1-bf5d-0000f805f530}",
+                        "Values":  {
+                                       "UpperFilters":  "[scfilter"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{53487c23-680f-4585-acc3-1f10d6777e82}",
+                        "Values":  {
+                                       "UpperFilters":  "[partmgr"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{53966cb1-4d46-4166-bf23-c522403cd495}",
+                        "Values":  {
+                                       "UpperFilters":  "[partmgr"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{6bdd1fc6-810f-11d0-bec7-08002be2092f}",
+                        "Values":  {
+                                       "UpperFilters":  "[ksthunk"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{71a27cdd-812a-11d0-bec7-08002be2092f}",
+                        "Values":  {
+                                       "UpperFilters":  "[volsnap",
+                                       "LowerFilters":  "[fvevol iorate rdyboost"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{75416e63-5912-4dfa-ae8f-3efaccaffb14}",
+                        "Values":  {
+                                       "UpperFilters":  "[partmgr",
+                                       "LowerFilters":  "[EhStorClass"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{ca3e7ab9-b4c3-4ae6-8251-579ef933890f}",
+                        "Values":  {
+                                       "UpperFilters":  "[ksthunk"
+                                   }
+                    },
+                    {
+                        "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{eec5ad98-8080-425f-922a-dabf3de3f69a}",
+                        "Values":  {
+                                       "UpperFilters":  "[WpdUpFltr"
+                                   }
+                    }
+                ],
+    "EntryCount":  50,
+    "Roots":  [
+                  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6",
+                  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_00",
+                  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_054C\u0026PID_0CE6\u0026MI_03",
+                  "HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\HID\\VID_054C\u0026PID_0CE6\u0026MI_03",
+                  "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\hidusbf",
+                  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\HIDUSBF",
+                  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class"
+              ],
+    "Rate":  1000,
+    "Vid":  "054C",
+    "Phase":  "After",
+    "GeneratedAt":  "2026-05-24 14:12:24"
+}

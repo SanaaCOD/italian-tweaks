@@ -1,0 +1,264 @@
+/* === Nvidia Gaming (base) — V2 stubs séparés === */
+var nvGamingDisplayCache = null;
+
+function makeNvGamingResult(status, message) {
+  return { status: status, message: message || "" };
+}
+
+function getNvGamingLogPath() {
+  var app = getAppFolderFromHta();
+  return app ? getAbsolutePathFs(app + "\\logs\\nvidia-gaming.log") : (UNREAL_LOGS + "\\nvidia-gaming.log");
+}
+
+function appendNvGamingLogLine(line) {
+  var path = getNvGamingLogPath();
+  try {
+    var fso = getFso();
+    var dir = fso.GetParentFolderName(path);
+    if (dir && !fso.FolderExists(dir)) fso.CreateFolder(dir);
+    var stream = fso.OpenTextFile(path, 8, true);
+    stream.WriteLine(String(line || ""));
+    stream.Close();
+  } catch (eW) {
+    try { appendNvidiaProfileLogLine("[nvidia-gaming] " + line); } catch (e2) {}
+  }
+}
+
+function setNvGamingStatus(text, kind) {
+  setNvidiaPanelStatus(text, kind);
+}
+
+function resolveNvGamingNipPath() {
+  var p = getNvidiaFullWarzoneNipPath();
+  if (p && fileExists(p)) return p;
+  return resolveNvidiaPerformanceProfilePath();
+}
+
+function resolveNvGamingInspectorPath() {
+  var inspector = ensureBundledNvidiaProfileInspector();
+  if (!inspector) inspector = resolveNvidiaProfileInspectorExe();
+  if (!inspector) inspector = getNvidiaFullProfileInspectorPath();
+  return inspector || "";
+}
+
+function ApplyNipProfile() {
+  appendNvGamingLogLine("STEP=ApplyNipProfile");
+  var inspector = resolveNvGamingInspectorPath();
+  if (!inspector || !fileExists(inspector)) {
+    return makeNvGamingResult("Failed", "NVIDIA Profile Inspector introuvable");
+  }
+  var nipPath = resolveNvGamingNipPath();
+  if (!nipPath || !fileExists(nipPath)) {
+    return makeNvGamingResult("Failed", "Profil .nip introuvable");
+  }
+  tryExportNvidiaBackupBeforeUnreal(inspector);
+  var run = importNvidiaProfileNipElevated(inspector, nipPath);
+  var mapped = mapNvidiaImportProcessResult(run);
+  appendNvGamingLogLine("NIP_EXIT=" + (run ? run.exitCode : "?") + " ok=" + mapped.ok);
+  if (mapped.ok) {
+    return makeNvGamingResult("Success", "Profil 3D (.nip) importé");
+  }
+  return makeNvGamingResult("Failed", mapped.status || "Import .nip échoué");
+}
+
+function runNvGamingDisplayApply() {
+  if (nvGamingDisplayCache) return nvGamingDisplayCache;
+  createUnrealFolders();
+  var helperPath = getNvidiaDisplayHelperPath();
+  var fso = getFso();
+  var payload = null;
+
+  if (helperPath && fileExists(helperPath)) {
+    var stdoutPath = UNREAL_LOGS + "\\nvidia-gaming-display-stdout.json";
+    var psPath = UNREAL_LOGS + "\\nvidia-gaming-display-run.ps1";
+    var escHelper = String(helperPath).replace(/'/g, "''");
+    var escOut = String(stdoutPath).replace(/'/g, "''");
+    var psLines = [
+      "$ErrorActionPreference = 'Continue'",
+      "$Helper = '" + escHelper + "'",
+      "$StdoutPath = '" + escOut + "'",
+      "$psi = New-Object System.Diagnostics.ProcessStartInfo",
+      "$psi.FileName = $Helper",
+      "$psi.Arguments = '--apply-full --json'",
+      "$psi.WorkingDirectory = (Split-Path -Parent $Helper)",
+      "$psi.WindowStyle = [System.Diagnostics.ProcessWindowStyle]::Hidden",
+      "$psi.CreateNoWindow = $true",
+      "$psi.UseShellExecute = $false",
+      "$psi.RedirectStandardOutput = $true",
+      "$p = [System.Diagnostics.Process]::Start($psi)",
+      "if ($p) {",
+      "  $stdout = $p.StandardOutput.ReadToEnd()",
+      "  if (-not $p.WaitForExit(120000)) { try { $p.Kill() } catch {}; exit 124 }",
+      "  else { if ($stdout) { [System.IO.File]::WriteAllText($StdoutPath, $stdout, [System.Text.UTF8Encoding]::new($false)) }; exit $p.ExitCode }",
+      "}",
+      "exit 18"
+    ];
+    var tw = fso.CreateTextFile(psPath, true);
+    tw.Write(psLines.join("\r\n"));
+    tw.Close();
+    appendNvGamingLogLine("DISPLAY=helper " + helperPath);
+    runPowerShell("-ExecutionPolicy Bypass -File \"" + psPath + "\"");
+    try {
+      if (fso.FileExists(stdoutPath)) {
+        var raw = readTextFileAll(stdoutPath);
+        if (raw && raw.charCodeAt(0) === 0xFEFF) raw = raw.substring(1);
+        if (raw) payload = JSON.parse(raw);
+        fso.DeleteFile(stdoutPath, true);
+      }
+    } catch (eP) {
+      appendNvGamingLogLine("DISPLAY_PARSE_ERROR=" + String(eP.message || eP));
+    }
+    try { fso.DeleteFile(psPath, true); } catch (eD) {}
+  }
+
+  if (!payload) {
+    var resultPath = UNREAL_LOGS + "\\nvidia-gaming-display-result.json";
+    var psDisplay = UNREAL_SCRIPTS + "\\apply-nvidia-display-profile.ps1";
+    if (!fileExists(psDisplay)) {
+      nvGamingDisplayCache = { ok: false, resolution: "", refresh: "", verified: false };
+      return nvGamingDisplayCache;
+    }
+    var escPs = String(psDisplay).replace(/'/g, "''");
+    var escRes = String(resultPath).replace(/'/g, "''");
+    var escLog = String(getNvGamingLogPath()).replace(/'/g, "''");
+    var runner = UNREAL_LOGS + "\\nvidia-gaming-display-ps.ps1";
+    var rLines = [
+      "& '" + escPs + "' -LogPath '" + escLog + "' -ResultPath '" + escRes + "'",
+      "exit $LASTEXITCODE"
+    ];
+    var tr = fso.CreateTextFile(runner, true);
+    tr.Write(rLines.join("\r\n"));
+    tr.Close();
+    appendNvGamingLogLine("DISPLAY=ps1 fallback");
+    runPowerShell("-ExecutionPolicy Bypass -File \"" + runner + "\"");
+    try {
+      if (fso.FileExists(resultPath)) {
+        var json = readTextFileAll(resultPath);
+        if (json) {
+          var parsed = JSON.parse(json);
+          if (parsed && parsed.resolution) {
+            payload = {
+              displayMode: {
+                applied: parsed.globalResult === "ok",
+                verified: parsed.resolution.verified === true,
+                resolution: parsed.resolution.targetResolution || parsed.resolution.activeResolution || "",
+                refreshRate: (parsed.resolution.targetRefresh || parsed.resolution.activeRefresh || "") + "Hz"
+              }
+            };
+          }
+        }
+        fso.DeleteFile(resultPath, true);
+      }
+    } catch (eP2) {}
+    try { fso.DeleteFile(runner, true); } catch (eD2) {}
+  }
+
+  var dm = payload && payload.displayMode ? payload.displayMode : {};
+  var res = dm.resolution || "";
+  var hz = dm.refreshRate || "";
+  if (hz && hz.indexOf("Hz") < 0) hz = hz + "Hz";
+  var verified = dm.applied === true && dm.verified === true;
+  nvGamingDisplayCache = { ok: verified, resolution: res, refresh: hz, verified: verified, raw: dm };
+  appendNvGamingLogLine("DISPLAY_RESULT verified=" + verified + " res=" + res + " hz=" + hz);
+  return nvGamingDisplayCache;
+}
+
+function ApplyMaxResolution() {
+  appendNvGamingLogLine("STEP=ApplyMaxResolution");
+  var d = runNvGamingDisplayApply();
+  if (!d || !d.resolution) {
+    return makeNvGamingResult("Failed", "Résolution maximale non appliquée ou non vérifiable");
+  }
+  if (d.verified) {
+    return makeNvGamingResult("Success", "Résolution " + d.resolution);
+  }
+  if (d.resolution) {
+    return makeNvGamingResult("Failed", "Résolution " + d.resolution + " (non vérifiée)");
+  }
+  return makeNvGamingResult("Failed", "Impossible d'appliquer la résolution maximale");
+}
+
+function ApplyMaxRefreshRate() {
+  appendNvGamingLogLine("STEP=ApplyMaxRefreshRate");
+  var d = runNvGamingDisplayApply();
+  if (!d || !d.refresh) {
+    return makeNvGamingResult("Failed", "Fréquence maximale non appliquée ou non vérifiable");
+  }
+  if (d.verified) {
+    return makeNvGamingResult("Success", "Fréquence " + d.refresh);
+  }
+  if (d.refresh) {
+    return makeNvGamingResult("Failed", "Fréquence " + d.refresh + " (non vérifiée)");
+  }
+  return makeNvGamingResult("Failed", "Impossible d'appliquer la fréquence maximale");
+}
+
+/* --- V2 : stubs (pas d'ancienne automatisation panneau) --- */
+function ApplyDigitalVibrance() {
+  return makeNvGamingResult("Skipped", "V2 : éclat numérique — non implémenté");
+}
+
+function ApplyGsyncOff() {
+  return makeNvGamingResult("Skipped", "V2 : désactivation G-Sync/VRR — non implémenté");
+}
+
+function ApplyNoScaling() {
+  return makeNvGamingResult("Skipped", "V2 : pas de mise à l'échelle — non implémenté");
+}
+
+function VerifyNvidiaSettings() {
+  return makeNvGamingResult("Skipped", "V2 : vérification globale — non implémenté");
+}
+
+function applyNvidiaGamingOptimizationFromUi() {
+  nvGamingDisplayCache = null;
+  setNvGamingStatus("Application en cours…", "progress");
+  var btn = $("btnApplyNvidiaGaming");
+  if (btn) btn.disabled = true;
+  window.setTimeout(function () {
+    try { applyNvidiaGamingOptimizationImpl(); } catch (eTop) {
+      appendNvGamingLogLine("EXCEPTION=" + String(eTop.message || eTop));
+      setNvGamingStatus("Erreur interne", "bad");
+    }
+    if (btn) btn.disabled = false;
+  }, 30);
+}
+
+function applyNvidiaGamingOptimizationImpl() {
+  appendNvGamingLogLine("DATE=" + new Date().toISOString());
+  appendNvGamingLogLine("ACTION=apply_nvidia_gaming_base");
+
+  var rNip = ApplyNipProfile();
+  var rRes = ApplyMaxResolution();
+  var rHz = ApplyMaxRefreshRate();
+
+  var failed = [];
+  if (rNip.status === "Failed") failed.push("NIP");
+  if (rRes.status === "Failed") failed.push("résolution");
+  if (rHz.status === "Failed") failed.push("fréquence");
+
+  if (failed.length === 0 && rNip.status === "Success" && rRes.status === "Success" && rHz.status === "Success") {
+    setNvGamingStatus(
+      "Base Nvidia appliquée : profil NIP, résolution maximale et fréquence maximale.",
+      "ok"
+    );
+    appendNvGamingLogLine("RESULT=ok");
+    return;
+  }
+
+  if (failed.length > 0) {
+    setNvGamingStatus("Échec partiel : " + failed.join(", "), "bad");
+    appendNvGamingLogLine("RESULT=partial_fail " + failed.join(","));
+    return;
+  }
+
+  setNvGamingStatus(
+    "Base Nvidia appliquée : profil NIP, résolution maximale et fréquence maximale.",
+    "ok"
+  );
+  appendNvGamingLogLine("RESULT=ok_with_skipped");
+}
+
+function applyNvidiaPanelProfile() {
+  applyNvidiaGamingOptimizationFromUi();
+}

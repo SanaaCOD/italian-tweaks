@@ -1,0 +1,17 @@
+{
+    "Optimized":  true,
+    "Vid":  "054C",
+    "Success":  true,
+    "ResponseTimeMs":  0.125,
+    "HidusbfFilterPresent":  true,
+    "ConfirmedRate":  8000,
+    "Badge":  "OPTIMISE",
+    "UsbParentDeviceId":  "USB\\VID_054C\u0026PID_0CE6\\5\u002630741cdd\u00260\u00264",
+    "Verified":  true,
+    "ConfiguredRate":  8000,
+    "PatchUSBXHCI":  3,
+    "Status":  "Optimized8000",
+    "Message":  "Boost 8000 Hz detecte",
+    "DeviceBadge":  "PS5 DUALSENSE",
+    "Pid":  "0CE6"
+}

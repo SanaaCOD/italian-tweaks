@@ -1,0 +1,40 @@
+=== Composants à cocher dans NVCleanInstall ===
+[x] Display Driver
+[x] PhysX
+[x] NVIDIA DLSS
+[ ] Legacy Control Panel
+[ ] HD Audio via HDMI
+[ ] Microsoft Visual C++ 2017 Runtimes
+[ ] USB-C Driver
+[ ] FrameView SDK
+[ ] Quadro View / VR
+[ ] Virtual Audio
+[ ] Telemetry
+[ ] NV Platform Controllers
+[ ] NVIDIA App
+[ ] NV Container
+[ ] ShadowPlay
+[ ] NV Backend
+[ ] NVIDIA App MessageBus
+
+=== Installation Tweaks ===
+[x] Disable Installer Telemetry & Advertising
+[ ] Unattended Express Installation
+[x] Perform a Clean Installation
+[ ] Add Hardware Support
+[ ] Enable DLSS Indicator
+[x] Disable Multiplane Overlay (MPO)
+[x] Disable Ansel
+[x] Show Expert Tweaks
+[x] Disable Driver Telemetry (Experimental)
+[ ] Disable NVIDIA Container (Experimental)
+[ ] Disable NVIDIA HD Audio device sleep timer
+[x] Enable Message Signaled Interrupts (MSI)
+[=] Interrupt Policy : Default
+[=] Interrupt Priority : Default
+[x] Disable HDCP
+[ ] Apply NVENC session limit patch
+[ ] Start external application
+[x] Rebuild digital signature
+[x] Use method compatible with Easy-Anti-Cheat
+[x] Automatically accept driver unsigned warning

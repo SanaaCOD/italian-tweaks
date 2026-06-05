@@ -1,0 +1,22 @@
+﻿DATE=2026-05-24 00:01:12
+SCOPE=EnumWindows top-level visible only
+COUNT=19
+HWND=399082 | title_raw='' | title_normalized='' | className='ThumbnailDeviceHelperWnd' | process='explorer' | pid=10664 | rect=L0,T0,R1,B1 | visible=True | enabled=True
+HWND=132074 | title_raw='' | title_normalized='' | className='Shell_TrayWnd' | process='explorer' | pid=10664 | rect=L0,T1392,R2560,B1440 | visible=True | enabled=True
+HWND=1901120 | title_raw='NVCleanstall' | title_normalized='nvcleanstall' | className='HwndWrapper[setup.exe;;6d4398e0-6d8f-4d6f-b8e2-4e225fb3cfc7]' | process='setup' | pid=4476 | rect=L0,T0,R330,B31 | visible=True | enabled=True
+HWND=530148 | title_raw='Administrateur : Windows PowerShell' | title_normalized='administrateur : windows powershell' | className='ConsoleWindowClass' | process='powershell' | pid=4040 | rect=L52,T52,R1045,B571 | visible=True | enabled=True
+HWND=5183254 | title_raw='Programme d'installation NVIDIA' | title_normalized='programme dinstallation nvidia' | className='NVISetupFrame' | process='setup' | pid=4648 | rect=L1333,T246,R1941,B697 | visible=True | enabled=True
+HWND=268374 | title_raw='UNREAL Gaming Optimizer' | title_normalized='unreal gaming optimizer' | className='HTML Application Host Window Class' | process='mshta' | pid=11012 | rect=L-32000,T-32000,R-31840,B-31972 | visible=True | enabled=True
+HWND=268144 | title_raw='' | title_normalized='' | className='NarratorHelperWindow' | process='svchost' | pid=2116 | rect=L-32000,T-32000,R-31984,B-31984 | visible=True | enabled=True
+HWND=2103298 | title_raw='NVCleanstall v1.19.0' | title_normalized='nvcleanstall v1.19.0' | className='HwndWrapper[NVCleanstall.exe;;ba2ea64c-6219-4a9b-8e36-d40953702bbe]' | process='NVCleanstall' | pid=5796 | rect=L100,T100,R676,B779 | visible=True | enabled=True
+HWND=131468 | title_raw='' | title_normalized='' | className='EdgeUiInputTopWndClass' | process='explorer' | pid=10664 | rect=L15,T0,R2560,B4 | visible=True | enabled=True
+HWND=131584 | title_raw='' | title_normalized='' | className='DummyDWMListenerWindow' | process='explorer' | pid=10664 | rect=L0,T0,R0,B0 | visible=True | enabled=True
+HWND=196732 | title_raw='' | title_normalized='' | className='DummyDWMListenerWindow' | process='explorer' | pid=10664 | rect=L0,T0,R0,B0 | visible=True | enabled=True
+HWND=131650 | title_raw='' | title_normalized='' | className='DummyDWMListenerWindow' | process='explorer' | pid=10664 | rect=L0,T0,R0,B0 | visible=True | enabled=True
+HWND=196742 | title_raw='' | title_normalized='' | className='DummyDWMListenerWindow' | process='explorer' | pid=10664 | rect=L0,T0,R0,B0 | visible=True | enabled=True
+HWND=131604 | title_raw='' | title_normalized='' | className='DummyDWMListenerWindow' | process='explorer' | pid=10664 | rect=L0,T0,R0,B0 | visible=True | enabled=True
+HWND=464984 | title_raw='' | title_normalized='' | className='Internet Explorer_Hidden' | process='mshta' | pid=11012 | rect=L0,T0,R0,B0 | visible=True | enabled=True
+HWND=262602 | title_raw='' | title_normalized='' | className='Internet Explorer_Hidden' | process='setup' | pid=4648 | rect=L0,T0,R0,B0 | visible=True | enabled=True
+HWND=268076 | title_raw='Cursor Agents' | title_normalized='cursor agents' | className='Chrome_WidgetWin_1' | process='Cursor' | pid=5196 | rect=L-32000,T-32000,R-31840,B-31972 | visible=True | enabled=True
+HWND=857936 | title_raw='Audit clics souris - Google Chrome' | title_normalized='audit clics souris - google chrome' | className='Chrome_WidgetWin_1' | process='chrome' | pid=9928 | rect=L-32000,T-32000,R-31840,B-31972 | visible=True | enabled=True
+HWND=196652 | title_raw='Program Manager' | title_normalized='program manager' | className='Progman' | process='explorer' | pid=10664 | rect=L0,T0,R2560,B1440 | visible=True | enabled=True
