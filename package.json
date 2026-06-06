@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "kojo",
   "productName": "Kojo",
   "version": "1.0.17",
@@ -9,7 +9,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/SanaaCOD/italian-tweaks.git"
+    "url": "https://github.com/SanaaCOD/kojo.git"
   },
   "scripts": {
     "dev": "electron .",
@@ -87,7 +87,7 @@
       {
         "provider": "github",
         "owner": "SanaaCOD",
-        "repo": "italian-tweaks"
+        "repo": "kojo"
       }
     ],
     "artifactName": "KOJO-Setup-${version}.${ext}"

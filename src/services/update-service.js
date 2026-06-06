@@ -1,11 +1,11 @@
-const { app } = require('electron');
+﻿const { app } = require('electron');
 const fs = require('fs');
 const path = require('path');
 const { autoUpdater } = require('electron-updater');
 const { getLogsDir } = require('./paths');
 
 const GITHUB_RELEASES_LATEST =
-  'https://api.github.com/repos/SanaaCOD/italian-tweaks/releases/latest';
+  'https://api.github.com/repos/SanaaCOD/kojo/releases/latest';
 
 let getMainWindow = () => null;
 let initialized = false;
@@ -13,7 +13,7 @@ let initialized = false;
 let lastPayload = {
   ok: true,
   status: 'idle',
-  message: 'Prêt',
+  message: 'PrÃªt',
   data: { currentVersion: app.getVersion(), updateMode: 'dev' }
 };
 
@@ -130,7 +130,7 @@ async function checkGitHubReleaseReadOnly() {
         ok: false,
         privateRepo: true,
         message:
-          'Repo privé — update réel nécessitera une release accessible ou un token'
+          'Repo privÃ© â€” update rÃ©el nÃ©cessitera une release accessible ou un token'
       };
     }
 
@@ -144,7 +144,7 @@ async function checkGitHubReleaseReadOnly() {
 
     const data = await res.json();
     const tagName = data?.tag_name || '';
-    const remoteDisplay = tagName || data?.name || '—';
+    const remoteDisplay = tagName || data?.name || 'â€”';
     const remoteVer = tagName.replace(/^v/i, '');
     const newer = compareVersions(remoteVer, currentVersion) > 0;
 
@@ -155,7 +155,7 @@ async function checkGitHubReleaseReadOnly() {
       tagName: remoteDisplay,
       remoteVersion: remoteDisplay,
       newer,
-      message: `Dernière release GitHub : ${remoteDisplay}`
+      message: `DerniÃ¨re release GitHub : ${remoteDisplay}`
     };
   } catch (err) {
     const msg = err?.message || String(err);
@@ -167,7 +167,7 @@ async function checkGitHubReleaseReadOnly() {
 function localBuildCheckPayload(githubResult) {
   const missingYml = !hasAppUpdateYml();
   const base =
-    'Mode test local — installe la version Setup pour tester les mises à jour réelles';
+    'Mode test local â€” installe la version Setup pour tester les mises Ã  jour rÃ©elles';
 
   if (githubResult?.privateRepo) {
     return makePayload({
@@ -183,9 +183,9 @@ function localBuildCheckPayload(githubResult) {
   }
 
   if (githubResult?.ok && githubResult.remoteVersion) {
-    const ghLine = githubResult.message || `Dernière release GitHub : ${githubResult.remoteVersion}`;
+    const ghLine = githubResult.message || `DerniÃ¨re release GitHub : ${githubResult.remoteVersion}`;
     const newerHint = githubResult.newer
-      ? ' (version plus récente que la vôtre)'
+      ? ' (version plus rÃ©cente que la vÃ´tre)'
       : '';
     return makePayload({
       ok: githubResult.newer,
@@ -202,7 +202,7 @@ function localBuildCheckPayload(githubResult) {
   }
 
   const fallbackMsg = missingYml
-    ? 'Mode test local — update réel disponible seulement avec l’application installée'
+    ? 'Mode test local â€” update rÃ©el disponible seulement avec lâ€™application installÃ©e'
     : base;
 
   return makePayload({
@@ -229,7 +229,7 @@ function initUpdateService(mainWindowGetter) {
   lastPayload = makePayload({
     ok: true,
     status: 'idle',
-    message: 'Prêt',
+    message: 'PrÃªt',
     data: { currentVersion: app.getVersion() }
   });
 
@@ -238,12 +238,12 @@ function initUpdateService(mainWindowGetter) {
   autoUpdater.allowDowngrade = false;
 
   if (mode !== 'installed') {
-    writeLog(`init ${mode} — autoUpdater disabled (no app-update.yml or dev)`);
+    writeLog(`init ${mode} â€” autoUpdater disabled (no app-update.yml or dev)`);
     return;
   }
 
   autoUpdater.on('checking-for-update', () => {
-    broadcast({ ok: true, status: 'checking', message: 'Vérification des mises à jour…' });
+    broadcast({ ok: true, status: 'checking', message: 'VÃ©rification des mises Ã  jourâ€¦' });
   });
 
   autoUpdater.on('update-available', (info) => {
@@ -267,7 +267,7 @@ function initUpdateService(mainWindowGetter) {
     const payload = makePayload({
       ok: true,
       status: 'not_available',
-      message: 'Application à jour',
+      message: 'Application Ã  jour',
       data: { remoteVersion: info?.version || app.getVersion() }
     });
     broadcast(payload);
@@ -280,7 +280,7 @@ function initUpdateService(mainWindowGetter) {
     broadcast({
       ok: true,
       status: 'downloading',
-      message: `Téléchargement… ${percent}%`,
+      message: `TÃ©lÃ©chargementâ€¦ ${percent}%`,
       data: {
         percent,
         transferred: progress?.transferred,
@@ -295,7 +295,7 @@ function initUpdateService(mainWindowGetter) {
     const payload = makePayload({
       ok: true,
       status: 'downloaded',
-      message: `Mise à jour ${ver} prête à installer`,
+      message: `Mise Ã  jour ${ver} prÃªte Ã  installer`,
       data: { version: ver, percent: 100 }
     });
     broadcast(payload);
@@ -328,7 +328,7 @@ function initUpdateService(mainWindowGetter) {
     clearWaiter('download');
   });
 
-  writeLog('init installed — autoUpdater ready (Kojo)');
+  writeLog('init installed â€” autoUpdater ready (Kojo)');
 }
 
 function getStatus() {
@@ -347,7 +347,7 @@ async function checkForUpdates() {
     const payload = makePayload({
       ok: true,
       status: 'not_available',
-      message: 'Mode dev — update réel indisponible',
+      message: 'Mode dev â€” update rÃ©el indisponible',
       data: { devMode: true, packaged: false }
     });
     broadcast(payload);
@@ -358,7 +358,7 @@ async function checkForUpdates() {
     broadcast({
       ok: true,
       status: 'checking',
-      message: 'Vérification GitHub (lecture seule)…'
+      message: 'VÃ©rification GitHub (lecture seule)â€¦'
     });
     const github = await checkGitHubReleaseReadOnly();
     const payload = localBuildCheckPayload(github);
@@ -377,7 +377,7 @@ async function checkForUpdates() {
     return makePayload({
       ok: false,
       status: 'checking',
-      message: 'Vérification déjà en cours…'
+      message: 'VÃ©rification dÃ©jÃ  en coursâ€¦'
     });
   }
 
@@ -387,7 +387,7 @@ async function checkForUpdates() {
       const payload = makePayload({
         ok: false,
         status: 'error',
-        message: 'Délai dépassé lors de la vérification GitHub'
+        message: 'DÃ©lai dÃ©passÃ© lors de la vÃ©rification GitHub'
       });
       broadcast(payload);
       checkWaiter = null;
@@ -434,7 +434,7 @@ async function downloadUpdate() {
     return makePayload({
       ok: false,
       status: 'error',
-      message: 'Mode dev — update réel indisponible'
+      message: 'Mode dev â€” update rÃ©el indisponible'
     });
   }
 
@@ -443,7 +443,7 @@ async function downloadUpdate() {
       ok: false,
       status: 'local_build',
       message:
-        'Mode test local — téléchargement indisponible (installez via Setup NSIS)'
+        'Mode test local â€” tÃ©lÃ©chargement indisponible (installez via Setup NSIS)'
     });
   }
 
@@ -451,7 +451,7 @@ async function downloadUpdate() {
     return makePayload({
       ok: false,
       status: 'error',
-      message: 'Aucune mise à jour disponible — cliquez d’abord sur Check update'
+      message: 'Aucune mise Ã  jour disponible â€” cliquez dâ€™abord sur Check update'
     });
   }
 
@@ -459,7 +459,7 @@ async function downloadUpdate() {
     return makePayload({
       ok: false,
       status: 'downloading',
-      message: 'Téléchargement déjà en cours…'
+      message: 'TÃ©lÃ©chargement dÃ©jÃ  en coursâ€¦'
     });
   }
 
@@ -469,7 +469,7 @@ async function downloadUpdate() {
       const payload = makePayload({
         ok: false,
         status: 'error',
-        message: 'Délai dépassé lors du téléchargement'
+        message: 'DÃ©lai dÃ©passÃ© lors du tÃ©lÃ©chargement'
       });
       broadcast(payload);
       downloadWaiter = null;
@@ -484,7 +484,7 @@ async function downloadUpdate() {
     };
 
     writeLog('downloadUpdate start');
-    broadcast({ ok: true, status: 'downloading', message: 'Téléchargement… 0%', data: { percent: 0 } });
+    broadcast({ ok: true, status: 'downloading', message: 'TÃ©lÃ©chargementâ€¦ 0%', data: { percent: 0 } });
 
     autoUpdater.downloadUpdate().catch((err) => {
       clearTimeout(timeout);
@@ -508,7 +508,7 @@ function quitAndInstall() {
     return makePayload({
       ok: false,
       status: 'error',
-      message: 'Mode dev — update réel indisponible'
+      message: 'Mode dev â€” update rÃ©el indisponible'
     });
   }
 
@@ -517,7 +517,7 @@ function quitAndInstall() {
       ok: false,
       status: 'local_build',
       message:
-        'Mode test local — installation indisponible (installez via Setup NSIS)'
+        'Mode test local â€” installation indisponible (installez via Setup NSIS)'
     });
   }
 
@@ -525,7 +525,7 @@ function quitAndInstall() {
     return makePayload({
       ok: false,
       status: 'error',
-      message: 'Téléchargez la mise à jour avant d’installer'
+      message: 'TÃ©lÃ©chargez la mise Ã  jour avant dâ€™installer'
     });
   }
 
@@ -537,7 +537,7 @@ function quitAndInstall() {
   return makePayload({
     ok: true,
     status: 'downloaded',
-    message: 'Redémarrage pour installer la mise à jour…',
+    message: 'RedÃ©marrage pour installer la mise Ã  jourâ€¦',
     data: { installing: true }
   });
 }
@@ -551,3 +551,4 @@ module.exports = {
   downloadUpdate,
   quitAndInstall
 };
+
