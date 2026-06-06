@@ -1,29 +1,26 @@
-# legacy-import — PurpleBoost / Unreal
+# legacy-import — scripts historiques
 
-**Source :** `C:\Users\Sanaa\Desktop\PurpleBoost_FULL_BACKUP_20260603_200134`  
+**Source :** backup PurpleBoost (2026-06)  
 **Ne pas modifier** l’ancienne app. Importer uniquement des scripts **déjà testés** dans `scripts/lib/` ou remplacer les stubs dans `scripts/<domain>/`.
 
-## Déjà intégré (via `scripts/lib/`)
+## Déjà intégré (via `scripts/lib/` ou `scripts/optimizations/`)
 
-| PurpleBoost | ITALIAN TWEAKS | Remplacer stub ? |
-|-------------|----------------|------------------|
-| `Scripts/Devices/*.ps1` | `controllers/Get-Controllers.ps1` appelle lib | Non — logique active |
-| `Get-NvidiaDriverStatus.ps1` | `drivers/Get-NvidiaStatus.ps1` | Non |
-| `Optimisation/Debloat/*.ps1` | `optimizations/Apply-Debloat.ps1` | Non |
-| `Optimisation/ModeJeu/*.ps1` | `optimizations/Apply-GameMode.ps1` | Non |
-| `Optimisation/GestionAlimentation/*.ps1` | `optimizations/Apply-PowerPlan.ps1` | Non |
-| `assets/Warzone/*` | `games/Apply-WarzoneProfile.ps1` | Non |
+| Source | Destination Kojo | État |
+|--------|------------------|------|
+| Devices / HIDUSBF | `controller-oc.js` + `resources/hidusbf` | actif |
+| `Get-NvidiaDriverStatus.ps1` | `drivers/Get-NvidiaStatus.ps1` | actif |
+| Debloat / Mode Jeu / Alimentation | `optimizations/debloat`, `mode-jeu`, `gestion-alimentation` | actif |
+| Warzone assets | `assets/game/warzone/` | actif |
 
 ## À importer plus tard (fragile ou UI auto)
 
-| PurpleBoost | Cible ITALIAN TWEAKS |
-|-------------|---------------------|
-| `nvcleaninstall-auto-uia.ps1` | `drivers/Run-NVCleanInstall.ps1` (remplacer stub par votre automation) |
-| `NVIDIA-PS1/*.ps1` | `drivers/Apply-NvidiaOptimization.ps1` |
-| `ddu-auto-clean.ahk` | `drivers/Run-DDU.ps1` |
-| `Unreal.hta` (logique réseau/jeu) | Déjà recréé en scripts clairs |
+| Source | Cible Kojo |
+|--------|------------|
+| nvcleaninstall automation | `drivers/Run-NVCleanInstall.ps1` |
+| NVIDIA panel scripts | `drivers/Apply-NvidiaOptimization.ps1` |
+| DDU automation | `drivers/Run-DDU.ps1` |
 
-## Stubs = équivalent TUNEDPC `.ps1.enc`
+## Stubs
 
-Tous les fichiers `scripts/games/Apply-*Settings.ps1` et la majorité des `optimizations/*` / `drivers/*` stubs correspondent aux noms TUNEDPC listés dans `docs/TUNEDPC-FEATURE-MATRIX.md`.  
+Les fichiers `scripts/games/Apply-*Settings.ps1` et une partie de `optimizations/*` / `drivers/*` sont des placeholders.  
 **Remplacez le corps du .ps1** — l’UI et l’IPC ne changent pas.

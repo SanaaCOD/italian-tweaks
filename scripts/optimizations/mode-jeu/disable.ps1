@@ -1,4 +1,4 @@
-﻿# PurpleBoost / Kojo - DISABLE Mode Jeu
+﻿# Kojo — DISABLE Mode Jeu
 # Desactive :
 # 1. Mode Jeu Windows
 # 2. Optimisation pour les jeux en mode fenetre / borderless

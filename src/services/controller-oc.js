@@ -1,5 +1,5 @@
 /**
- * TunedPC Controller Overclocker — scripts décryptés depuis TunedPC-Setup (Apply / Detect).
+ * Controller Overclocker Kojo — HIDUSBF + scripts Apply / Detect.
  * Chemins : resources/scripts/*.ps1, resources/hidusbf
  */
 const fs = require('fs');

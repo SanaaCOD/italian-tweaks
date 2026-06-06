@@ -328,7 +328,7 @@ function initUpdateService(mainWindowGetter) {
     clearWaiter('download');
   });
 
-  writeLog('init installed — autoUpdater ready (Kojo / github SanaaCOD/italian-tweaks)');
+  writeLog('init installed — autoUpdater ready (Kojo)');
 }
 
 function getStatus() {

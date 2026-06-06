@@ -106,7 +106,7 @@ function startStatsRefresh() {
   const tick = async () => {
     if (currentPage !== 'accueil') return;
     try {
-      const stats = await window.italianTweaks.system.getStats({ full: false });
+      const stats = await (window.kojo || window.italianTweaks).system.getStats({ full: false });
       if (mainContent.querySelector('.page-accueil')) {
         ItPages.updateAccueilStats(mainContent, stats);
       }

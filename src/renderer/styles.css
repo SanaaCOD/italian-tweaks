@@ -1171,7 +1171,7 @@ button {
   transition: width 0.2s ease;
 }
 
-/* Connexion — workflow PurpleBoost, thème Kojo */
+/* Connexion — workflow réseau Kojo */
 .connexion-page {
   max-width: var(--content-max);
   margin-top: 1rem;

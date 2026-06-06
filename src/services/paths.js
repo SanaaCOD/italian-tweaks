@@ -10,7 +10,7 @@ function getBundledContentRoot() {
   return process.resourcesPath;
 }
 
-/** Scripts PowerShell : uniquement resources/scripts (TunedPC). */
+/** Scripts PowerShell : resources/scripts (build) ou scripts/ (dev). */
 function getScriptsDir() {
   if (!app.isPackaged) {
     return path.join(__dirname, '..', '..', 'scripts');
@@ -18,7 +18,7 @@ function getScriptsDir() {
   return path.join(process.resourcesPath, 'scripts');
 }
 
-/** HIDUSBF bundle (TunedPC: resources/hidusbf uniquement). */
+/** HIDUSBF bundle (resources/hidusbf). */
 function getHidusbfDriverDir() {
   if (app.isPackaged) {
     return path.join(process.resourcesPath, 'hidusbf');

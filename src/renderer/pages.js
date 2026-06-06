@@ -1,5 +1,8 @@
 /* Pages Kojo — chaque bouton → IPC → script .ps1 */
 window.ItPages = {
+  _api() {
+    return window.kojo || window.italianTweaks;
+  },
   /** Lit data.cpu / data.gpu / data.ram (objet .usage ou nombre) */
   _normalizeAccueilStats(r) {
     const raw = r?.data ?? r ?? {};
@@ -169,21 +172,21 @@ window.ItPages = {
           ${this._hw('ram', 'RAM', 'USAGE', applied.ram, [s.ramMeta.modules, s.ramMeta.speed, `XMP: ${s.ramMeta.xmp || 'N/D'}`].filter(Boolean).join('\n'))}
         </div>
         <div class="card-grid page-actions">
-          ${ItUi.actionCard({ title: 'Restaurer défauts', text: 'Équivalent RESTORE_DEFAULTS.ps1.enc', script: 'system/Restore-Defaults.ps1', actions: [{ id: 'restore-def', label: 'Exécuter', primary: true }] })}
-          ${ItUi.actionCard({ title: 'Tout annuler', text: 'Équivalent REVERT_ALL.ps1.enc', script: 'system/Revert-All.ps1', actions: [{ id: 'revert-all', label: 'Exécuter', primary: true }] })}
+          ${ItUi.actionCard({ title: 'Restaurer défauts', text: 'Restaure les réglages système par défaut.', script: 'system/Restore-Defaults.ps1', actions: [{ id: 'restore-def', label: 'Exécuter', primary: true }] })}
+          ${ItUi.actionCard({ title: 'Tout annuler', text: 'Annule les modifications Kojo en une passe.', script: 'system/Revert-All.ps1', actions: [{ id: 'revert-all', label: 'Exécuter', primary: true }] })}
         </div>
       </div>`;
     const grid = main.querySelector('.page-actions');
     ItApi.bindPage(grid, {
-      'restore-def': () => window.italianTweaks.system.restoreDefaults(),
-      'revert-all': () => window.italianTweaks.system.revertAll()
+      'restore-def': () => ItPages._api().system.restoreDefaults(),
+      'revert-all': () => ItPages._api().system.revertAll()
     });
 
     if (!r) {
       this._fetchInBackground(
         pageId,
         main,
-        () => window.italianTweaks.system.getStats({ full: true }),
+        () => ItPages._api().system.getStats({ full: true }),
         (payload) => {
           ItPageCache.set(pageId, payload);
           this.updateAccueilStats(main, payload);
@@ -299,11 +302,11 @@ window.ItPages = {
   },
 
   async _enumeratePeripheriquesFresh() {
-    return window.italianTweaks.controllerOc.enumerate();
+    return ItPages._api().controllerOc.enumerate();
   },
 
   async _ensureControllerOcAdmin() {
-    const elevated = await window.italianTweaks.controllerOc.isElevated();
+    const elevated = await ItPages._api().controllerOc.isElevated();
     if (elevated) return null;
     return {
       ok: false,
@@ -544,7 +547,7 @@ window.ItPages = {
         return ItApi.run(async () => {
           const denied = await this._ensureControllerOcAdmin();
           if (denied) return denied;
-          const result = await window.italianTweaks.controllerOc.applyOverclock(c.instanceId, parentId, hz);
+          const result = await ItPages._api().controllerOc.applyOverclock(c.instanceId, parentId, hz);
           const scan = await this._enumeratePeripheriquesFresh();
           this._applyPeripheriquesData(main, scan);
           return result;
@@ -562,7 +565,7 @@ window.ItPages = {
         return ItApi.run(async () => {
           const denied = await this._ensureControllerOcAdmin();
           if (denied) return denied;
-          const result = await window.italianTweaks.controllerOc.removeOverclock(c.instanceId, parentId);
+          const result = await ItPages._api().controllerOc.removeOverclock(c.instanceId, parentId);
           if (result?.controllers?.length || result?.devices?.length) {
             this._applyPeripheriquesData(main, result);
           }
@@ -669,14 +672,14 @@ window.ItPages = {
     if (!grid) return;
     ItApi.bindPage(grid, {
       refresh: () => this.renderDrivers(main),
-      ddu: () => window.italianTweaks.drivers.runDdu(),
-      nvc: () => window.italianTweaks.drivers.runNvclean(),
-      inst: () => window.italianTweaks.drivers.installLatest(),
-      opt: () => window.italianTweaks.drivers.applyOptimization(),
-      sq: () => window.italianTweaks.drivers.applySqEngine(),
-      guide: () => window.italianTweaks.drivers.nvidiaGuide(),
-      oc: () => window.italianTweaks.drivers.gpuOverclock(),
-      nip: () => window.italianTweaks.drivers.openNip()
+      ddu: () => ItPages._api().drivers.runDdu(),
+      nvc: () => ItPages._api().drivers.runNvclean(),
+      inst: () => ItPages._api().drivers.installLatest(),
+      opt: () => ItPages._api().drivers.applyOptimization(),
+      sq: () => ItPages._api().drivers.applySqEngine(),
+      guide: () => ItPages._api().drivers.nvidiaGuide(),
+      oc: () => ItPages._api().drivers.gpuOverclock(),
+      nip: () => ItPages._api().drivers.openNip()
     });
   },
 
@@ -714,7 +717,7 @@ window.ItPages = {
     this._fetchInBackground(
       pageId,
       main,
-      () => window.italianTweaks.drivers.getNvidiaStatus(),
+      () => ItPages._api().drivers.getNvidiaStatus(),
       (payload) => this._applyDriversNvidia(main, payload),
       () => {
         ItPageLoader.setCardStatus(main, 'nvidia-status', 'Vérification en arrière-plan', 'warn');
@@ -757,7 +760,7 @@ window.ItPages = {
   },
 
   _refreshConnexionStatus(main) {
-    return window.italianTweaks.network.status().then((payload) => {
+    return ItPages._api().network.status().then((payload) => {
       this._applyConnexionStatus(main, payload?.data || {});
       return payload;
     }).catch(() => null);
@@ -882,26 +885,26 @@ window.ItPages = {
     );
     ItUi.bindActions(root, {
       game: async (btn) => {
-        const r = await ItApi.run(() => window.italianTweaks.network.gaming(), btn);
+        const r = await ItApi.run(() => ItPages._api().network.gaming(), btn);
         if (r?.ok) {
           this._applyConnProfileActive(main, r.data?.activeProfile || 'gaming');
           refresh();
         }
       },
       dl: async (btn) => {
-        const r = await ItApi.run(() => window.italianTweaks.network.download(), btn);
+        const r = await ItApi.run(() => ItPages._api().network.download(), btn);
         if (r?.ok) {
           this._applyConnProfileActive(main, r.data?.activeProfile || 'download');
           refresh();
         }
       },
-      tcp: (btn) => ItApi.run(() => window.italianTweaks.network.tcp(), btn),
+      tcp: (btn) => ItApi.run(() => ItPages._api().network.tcp(), btn),
       rst: async (btn) => {
         if (!confirmRestore()) {
           ItUi.toast('Annulé', false);
           return;
         }
-        const r = await ItApi.run(() => window.italianTweaks.network.restore(), btn);
+        const r = await ItApi.run(() => ItPages._api().network.restore(), btn);
         if (r?.ok) refresh();
       },
       'tcp-gaming': async (btn) => {
@@ -909,7 +912,7 @@ window.ItPages = {
           ItUi.toast('Annulé', false);
           return;
         }
-        const r = await ItApi.run(() => window.italianTweaks.network.applyTcpGaming(), btn);
+        const r = await ItApi.run(() => ItPages._api().network.applyTcpGaming(), btn);
         if (r?.ok) refresh();
       },
       'net-test': async (btn) => {
@@ -918,8 +921,8 @@ window.ItPages = {
         let unsubProgress = null;
         const UI_MAX_MS = 95000;
         this._setNetTestProgress(main, 1, 'Préparation…');
-        if (window.italianTweaks.network.onNetworkTestProgress) {
-          unsubProgress = window.italianTweaks.network.onNetworkTestProgress((p) => {
+        if (ItPages._api().network.onNetworkTestProgress) {
+          unsubProgress = ItPages._api().network.onNetworkTestProgress((p) => {
             if (!p || p.phase === 'error') return;
             const step = this._netTestPhaseStep(p.phase);
             const label = this._netTestPhaseLabel(p.phase);
@@ -928,7 +931,7 @@ window.ItPages = {
             this._setNetTestProgress(main, step, `${label}${speedHint || latHint}`);
           });
         }
-        const runTest = window.italianTweaks.network.runNetworkTest();
+        const runTest = ItPages._api().network.runNetworkTest();
         const uiTimeout = new Promise((resolve) => {
           setTimeout(() => resolve({
             ok: false,
@@ -1054,7 +1057,7 @@ window.ItPages = {
     this._fetchInBackground(
       pageId,
       main,
-      () => window.italianTweaks.network.status(),
+      () => ItPages._api().network.status(),
       (payload) => this._applyConnexionStatus(main, payload?.data || {}),
       () => {}
     );
@@ -1063,11 +1066,11 @@ window.ItPages = {
   _bindJeu(main, gameLabels) {
     const grid = main.querySelector('#pg');
     const handlers = {
-      'wz-detect': () => window.italianTweaks.games.warzoneDetect(),
-      'wz-apply': () => window.italianTweaks.games.warzoneApply(),
-      'wz-restore': () => window.italianTweaks.games.warzoneRestore()
+      'wz-detect': () => ItPages._api().games.warzoneDetect(),
+      'wz-apply': () => ItPages._api().games.warzoneApply(),
+      'wz-restore': () => ItPages._api().games.warzoneRestore()
     };
-    Object.keys(gameLabels).forEach((id) => { handlers[`g-${id}`] = () => window.italianTweaks.games.apply(id); });
+    Object.keys(gameLabels).forEach((id) => { handlers[`g-${id}`] = () => ItPages._api().games.apply(id); });
     ItApi.bindPage(grid, handlers);
   },
 
@@ -1099,7 +1102,7 @@ window.ItPages = {
     Object.entries(gameLabels).forEach(([id, label]) => {
       html += ItUi.actionCard({
         title: label,
-        text: `Équivalent TUNEDPC ${id}`,
+        text: `Profil ${label}`,
         script: `games/Apply-${label.replace(/\s/g, '')}Settings.ps1`,
         actions: [{ id: `g-${id}`, label: 'Appliquer profil (stub)' }]
       });
@@ -1111,7 +1114,7 @@ window.ItPages = {
     this._fetchInBackground(
       pageId,
       main,
-      () => window.italianTweaks.games.warzoneDetect(),
+      () => ItPages._api().games.warzoneDetect(),
       (payload) => {
         const w = payload?.data || {};
         ItPageLoader.setCardText(main, 'warzone-status', w.playersDir || 'Non détecté');
@@ -1186,7 +1189,7 @@ window.ItPages = {
       applyBtn.disabled = true;
       setStatus('Application en cours…', 'pending');
       try {
-        const r = await window.italianTweaks.optimModules.apply({ ui, saved });
+        const r = await ItPages._api().optimModules.apply({ ui, saved });
         if (r?.status === 'cancelled') {
           setStatus('', 'muted');
           ItUi.toast('Annulé', false);
@@ -1258,16 +1261,16 @@ window.ItPages = {
     ItApi.bindPage(grid, {
       st: (btn) => ItApi.run(async () => {
         ItPageLoader.setCardStatus(main, 'audio-status', 'Analyse en cours…', 'pending');
-        return ItPageLoader.run(window.italianTweaks.audio.status(), ItPageLoader.READ_MS);
+        return ItPageLoader.run(ItPages._api().audio.status(), ItPageLoader.READ_MS);
       }, btn),
-      ap: () => window.italianTweaks.audio.apply(),
-      rs: () => window.italianTweaks.audio.restore(),
-      open: () => window.italianTweaks.audio.openSettings()
+      ap: () => ItPages._api().audio.apply(),
+      rs: () => ItPages._api().audio.restore(),
+      open: () => ItPages._api().audio.openSettings()
     });
   },
 
   renderCompte(main) {
-    main.innerHTML = `${this._header('Compte / Abonnement', 'Licence Kojo — hors TUNEDPC cloud')}<div class="card-grid">${ItUi.actionCard({ title: 'Kojo', text: 'Abonnement à brancher (pas de .ps1.enc Auth).', status: 'Local', actions: [{ id: 'x', label: '—', disabled: true }] })}</div>`;
+    main.innerHTML = `${this._header('Compte / Abonnement', 'Licence locale Kojo')}<div class="card-grid">${ItUi.actionCard({ title: 'Kojo', text: 'Abonnement à brancher.', status: 'Local', actions: [{ id: 'x', label: '—', disabled: true }] })}</div>`;
   },
 
   _updateStatusLabel(status) {
@@ -1401,7 +1404,7 @@ window.ItPages = {
 
   _ensureReglagesUpdateListener(main) {
     if (main._itUpdateUnsub) return;
-    main._itUpdateUnsub = window.italianTweaks.updates.onStatus((payload) => {
+    main._itUpdateUnsub = ItPages._api().updates.onStatus((payload) => {
       if (!main.querySelector('[data-card-id="settings-update"]')) return;
       this._applyUpdatePayload(main, payload);
     });
@@ -1533,11 +1536,11 @@ window.ItPages = {
       'upd-dl': (btn) => this._runUpdateAction(main, btn, () => ItApi.updates.download()),
       'upd-install': (btn) => this._runUpdateAction(main, btn, () => ItApi.updates.install()),
       tog: async () => {
-        await window.italianTweaks.settings.save({ confirmDangerousActions: !s.confirmDangerousActions });
+        await ItPages._api().settings.save({ confirmDangerousActions: !s.confirmDangerousActions });
         this.renderReglages(main);
       },
       rst: async () => {
-        await window.italianTweaks.settings.reset();
+        await ItPages._api().settings.reset();
         this.renderReglages(main);
       }
     };
@@ -1569,7 +1572,7 @@ window.ItPages = {
     this._fetchInBackground(
       pageId,
       main,
-      () => window.italianTweaks.settings.get(),
+      () => ItPages._api().settings.get(),
       (payload) => this._applyReglagesOther(main, payload),
       () => {
         ItPageLoader.setCardStatus(main, 'settings-confirm', 'Données indisponibles', 'warn');

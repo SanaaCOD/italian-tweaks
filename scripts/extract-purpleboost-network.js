@@ -1,5 +1,5 @@
 /**
- * Extrait buildPsTcpGamingProfile / buildPsTcpRestoreNetwork depuis Unreal.hta (PurpleBoost).
+ * Extrait buildPsTcpGamingProfile / buildPsTcpRestoreNetwork depuis une référence HTA legacy.
  */
 const fs = require('fs');
 const path = require('path');

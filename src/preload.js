@@ -1,7 +1,7 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-/** API preload interne (nom historique italianTweaks — non affiché à l'utilisateur). */
-contextBridge.exposeInMainWorld('italianTweaks', {
+/** API preload exposée à window.kojo (alias temporaire : window.italianTweaks). */
+const kojoApi = {
   app: {
     getBuildInfo: () => ipcRenderer.invoke('app:getBuildInfo')
   },
@@ -100,4 +100,7 @@ contextBridge.exposeInMainWorld('italianTweaks', {
       return () => ipcRenderer.removeListener('updates:status', handler);
     }
   }
-});
+};
+
+contextBridge.exposeInMainWorld('kojo', kojoApi);
+contextBridge.exposeInMainWorld('italianTweaks', kojoApi);

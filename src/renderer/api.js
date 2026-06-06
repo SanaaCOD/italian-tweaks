@@ -1,6 +1,10 @@
 /** Appels IPC + retour UI standardisé */
+function kojoApi() {
+  return window.kojo || window.italianTweaks;
+}
+
 function itUpdatesApi() {
-  const u = window.italianTweaks?.updates;
+  const u = kojoApi()?.updates;
   if (!u) {
     const missing = () => Promise.resolve({
       ok: false,
@@ -55,7 +59,7 @@ window.ItApi = {
     onStatus: (callback) => itUpdatesApi().onStatus(callback)
   },
   app: {
-    getBuildInfo: () => window.italianTweaks?.app?.getBuildInfo?.() ?? Promise.resolve({
+    getBuildInfo: () => kojoApi()?.app?.getBuildInfo?.() ?? Promise.resolve({
       version: '?',
       displayLine: 'v? · build ? · local',
       devMode: true,

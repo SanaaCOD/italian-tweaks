@@ -1,5 +1,5 @@
 /**
- * Polling Accueil — même rythme que PurpleBoost/TUNEDPC (8s + collect GPU timeout 4s)
+ * Polling Accueil — collecte stats toutes les 8 s (GPU timeout 4 s)
  */
 const { spawn } = require('child_process');
 const fs = require('fs');

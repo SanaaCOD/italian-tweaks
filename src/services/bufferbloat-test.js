@@ -1,6 +1,5 @@
 /**
- * Bufferbloat / Network Test — logique TunedPC (Cloudflare speed + pings parallèles).
- * Porté depuis TunedPC dist-electron/main (registerBufferbloatHandlers / runSpeedTest).
+ * Bufferbloat / Network Test — Cloudflare speed + pings parallèles.
  */
 const { performance } = require('perf_hooks');
 const { randomUUID } = require('crypto');

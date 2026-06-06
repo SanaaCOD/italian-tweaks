@@ -27,16 +27,16 @@ function Resolve-AppRoot {
     $here = $PSScriptRoot
     if ($here) {
         $c = Split-Path -Parent $here
-        if ($c -and (Test-Path -LiteralPath (Join-Path $c 'Unreal.hta'))) { return $c }
+        if ($c -and (Test-Path -LiteralPath (Join-Path $c 'package.json'))) { return $c }
         if ($c) { return $c }
     }
     return ''
 }
 
-function Get-PurpleBoostDir {
+function Get-KojoDataDir {
     $pd = $env:ProgramData
     if (-not $pd) { $pd = 'C:\ProgramData' }
-    $dir = Join-Path $pd 'PurpleBoost'
+    $dir = Join-Path $pd 'Kojo'
     if (-not (Test-Path -LiteralPath $dir)) {
         New-Item -ItemType Directory -Path $dir -Force | Out-Null
     }
@@ -291,9 +291,9 @@ function Write-ResultFile {
 
 $sw = [System.Diagnostics.Stopwatch]::StartNew()
 $app = Resolve-AppRoot $AppRoot
-$pbDir = Get-PurpleBoostDir
-if (-not $CachePath) { $CachePath = Join-Path $pbDir 'nvidia-driver-latest.json' }
-$logPath = if ($app) { Join-Path $app 'logs\nvidia-driver-check.log' } else { Join-Path $pbDir 'logs\nvidia-driver-check.log' }
+$kojoDir = Get-KojoDataDir
+if (-not $CachePath) { $CachePath = Join-Path $kojoDir 'nvidia-driver-latest.json' }
+$logPath = if ($app) { Join-Path $app 'logs\nvidia-driver-check.log' } else { Join-Path $kojoDir 'logs\nvidia-driver-check.log' }
 
 $previousCache = Read-CacheFile $CachePath
 if (-not $Force -and $previousCache -and $previousCache.checkedAt) {

@@ -1,22 +1,21 @@
-# Arborescence ITALIAN TWEAKS
+# Arborescence Kojo
 
 ```
-italian-tweaks/
+kojo-dev-rebuild/
 ├── assets/                    # logo, background, game/warzone/
-├── docs/                      # matrices TUNEDPC, arborescence
-├── legacy-import/             # guide import PurpleBoost
+├── docs/                      # matrices legacy, arborescence
+├── legacy-import/             # guide import scripts historiques
 ├── legacy-purpleboost/        # inventaire copie lib
 ├── logs/                      # JSON cache, logs scripts
 ├── scripts/
-│   ├── _common/               # ItalianTweaks.Json.ps1 (contrat)
+│   ├── _common/               # Kojo.Json.ps1 (contrat JSON scripts)
 │   ├── system/                # Get-SystemStats, Restore, Revert, Master
-│   ├── controllers/           # Get-Controllers, Apply/Restore polling, OC
-│   ├── drivers/               # NVIDIA, DDU, NVClean, stubs TUNEDPC GPU
+│   ├── drivers/               # NVIDIA, DDU, NVClean
 │   ├── network/               # profils, TCP, restore
-│   ├── games/                 # Warzone + stubs par jeu TUNEDPC
-│   ├── optimizations/       # Debloat, GameMode, Power, stubs
-│   ├── audio/                 # Get + stubs
-│   └── lib/                   # scripts PurpleBoost (exécution interne)
+│   ├── games/                 # Warzone + profils par jeu
+│   ├── optimizations/         # Debloat, Mode Jeu, alimentation
+│   ├── audio/                 # Get + profils
+│   └── lib/                   # scripts internes (exécution directe)
 ├── tools/
 │   ├── ddu/ hidusbf/ nvcleanstall/ tcpoptimizer/ nvidia/
 ├── src/
@@ -31,4 +30,4 @@ italian-tweaks/
 
 ## Flux
 
-`Bouton UI` → `preload` → `ipc/handlers` → `services/*.js` → `script-runner` → `scripts/<domain>/*.ps1` → **JSON** → UI (statut + log JSON)
+`Bouton UI` → `preload (window.kojo)` → `ipc/handlers` → `services/*.js` → `script-runner` → `scripts/<domain>/*.ps1` → **JSON** → UI (statut + log)

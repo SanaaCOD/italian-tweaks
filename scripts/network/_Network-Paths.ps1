@@ -1,4 +1,4 @@
-# Chemins réseau Kojo (PurpleBoost / ProgramData\Kojo)
+# Chemins réseau Kojo (%ProgramData%\Kojo)
 
 $script:NetworkDataRoot = $null
 $script:NetworkScriptsDir = $null

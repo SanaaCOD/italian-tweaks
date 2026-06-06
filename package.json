@@ -1,10 +1,10 @@
 {
-  "name": "italian-tweaks",
+  "name": "kojo",
   "productName": "Kojo",
   "version": "1.0.17",
   "description": "Kojo Performance Suite",
   "main": "src/main.js",
-  "author": "ITALIAN TWEAKS",
+  "author": "Kojo",
   "license": "UNLICENSED",
   "private": true,
   "repository": {
@@ -29,7 +29,7 @@
     "electron-builder": "^25.1.8"
   },
   "build": {
-    "appId": "com.sanaacod.italiantweaks",
+    "appId": "com.sanaacod.kojo",
     "productName": "Kojo",
     "directories": {
       "output": "build",
@@ -53,7 +53,7 @@
         }
       ],
       "icon": "assets/icon.png",
-      "artifactName": "ITALIAN-TWEAKS-Setup-${version}.${ext}",
+      "artifactName": "KOJO-Setup-${version}.${ext}",
       "requestedExecutionLevel": "requireAdministrator"
     },
     "nsis": {
@@ -90,6 +90,6 @@
         "repo": "italian-tweaks"
       }
     ],
-    "artifactName": "KOJO-Setup-."
+    "artifactName": "KOJO-Setup-${version}.${ext}"
   }
 }

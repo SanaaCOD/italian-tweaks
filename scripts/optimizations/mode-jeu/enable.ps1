@@ -1,4 +1,4 @@
-﻿# PurpleBoost / Kojo - ENABLE Mode Jeu
+﻿# Kojo — ENABLE Mode Jeu
 # Active :
 # 1. Mode Jeu Windows
 # 2. Optimisation pour les jeux en mode fenetre / borderless

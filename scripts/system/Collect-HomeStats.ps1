@@ -1,5 +1,5 @@
 #Requires -Version 5.1
-# Logique alignée PurpleBoost / TUNEDPC (home-stats-collect) — pourcentages CPU/GPU/RAM
+# Logique stats Accueil — pourcentages CPU/GPU/RAM
 param(
     [string]$AppRoot = '',
     [string]$LogDir = '',
