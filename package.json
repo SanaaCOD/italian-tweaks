@@ -1,93 +1,95 @@
 {
-    "name":  "italian-tweaks",
-    "productName":  "Kojo",
-    "version":  "1.0.17",
-    "description":  "Kojo Performance Suite",
-    "main":  "src/main.js",
-    "author":  "ITALIAN TWEAKS",
-    "license":  "UNLICENSED",
-    "private":  true,
-    "repository":  {
-                       "type":  "git",
-                       "url":  "https://github.com/SanaaCOD/italian-tweaks.git"
-                   },
-    "scripts":  {
-                    "dev":  "electron .",
-                    "start":  "electron .",
-                    "build":  "electron-builder",
-                    "build:dir":  "electron-builder --dir",
-                    "release":  "electron-builder --publish always",
-                    "postinstall":  "node scripts/generate-placeholders.js \u0026\u0026 node scripts/generate-build-info.js",
-                    "prebuild":  "node scripts/generate-build-info.js",
-                    "prebuild:dir":  "node scripts/generate-build-info.js"
-                },
-    "dependencies":  {
-                         "electron-updater":  "^6.8.3"
-                     },
-    "devDependencies":  {
-                            "electron":  "^35.0.0",
-                            "electron-builder":  "^25.1.8"
-                        },
-    "build":  {
-                  "appId":  "com.sanaacod.italiantweaks",
-                  "productName":  "Kojo",
-                  "directories":  {
-                                      "output":  "build",
-                                      "buildResources":  "build/resources"
-                                  },
-                  "files":  [
-                                "src/**/*",
-                                "assets/**/*",
-                                "scripts/**/*",
-                                "tools/**/*",
-                                "package.json",
-                                "src/build-info.json"
-                            ],
-                  "win":  {
-                              "target":  [
-                                             {
-                                                 "target":  "nsis",
-                                                 "arch":  [
-                                                              "x64"
-                                                          ]
-                                             }
-                                         ],
-                              "icon":  "assets/icon.png",
-                              "artifactName":  "ITALIAN-TWEAKS-Setup-${version}.${ext}"
-                          },
-                  "nsis":  {
-                               "oneClick":  false,
-                               "allowToChangeInstallationDirectory":  true,
-                               "shortcutName":  "Kojo"
-                           },
-                  "asar":  true,
-                  "asarUnpack":  [
-                                     "scripts/**/*",
-                                     "tools/**/*",
-                                     "package.json"
-                                 ],
-                  "extraResources":  [
-                                         {
-                                             "from":  "scripts",
-                                             "to":  "scripts",
-                                             "filter":  [
-                                                            "**/*"
-                                                        ]
-                                         },
-                                         {
-                                             "from":  "tools",
-                                             "to":  "tools",
-                                             "filter":  [
-                                                            "**/*"
-                                                        ]
-                                         }
-                                     ],
-                  "publish":  [
-                                  {
-                                      "provider":  "github",
-                                      "owner":  "SanaaCOD",
-                                      "repo":  "italian-tweaks"
-                                  }
-                              ]
-              }
+  "name": "italian-tweaks",
+  "productName": "Kojo",
+  "version": "1.0.17",
+  "description": "Kojo Performance Suite",
+  "main": "src/main.js",
+  "author": "ITALIAN TWEAKS",
+  "license": "UNLICENSED",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SanaaCOD/italian-tweaks.git"
+  },
+  "scripts": {
+    "dev": "electron .",
+    "start": "electron .",
+    "build": "electron-builder",
+    "build:dir": "electron-builder --dir",
+    "release": "electron-builder --publish always",
+    "postinstall": "node scripts/generate-placeholders.js && node scripts/generate-build-info.js",
+    "prebuild": "node scripts/generate-build-info.js",
+    "prebuild:dir": "node scripts/generate-build-info.js"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.3"
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.sanaacod.italiantweaks",
+    "productName": "Kojo",
+    "directories": {
+      "output": "build",
+      "buildResources": "build/resources"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "scripts/**/*",
+      "tools/**/*",
+      "package.json",
+      "src/build-info.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.png",
+      "artifactName": "ITALIAN-TWEAKS-Setup-${version}.${ext}",
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "Kojo"
+    },
+    "asar": true,
+    "asarUnpack": [
+      "scripts/**/*",
+      "tools/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "scripts",
+        "to": "scripts",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "tools",
+        "to": "tools",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "SanaaCOD",
+        "repo": "italian-tweaks"
+      }
+    ],
+    "artifactName": "KOJO-Setup-."
+  }
 }

@@ -1,10 +1,10 @@
-﻿# PurpleBoost - ENABLE
+﻿# PurpleBoost / Kojo - ENABLE Mode Jeu
 # Active :
 # 1. Mode Jeu Windows
 # 2. Optimisation pour les jeux en mode fenetre / borderless
+# 3. HAGS / Planification de processeur graphique a acceleration materielle
 #
-# Pas besoin admin : réglages HKCU utilisateur courant.
-# Ne pas mettre de pause, sinon ton bouton dans l'app va bloquer.
+# HAGS utilise HKLM et necessite admin + redemarrage PC.
 
 $ErrorActionPreference = "Stop"
 
@@ -80,17 +80,24 @@ try {
     Set-DwordValue -Path $gameBarPath -Name "AllowAutoGameMode" -Value 1
     Set-DwordValue -Path $gameBarPath -Name "AutoGameModeEnabled" -Value 1
 
-    # 2. Optimisation pour les jeux en mode fenêtré ON
+    # 2. Optimisation pour les jeux en mode fenetre / borderless ON
     Set-DirectXGlobalSetting -SettingName "SwapEffectUpgradeEnable" -SettingValue "1"
 
-    # Cache graphique utilisé par Windows sur certaines builds
+    # Cache graphique utilise par Windows sur certaines builds
     $graphicsPath = "HKCU:\Software\Microsoft\DirectX\GraphicsSettings"
     Set-DwordValue -Path $graphicsPath -Name "SwapEffectUpgradeCache" -Value 1
 
+    # 3. HAGS ON - Planification de processeur graphique a acceleration materielle
+    $graphicsDriversPath = "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers"
+    Set-DwordValue -Path $graphicsDriversPath -Name "HwSchMode" -Value 2
+
     Write-Host "OK - Mode Jeu active." -ForegroundColor Green
     Write-Host "OK - Optimisation jeux en mode fenetre activee." -ForegroundColor Green
+    Write-Host "OK - HAGS active : redemarrage PC requis." -ForegroundColor Green
+
+    exit 0
 }
 catch {
-    Write-Error "Erreur activation Mode Jeu / optimisation fenetree : $($_.Exception.Message)"
-    throw
+    Write-Error "Erreur activation Mode Jeu / optimisation fenetree / HAGS : $($_.Exception.Message)"
+    exit 1
 }
