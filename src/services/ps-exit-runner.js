@@ -33,12 +33,23 @@ function runPs1ExitCode(relativePath, options = {}) {
       shell: false
     });
 
+    let stdout = '';
+    if (options.captureStdout) {
+      child.stdout.on('data', (chunk) => {
+        stdout += chunk.toString();
+      });
+    }
+
     let settled = false;
     const finish = (result) => {
       if (settled) return;
       settled = true;
       clearTimeout(timer);
-      resolve({ ...result, commandLine });
+      resolve({
+        ...result,
+        commandLine,
+        stdout: options.captureStdout ? stdout.trim() : undefined
+      });
     };
 
     const timer = setTimeout(() => {

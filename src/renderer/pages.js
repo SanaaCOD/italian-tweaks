@@ -172,6 +172,7 @@ window.ItPages = {
           ${this._hw('ram', 'RAM', 'USAGE', applied.ram, [s.ramMeta.modules, s.ramMeta.speed, `XMP: ${s.ramMeta.xmp || 'N/D'}`].filter(Boolean).join('\n'))}
         </div>
         <div class="card-grid page-actions">
+          ${ItUi.actionCard({ title: 'Protection système', text: 'Crée un point de restauration Windows avant de modifier des réglages système.', cardId: 'restore-point-card', actions: [{ id: 'create-restore-point', label: 'Créer un point de restauration', primary: true }] })}
           ${ItUi.actionCard({ title: 'Restaurer défauts', text: 'Restaure les réglages système par défaut.', script: 'system/Restore-Defaults.ps1', actions: [{ id: 'restore-def', label: 'Exécuter', primary: true }] })}
           ${ItUi.actionCard({ title: 'Tout annuler', text: 'Annule les modifications Kojo en une passe.', script: 'system/Revert-All.ps1', actions: [{ id: 'revert-all', label: 'Exécuter', primary: true }] })}
         </div>
@@ -181,6 +182,53 @@ window.ItPages = {
       'restore-def': () => ItPages._api().system.restoreDefaults(),
       'revert-all': () => ItPages._api().system.revertAll()
     });
+
+    const restoreBtn = grid?.querySelector('[data-action="create-restore-point"]');
+    if (restoreBtn) {
+      restoreBtn.addEventListener('click', async () => {
+        if (restoreBtn.disabled) return;
+        const card = restoreBtn.closest('.action-card');
+        const statusEl = card?.querySelector('.action-card__status');
+        restoreBtn.disabled = true;
+        if (statusEl) {
+          statusEl.textContent = 'Création en cours…';
+          statusEl.className = 'action-card__status status-pending';
+        }
+        ItUi.toast('Création du point de restauration…', false);
+        try {
+          const r = await ItPages._api().system.createRestorePoint();
+          if (r?.status === 'rate_limited') {
+            if (statusEl) {
+              statusEl.textContent = 'Point récent existant';
+              statusEl.className = 'action-card__status status-warn';
+            }
+            ItUi.toast('Un point de restauration récent existe déjà.', false);
+            return;
+          }
+          if (r?.ok) {
+            if (statusEl) {
+              statusEl.textContent = 'Créé';
+              statusEl.className = 'action-card__status status-ok';
+            }
+            ItUi.toast('Point de restauration créé.', false);
+            return;
+          }
+          if (statusEl) {
+            statusEl.textContent = 'Échec';
+            statusEl.className = 'action-card__status status-err';
+          }
+          ItUi.toast('Impossible de créer le point de restauration.', true);
+        } catch {
+          if (statusEl) {
+            statusEl.textContent = 'Échec';
+            statusEl.className = 'action-card__status status-err';
+          }
+          ItUi.toast('Impossible de créer le point de restauration.', true);
+        } finally {
+          restoreBtn.disabled = false;
+        }
+      });
+    }
 
     if (!r) {
       this._fetchInBackground(
@@ -1303,6 +1351,7 @@ window.ItPages = {
           <div class="optim-grid" id="optimRegistryGrid">
             ${registryCards}
           </div>
+          <p class="optim-panel__hint">Conseillé : crée un point de restauration depuis l'accueil avant d'appliquer des optimisations système.</p>
           <div class="optim-actions">
             <button type="button" class="btn btn--primary optim-apply-btn" id="optimApplyBtn">APPLIQUER</button>
           </div>

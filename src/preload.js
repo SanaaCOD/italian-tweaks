@@ -9,7 +9,8 @@ const kojoApi = {
     getStats: (opts) => ipcRenderer.invoke('system:getStats', opts),
     restoreDefaults: () => ipcRenderer.invoke('system:restoreDefaults'),
     revertAll: () => ipcRenderer.invoke('system:revertAll'),
-    masterRunAll: () => ipcRenderer.invoke('system:masterRunAll')
+    masterRunAll: () => ipcRenderer.invoke('system:masterRunAll'),
+    createRestorePoint: () => ipcRenderer.invoke('system:createRestorePoint')
   },
   controllerOc: {
     isElevated: () => ipcRenderer.invoke('controllerOc:isElevated'),

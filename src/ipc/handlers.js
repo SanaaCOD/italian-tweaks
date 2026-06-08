@@ -5,6 +5,7 @@ const drivers = require('../services/drivers');
 const network = require('../services/network');
 const optimizations = require('../services/optimizations');
 const optimizationModules = require('../services/optimization-modules-service');
+const systemRestore = require('../services/system-restore-service');
 const audio = require('../services/audio');
 const games = require('../services/games');
 const settings = require('../services/settings');
@@ -29,6 +30,7 @@ function registerIpcHandlers() {
   ipcMain.handle('system:restoreDefaults', () => system.restoreAll());
   ipcMain.handle('system:revertAll', () => system.revertAll());
   ipcMain.handle('system:masterRunAll', () => system.masterRunAll());
+  ipcMain.handle('system:createRestorePoint', () => systemRestore.createRestorePoint());
 
   controllerOc.registerControllerOcHandlers(ipcMain);
 

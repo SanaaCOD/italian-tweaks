@@ -1602,6 +1602,13 @@ button {
   margin-top: 1rem;
 }
 
+.optim-panel__hint {
+  margin: 1rem 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
 .optim-toggle {
   flex: 0 0 48px;
   width: 48px;
