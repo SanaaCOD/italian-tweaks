@@ -74,7 +74,9 @@ const kojoApi = {
     openSettings: () => ipcRenderer.invoke('audio:openSettings')
   },
   applications: {
-    open: (appId) => ipcRenderer.invoke('applications:open', appId)
+    open: (appId) => ipcRenderer.invoke('applications:open', appId),
+    optimize: (appId) => ipcRenderer.invoke('applications:optimize', appId),
+    detect: (appId) => ipcRenderer.invoke('applications:detect', appId)
   },
   games: {
     warzoneDetect: () => ipcRenderer.invoke('games:warzoneDetect'),

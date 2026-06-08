@@ -100,7 +100,9 @@ function registerIpcHandlers() {
   ipcMain.handle('games:warzoneRestore', () => games.restoreWarzoneProfile());
   ipcMain.handle('games:apply', (_e, gameId) => games.applyGame(gameId));
 
-  ipcMain.handle('applications:open', (_e, appId) => applications.openApp(appId));
+  ipcMain.handle('applications:open', (_e, appId) => applications.openApplication(appId));
+  ipcMain.handle('applications:optimize', (_e, appId) => applications.optimizeApplication(appId));
+  ipcMain.handle('applications:detect', (_e, appId) => applications.detectApplication(appId));
 
   ipcMain.handle('settings:get', () => settings.load());
   ipcMain.handle('settings:save', (_e, d) => settings.save(d));

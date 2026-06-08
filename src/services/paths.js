@@ -30,6 +30,14 @@ function getHidusbfDriverDir() {
   return bundled;
 }
 
+/** Installers locaux (resources/installers) — optionnels. */
+function getInstallersDir() {
+  if (!app.isPackaged) {
+    return path.join(getBundledContentRoot(), 'resources', 'installers');
+  }
+  return path.join(process.resourcesPath, 'installers');
+}
+
 /** Outils tiers (DDU, etc.) — jamais HIDUSBF. */
 function getToolsDir() {
   if (!app.isPackaged) {
@@ -73,6 +81,7 @@ module.exports = {
   getBundledContentRoot,
   getHidusbfDriverDir,
   getToolsDir,
+  getInstallersDir,
   getScriptsDir,
   getLogsDir,
   getSettingsPath,

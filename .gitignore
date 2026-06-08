@@ -6,3 +6,6 @@ build-tmp/
 .env
 .DS_Store
 Thumbs.db
+
+# Local application installers - too large for GitHub source repo
+resources/installers/applications/**/*.exe

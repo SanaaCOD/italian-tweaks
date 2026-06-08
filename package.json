@@ -81,6 +81,13 @@
                                              "filter":  [
                                                             "**/*"
                                                         ]
+                                         },
+                                         {
+                                             "from":  "resources/installers",
+                                             "to":  "installers",
+                                             "filter":  [
+                                                            "**/*"
+                                                        ]
                                          }
                                      ],
                   "publish":  [

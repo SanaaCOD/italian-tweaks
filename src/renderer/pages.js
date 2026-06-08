@@ -734,6 +734,44 @@ window.ItPages = {
     ItPageLoader.log(pageId, 'shell', performance.now() - t0);
   },
 
+  _bindApplicationAction(main, actionId, handler) {
+    const btn = main.querySelector(`[data-action="${actionId}"]`);
+    if (!btn) return;
+    btn.addEventListener('click', async () => {
+      if (btn.disabled) return;
+      const card = btn.closest('.action-card');
+      const statusEl = card?.querySelector('.action-card__status');
+      btn.disabled = true;
+      if (statusEl) {
+        statusEl.textContent = 'En cours…';
+        statusEl.className = 'action-card__status status-pending';
+      }
+      try {
+        const r = await handler();
+        if (statusEl) {
+          if (r?.ok) {
+            statusEl.textContent = 'PRÊT';
+            statusEl.className = 'action-card__status status-ok';
+          } else {
+            statusEl.textContent = 'Erreur';
+            statusEl.className = 'action-card__status status-err';
+          }
+        }
+        if (r?.message) {
+          ItUi.toast(r.message, !r.ok);
+        }
+      } catch {
+        if (statusEl) {
+          statusEl.textContent = 'Erreur';
+          statusEl.className = 'action-card__status status-err';
+        }
+        ItUi.toast('Une erreur est survenue.', true);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  },
+
   renderApplications(main) {
     const pageId = 'applications';
     const t0 = performance.now();
@@ -742,28 +780,41 @@ window.ItPages = {
     grid.innerHTML = [
       ItUi.actionCard({
         title: 'Discord',
-        text: 'Ouvre ou installe Discord pour la communication gaming.',
+        text: 'Ouvre ou installe Discord, puis applique des réglages légers pour limiter les tâches en arrière-plan.',
         status: 'PRÊT',
-        actions: [{ id: 'open-discord', label: 'Ouvrir', primary: true }]
+        actions: [
+          { id: 'open-discord', label: 'Ouvrir / Installer', primary: true },
+          { id: 'optimize-discord', label: 'Optimiser' }
+        ]
       }),
       ItUi.actionCard({
         title: 'Battle.net',
-        text: 'Ouvre ou installe Battle.net pour accéder à tes jeux Blizzard.',
+        text: 'Ouvre ou installe Battle.net, puis limite certains éléments de lancement et d\'arrière-plan.',
         status: 'PRÊT',
-        actions: [{ id: 'open-battlenet', label: 'Ouvrir', primary: true }]
+        actions: [
+          { id: 'open-battlenet', label: 'Ouvrir / Installer', primary: true },
+          { id: 'optimize-battlenet', label: 'Optimiser' }
+        ]
       }),
       ItUi.actionCard({
         title: 'OBS',
-        text: 'Ouvre ou installe OBS pour l\'enregistrement et le streaming.',
+        text: 'Ouvre ou installe OBS, puis prépare une configuration plus légère sans écraser tes scènes.',
         status: 'PRÊT',
-        actions: [{ id: 'open-obs', label: 'Ouvrir', primary: true }]
+        actions: [
+          { id: 'open-obs', label: 'Ouvrir / Installer', primary: true },
+          { id: 'optimize-obs', label: 'Optimiser' }
+        ]
       })
     ].join('');
-    ItApi.bindPage(grid, {
-      'open-discord': () => ItPages._api().applications.open('discord'),
-      'open-battlenet': () => ItPages._api().applications.open('battlenet'),
-      'open-obs': () => ItPages._api().applications.open('obs')
-    });
+
+    const api = ItPages._api().applications;
+    this._bindApplicationAction(main, 'open-discord', () => api.open('discord'));
+    this._bindApplicationAction(main, 'open-battlenet', () => api.open('battlenet'));
+    this._bindApplicationAction(main, 'open-obs', () => api.open('obs'));
+    this._bindApplicationAction(main, 'optimize-discord', () => api.optimize('discord'));
+    this._bindApplicationAction(main, 'optimize-battlenet', () => api.optimize('battlenet'));
+    this._bindApplicationAction(main, 'optimize-obs', () => api.optimize('obs'));
+
     ItPageLoader.log(pageId, 'shell', performance.now() - t0);
   },
 
