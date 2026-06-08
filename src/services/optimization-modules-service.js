@@ -35,6 +35,62 @@ const MODULES = [
     disableScript: 'optimizations/gestion-alimentation/disable.ps1',
     logPrefix: 'POWER',
     needsAdmin: true
+  },
+  {
+    key: 'regXboxMonitoring',
+    label: 'Xbox Game Monitoring',
+    enableScript: 'optimizations/registry/xbox-game-monitoring/enable.ps1',
+    disableScript: 'optimizations/registry/xbox-game-monitoring/disable.ps1',
+    logPrefix: 'REG_XBOX_GAMEMONITORING',
+    needsAdmin: true
+  },
+  {
+    key: 'regGameBarDvr',
+    label: 'Game Bar / GameDVR',
+    enableScript: 'optimizations/registry/gamebar-dvr/enable.ps1',
+    disableScript: 'optimizations/registry/gamebar-dvr/disable.ps1',
+    logPrefix: 'REG_GAMEBAR',
+    needsAdmin: false
+  },
+  {
+    key: 'regGamesMmcss',
+    label: 'Priorité Jeux MMCSS',
+    enableScript: 'optimizations/registry/games-mmcss/enable.ps1',
+    disableScript: 'optimizations/registry/games-mmcss/disable.ps1',
+    logPrefix: 'REG_GAMES_MMCSS',
+    needsAdmin: true
+  },
+  {
+    key: 'regMouseRaw',
+    label: 'Souris précision brute',
+    enableScript: 'optimizations/registry/mouse-raw/enable.ps1',
+    disableScript: 'optimizations/registry/mouse-raw/disable.ps1',
+    logPrefix: 'REG_MOUSE',
+    needsAdmin: false
+  },
+  {
+    key: 'regMultimediaProfile',
+    label: 'Profil Multimédia Gaming',
+    enableScript: 'optimizations/registry/multimedia-profile/enable.ps1',
+    disableScript: 'optimizations/registry/multimedia-profile/disable.ps1',
+    logPrefix: 'REG_MULTIMEDIA',
+    needsAdmin: true
+  },
+  {
+    key: 'regTcpipLowLatency',
+    label: 'TCP/IP faible latence',
+    enableScript: 'optimizations/registry/tcpip-low-latency/enable.ps1',
+    disableScript: 'optimizations/registry/tcpip-low-latency/disable.ps1',
+    logPrefix: 'REG_TCPIP',
+    needsAdmin: true
+  },
+  {
+    key: 'regVisualEffects',
+    label: 'Effets visuels performance',
+    enableScript: 'optimizations/registry/visual-effects-performance/enable.ps1',
+    disableScript: 'optimizations/registry/visual-effects-performance/disable.ps1',
+    logPrefix: 'REG_VISUAL_EFFECTS',
+    needsAdmin: false
   }
 ];
 

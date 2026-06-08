@@ -1127,7 +1127,66 @@ window.ItPages = {
     );
   },
 
-  _optimModuleCard(id, title) {
+  _optimModuleDefs() {
+    return [
+      { id: 'debloat', title: 'Debloat', section: 'modules' },
+      { id: 'gameMode', title: 'Mode Jeu', section: 'modules' },
+      { id: 'power', title: 'Gestion de l\'alimentation', section: 'modules' },
+      {
+        id: 'regXboxMonitoring',
+        title: 'Xbox Game Monitoring',
+        section: 'registry',
+        description: 'Désactive Xbox Game Monitoring, un service Xbox/GameDVR inutile pour la plupart des configs gaming compétitives.'
+      },
+      {
+        id: 'regGameBarDvr',
+        title: 'Game Bar / GameDVR',
+        section: 'registry',
+        description: 'Limite les overlays, raccourcis Xbox et interruptions en jeu.'
+      },
+      {
+        id: 'regGamesMmcss',
+        title: 'Priorité Jeux MMCSS',
+        section: 'registry',
+        description: 'Favorise les tâches de jeu dans le planificateur multimédia Windows.'
+      },
+      {
+        id: 'regMouseRaw',
+        title: 'Souris précision brute',
+        section: 'registry',
+        description: 'Désactive l\'accélération souris Windows pour une visée plus constante.'
+      },
+      {
+        id: 'regMultimediaProfile',
+        title: 'Profil Multimédia Gaming',
+        section: 'registry',
+        description: 'Réduit la réserve système et priorise audio, affichage et jeu.'
+      },
+      {
+        id: 'regTcpipLowLatency',
+        title: 'TCP/IP faible latence',
+        section: 'registry',
+        description: 'Applique des tweaks réseau génériques sans importer de valeurs propres au PC.'
+      },
+      {
+        id: 'regVisualEffects',
+        title: 'Effets visuels performance',
+        section: 'registry',
+        description: 'Réduit les animations Windows pour garder une interface plus légère.'
+      }
+    ];
+  },
+
+  _optimDefaultState() {
+    const state = {};
+    for (const mod of this._optimModuleDefs()) state[mod.id] = false;
+    return state;
+  },
+
+  _optimModuleCard(id, title, description) {
+    const descHtml = description
+      ? `<p class="optim-card__desc">${ItUi.escape(description)}</p>`
+      : '';
     return `
       <article class="optim-card" data-optim-module="${ItUi.escape(id)}" id="optim-card-${ItUi.escape(id)}">
         <div class="optim-card__head">
@@ -1136,6 +1195,7 @@ window.ItPages = {
             <span class="optim-toggle__thumb"></span>
           </button>
         </div>
+        ${descHtml}
       </article>`;
   },
 
@@ -1155,10 +1215,10 @@ window.ItPages = {
       } catch {
         /* ignore */
       }
-      return { debloat: false, gameMode: false, power: false };
+      return this._optimDefaultState();
     };
 
-    const ui = { debloat: false, gameMode: false, power: false };
+    const ui = this._optimDefaultState();
     const saved = loadSaved();
     Object.assign(ui, saved);
     for (const id of Object.keys(ui)) this._setOptimToggle(main, id, ui[id]);
@@ -1220,6 +1280,14 @@ window.ItPages = {
   renderOptimisation(main) {
     const pageId = 'optimisation';
     const t0 = performance.now();
+    const moduleCards = this._optimModuleDefs()
+      .filter((mod) => mod.section === 'modules')
+      .map((mod) => this._optimModuleCard(mod.id, mod.title, mod.description))
+      .join('');
+    const registryCards = this._optimModuleDefs()
+      .filter((mod) => mod.section === 'registry')
+      .map((mod) => this._optimModuleCard(mod.id, mod.title, mod.description))
+      .join('');
     main.innerHTML = `
       ${this._header('Optimisation', 'Sélectionnez les modules souhaités, puis cliquez sur Appliquer.')}
       <section class="optim-page">
@@ -1227,9 +1295,13 @@ window.ItPages = {
           <div class="optim-panel__kicker">MODULES</div>
           <p class="optim-panel__status" id="optimModulesStatus" aria-live="polite"></p>
           <div class="optim-grid" id="optimModulesGrid">
-            ${this._optimModuleCard('debloat', 'Debloat')}
-            ${this._optimModuleCard('gameMode', 'Mode Jeu')}
-            ${this._optimModuleCard('power', 'Gestion de l\'alimentation')}
+            ${moduleCards}
+          </div>
+        </div>
+        <div class="optim-panel optim-panel--registry">
+          <div class="optim-panel__kicker">RÉGLAGES REGISTRE GAMING</div>
+          <div class="optim-grid" id="optimRegistryGrid">
+            ${registryCards}
           </div>
           <div class="optim-actions">
             <button type="button" class="btn btn--primary optim-apply-btn" id="optimApplyBtn">APPLIQUER</button>

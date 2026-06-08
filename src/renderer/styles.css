@@ -1591,6 +1591,17 @@ button {
   color: var(--text-primary);
 }
 
+.optim-card__desc {
+  margin: 0.65rem 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.optim-panel--registry {
+  margin-top: 1rem;
+}
+
 .optim-toggle {
   flex: 0 0 48px;
   width: 48px;
