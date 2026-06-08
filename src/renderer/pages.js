@@ -698,80 +698,73 @@ window.ItPages = {
     void this._runPeripheriquesScanWave(main, this._PERIPH_STARTUP_DELAYS_MS);
   },
 
-  _nvidiaCardHtml(d, loading) {
-    const text = loading
-      ? 'Analyse du pilote NVIDIA…'
-      : `Installé: ${d.installedVersion || '—'}\nDernière: ${d.latestVersion || '—'}`;
-    const status = loading ? 'Chargement…' : (d.updateAvailable ? 'MAJ dispo' : 'OK');
-    const statusType = loading ? 'pending' : (d.updateAvailable ? 'warn' : 'ok');
-    return ItUi.actionCard({
-      title: 'GPU NVIDIA',
-      text,
-      status,
-      statusType,
-      cardId: 'nvidia-status',
-      script: 'drivers/Get-NvidiaStatus.ps1',
-      actions: [{ id: 'refresh', label: 'Actualiser' }]
-    });
-  },
-
-  _bindDrivers(main) {
-    const grid = main.querySelector('#pg');
-    if (!grid) return;
-    ItApi.bindPage(grid, {
-      refresh: () => this.renderDrivers(main),
-      ddu: () => ItPages._api().drivers.runDdu(),
-      nvc: () => ItPages._api().drivers.runNvclean(),
-      inst: () => ItPages._api().drivers.installLatest(),
-      opt: () => ItPages._api().drivers.applyOptimization(),
-      sq: () => ItPages._api().drivers.applySqEngine(),
-      guide: () => ItPages._api().drivers.nvidiaGuide(),
-      oc: () => ItPages._api().drivers.gpuOverclock(),
-      nip: () => ItPages._api().drivers.openNip()
-    });
-  },
-
-  _applyDriversNvidia(main, payload) {
-    const d = payload?.data || {};
-    const card = main.querySelector('[data-card-id="nvidia-status"]');
-    if (!card) return;
-    const text = `Installé: ${d.installedVersion || '—'}\nDernière: ${d.latestVersion || '—'}`;
-    card.querySelector('.action-card__text').textContent = text;
-    const st = card.querySelector('.action-card__status');
-    st.textContent = d.updateAvailable ? 'MAJ dispo' : 'OK';
-    st.className = `action-card__status ${d.updateAvailable ? 'status-warn' : 'status-ok'}`;
-  },
-
   renderDrivers(main) {
     const pageId = 'drivers';
     const t0 = performance.now();
-    const cached = ItPageCache.get(pageId);
-    const d = cached?.payload?.data || {};
     const grid = this._mountPage(main, 'Drivers', 'scripts/drivers/');
+    grid.classList.add('card-grid--drivers');
     grid.innerHTML = [
-      this._nvidiaCardHtml(d, !cached),
-      ItUi.actionCard({ title: 'DDU', script: 'drivers/Run-DDU.ps1', actions: [{ id: 'ddu', label: 'Lancer DDU', primary: true }] }),
-      ItUi.actionCard({ title: 'NVCleanInstall', script: 'drivers/Run-NVCleanInstall.ps1', actions: [{ id: 'nvc', label: 'Lancer', primary: true }] }),
-      ItUi.actionCard({ title: 'Installer dernier pilote', script: 'drivers/Install-LatestNvidiaDriver.ps1', actions: [{ id: 'inst', label: 'Installer (stub)', primary: true }] }),
-      ItUi.actionCard({ title: 'Optimisation NVIDIA', script: 'drivers/Apply-NvidiaOptimization.ps1', actions: [{ id: 'opt', label: 'Appliquer (stub)' }] }),
-      ItUi.actionCard({ title: 'SQ Engine', script: 'drivers/Apply-SQEngine.ps1', actions: [{ id: 'sq', label: 'SQ (stub)' }] }),
-      ItUi.actionCard({ title: 'Guide panneau NVIDIA', script: 'drivers/NVIDIA-ControlPanel-Guide.ps1', actions: [{ id: 'guide', label: 'Guide (stub)' }] }),
-      ItUi.actionCard({ title: 'GPU Overclock', script: 'drivers/GPU-Overclock.ps1', actions: [{ id: 'oc', label: 'OC (stub)' }] }),
-      ItUi.actionCard({ title: 'Profil .nip', text: 'tools/nvidia/sq_competitive.nip', actions: [{ id: 'nip', label: 'Ouvrir profil', primary: true }] })
+      ItUi.actionCard({
+        title: 'Désinstaller pilote graphique',
+        text: 'Lance l\'outil de désinstallation propre du pilote graphique pour repartir sur une base saine.',
+        status: 'PRÊT',
+        script: 'drivers/Run-DDU.ps1',
+        actions: [{ id: 'ddu', label: 'Lancer', primary: true }]
+      }),
+      ItUi.actionCard({
+        title: 'Installation pilote graphique',
+        text: 'Installe ou prépare l\'installation du pilote graphique NVIDIA dans un flux propre.',
+        status: 'PRÊT',
+        script: 'drivers/Run-NVCleanInstall.ps1',
+        actions: [{ id: 'nvc', label: 'Lancer', primary: true }]
+      }),
+      ItUi.actionCard({
+        title: 'Mode graphique performance',
+        text: 'Applique les réglages NVIDIA orientés performance pour le gaming compétitif.',
+        status: 'PRÊT',
+        script: 'drivers/Apply-NvidiaOptimization.ps1',
+        actions: [{ id: 'opt', label: 'Appliquer', primary: true }]
+      })
     ].join('');
-    this._bindDrivers(main);
+    ItApi.bindPage(grid, {
+      ddu: () => ItPages._api().drivers.runDdu(),
+      nvc: () => ItPages._api().drivers.runNvclean(),
+      opt: () => ItPages._api().drivers.applyOptimization()
+    });
     ItPageLoader.log(pageId, 'shell', performance.now() - t0);
+  },
 
-    this._fetchInBackground(
-      pageId,
-      main,
-      () => ItPages._api().drivers.getNvidiaStatus(),
-      (payload) => this._applyDriversNvidia(main, payload),
-      () => {
-        ItPageLoader.setCardStatus(main, 'nvidia-status', 'Vérification en arrière-plan', 'warn');
-        ItPageLoader.setCardText(main, 'nvidia-status', 'Données indisponibles pour le moment.');
-      }
-    );
+  renderApplications(main) {
+    const pageId = 'applications';
+    const t0 = performance.now();
+    const grid = this._mountPage(main, 'Applications');
+    grid.classList.add('card-grid--applications');
+    grid.innerHTML = [
+      ItUi.actionCard({
+        title: 'Discord',
+        text: 'Ouvre ou installe Discord pour la communication gaming.',
+        status: 'PRÊT',
+        actions: [{ id: 'open-discord', label: 'Ouvrir', primary: true }]
+      }),
+      ItUi.actionCard({
+        title: 'Battle.net',
+        text: 'Ouvre ou installe Battle.net pour accéder à tes jeux Blizzard.',
+        status: 'PRÊT',
+        actions: [{ id: 'open-battlenet', label: 'Ouvrir', primary: true }]
+      }),
+      ItUi.actionCard({
+        title: 'OBS',
+        text: 'Ouvre ou installe OBS pour l\'enregistrement et le streaming.',
+        status: 'PRÊT',
+        actions: [{ id: 'open-obs', label: 'Ouvrir', primary: true }]
+      })
+    ].join('');
+    ItApi.bindPage(grid, {
+      'open-discord': () => ItPages._api().applications.open('discord'),
+      'open-battlenet': () => ItPages._api().applications.open('battlenet'),
+      'open-obs': () => ItPages._api().applications.open('obs')
+    });
+    ItPageLoader.log(pageId, 'shell', performance.now() - t0);
   },
 
   _applyConnProfileActive(main, profile) {
@@ -1177,9 +1170,24 @@ window.ItPages = {
 
   _optimModuleDefs() {
     return [
-      { id: 'debloat', title: 'Debloat', section: 'modules' },
-      { id: 'gameMode', title: 'Mode Jeu', section: 'modules' },
-      { id: 'power', title: 'Gestion de l\'alimentation', section: 'modules' },
+      {
+        id: 'debloat',
+        title: 'Debloat',
+        section: 'modules',
+        description: 'Allège Windows en désactivant les éléments inutiles pour le gaming haute performance.'
+      },
+      {
+        id: 'gameMode',
+        title: 'Mode Jeu',
+        section: 'modules',
+        description: 'Active les réglages système orientés jeu, y compris les optimisations graphiques et de latence.'
+      },
+      {
+        id: 'power',
+        title: 'Gestion de l\'alimentation',
+        section: 'modules',
+        description: 'Applique un plan d\'alimentation orienté performance maximale pour limiter les baisses de fréquence.'
+      },
       {
         id: 'regXboxMonitoring',
         title: 'Xbox Game Monitoring',

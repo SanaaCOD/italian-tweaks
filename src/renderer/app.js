@@ -3,7 +3,13 @@
  */
 
 const NAV = [
-  { label: 'PRINCIPAL', items: [{ id: 'accueil', title: 'Accueil', icon: 'home' }] },
+  {
+    label: 'PRINCIPAL',
+    items: [
+      { id: 'accueil', title: 'Accueil', icon: 'home' },
+      { id: 'applications', title: 'Applications', icon: 'apps' }
+    ]
+  },
   {
     label: 'MATÉRIEL & RÉSEAU',
     items: [
@@ -31,6 +37,7 @@ const NAV = [
 
 const ICONS = {
   home: '<svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg>',
+  apps: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
   usb: '<svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="6" rx="1"/><path d="M12 8v6M9 14h6M10 20h4"/></svg>',
   chip: '<svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 5V3M15 5V3M9 21v-2M15 21v-2M5 9H3M5 15H3M21 9h-2M21 15h-2"/></svg>',
   network: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M5 12a7 7 0 0 1 14 0M2 12a10 10 0 0 1 20 0"/></svg>',
@@ -43,6 +50,7 @@ const ICONS = {
 
 const PAGE_RENDERERS = {
   accueil: (main) => ItPages.renderAccueil(main),
+  applications: (main) => ItPages.renderApplications(main),
   peripheriques: (main) => ItPages.renderPeripheriques(main),
   drivers: (main) => ItPages.renderDrivers(main),
   connexion: (main) => ItPages.renderConnexion(main),

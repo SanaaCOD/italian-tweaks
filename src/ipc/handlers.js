@@ -8,6 +8,7 @@ const optimizationModules = require('../services/optimization-modules-service');
 const systemRestore = require('../services/system-restore-service');
 const audio = require('../services/audio');
 const games = require('../services/games');
+const applications = require('../services/applications-service');
 const settings = require('../services/settings');
 const updateService = require('../services/update-service');
 const { getBuildInfo } = require('../services/build-info');
@@ -98,6 +99,8 @@ function registerIpcHandlers() {
   });
   ipcMain.handle('games:warzoneRestore', () => games.restoreWarzoneProfile());
   ipcMain.handle('games:apply', (_e, gameId) => games.applyGame(gameId));
+
+  ipcMain.handle('applications:open', (_e, appId) => applications.openApp(appId));
 
   ipcMain.handle('settings:get', () => settings.load());
   ipcMain.handle('settings:save', (_e, d) => settings.save(d));

@@ -73,6 +73,9 @@ const kojoApi = {
     restore: () => ipcRenderer.invoke('audio:restore'),
     openSettings: () => ipcRenderer.invoke('audio:openSettings')
   },
+  applications: {
+    open: (appId) => ipcRenderer.invoke('applications:open', appId)
+  },
   games: {
     warzoneDetect: () => ipcRenderer.invoke('games:warzoneDetect'),
     warzoneApply: () => ipcRenderer.invoke('games:warzoneApply'),
