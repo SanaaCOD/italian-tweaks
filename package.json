@@ -1,7 +1,7 @@
 {
     "name":  "kojo",
     "productName":  "Kojo",
-    "version":  "1.0.19",
+    "version":  "1.0.20",
     "description":  "Kojo Performance Suite",
     "main":  "src/main.js",
     "author":  "Kojo",
